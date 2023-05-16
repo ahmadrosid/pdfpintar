@@ -2,13 +2,13 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
 import { Worker, Viewer, ProgressBar } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import { ArrowLeft, Bot, User } from "lucide-react";
+import { ArrowLeft, Bot, User, Send } from "lucide-react";
 import clsx from "clsx";
 
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "../../../css/default_layout_theme.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 import { router } from "@inertiajs/react";
 
 type ChatMetadata = {
@@ -26,8 +26,9 @@ type DocumentIndexProps = PageProps<{ document?: Document; chat?: Chat }>;
 export default function DocumentIndex({ document }: DocumentIndexProps) {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
     const [messages, setMessage] = useState<Chat[]>([]);
+    const lastElement = useRef<HTMLDivElement>(null);
 
-    const { data, setData, reset } = useForm({
+    const { data, setData, processing } = useForm({
         question: "",
         document_id: document?.id,
     });
@@ -49,7 +50,8 @@ export default function DocumentIndex({ document }: DocumentIndexProps) {
                 setMessage((prev) => {
                     return [...prev, props.chat];
                 });
-                reset();
+                setData("question", "");
+                lastElement.current?.scrollIntoView({ behavior: "smooth" });
             },
         });
     };
@@ -94,11 +96,11 @@ export default function DocumentIndex({ document }: DocumentIndexProps) {
                         )}
                         <div className="flex flex-col">
                             <div className="flex-1 border-t border-violet-200">
-                                <div>
+                                <div className="h-[84vh] overflow-auto">
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
-                                                "p-4 flex gap-2 items-start border-b border-violet-200",
+                                                "p-6 flex gap-4 items-start border-b border-violet-200",
                                                 item.role === "bot"
                                                     ? "bg-violet-100"
                                                     : "bg-white"
@@ -106,35 +108,42 @@ export default function DocumentIndex({ document }: DocumentIndexProps) {
                                             key={idx}
                                         >
                                             {item.role === "user" ? (
-                                                <div className="w-[33px] flex justify-center items-center bg-stone-600 rounded-md p-1.5 text-white">
+                                                <div className="w-[28px] flex justify-center items-center bg-stone-500 rounded-md p-1 text-white">
                                                     <User className="w-5 h-5" />
                                                 </div>
                                             ) : (
-                                                <div className="w-[33px] flex justify-center items-center bg-violet-600 rounded-md p-1.5 text-white">
+                                                <div className="w-[28px] flex justify-center items-center bg-violet-500 rounded-md p-1 text-white">
                                                     <Bot className="w-5 h-5" />
                                                 </div>
                                             )}
-                                            <p className="flex-1">
+                                            <p className="flex-1 text-base">
                                                 {item.message}
                                             </p>
                                         </div>
                                     ))}
+                                    <div ref={lastElement}></div>
                                 </div>
                             </div>
                             <div className="p-4 bg-violet-100">
                                 <form
                                     onSubmit={handleSubmitChat}
-                                    className="flex gap-2"
+                                    className="flex items-center relative"
                                 >
                                     <input
                                         type="text"
                                         placeholder="Type your message here"
+                                        value={data.question}
                                         onChange={(e) =>
                                             setData("question", e.target.value)
                                         }
                                         className="p-2 w-full rounded outline-none border-violet-200 focus:ring-0 active:ring-0 focus:border-violet-300"
                                     />
-                                    <button className="text-sm">Send</button>
+                                    <button
+                                        disabled={processing}
+                                        className="absolute rounded-md right-1 text-sm p-2 hover:bg-violet-50"
+                                    >
+                                        <Send className="w-4 h-4" />
+                                    </button>
                                 </form>
                             </div>
                         </div>

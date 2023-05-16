@@ -51,6 +51,7 @@ export default function DocumentIndex({
                                             >
                                                 {item.title}
                                             </a>
+                                            <span>{item.created_at}</span>
                                         </p>
                                     </div>
                                 ))}

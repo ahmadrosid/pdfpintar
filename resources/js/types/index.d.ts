@@ -2,6 +2,7 @@ export interface Document {
     path: string;
     title: string;
     id: number;
+    created_at: string;
 }
 
 export interface User {

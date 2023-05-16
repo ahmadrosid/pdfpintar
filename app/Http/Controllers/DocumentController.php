@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
-use App\Http\Resources\DocumentResource;
 use App\Jobs\ProcessEmbeddingDocument;
 use App\Models\Document;
 use App\Models\User;
@@ -26,6 +25,7 @@ class DocumentController extends Controller
                 'id' => $item['id'],
                 'path' => str_replace("public", "storage", asset($item['path'])),
                 'title' => $item['title'],
+                'created_at' => $item['created_at']
             ];
         })->all();
 
