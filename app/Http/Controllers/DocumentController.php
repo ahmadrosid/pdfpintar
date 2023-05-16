@@ -5,17 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Http\Resources\DocumentResource;
+use App\Jobs\ProcessEmbeddingDocument;
 use App\Models\Document;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
+use Inertia\Inertia;
 
 class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = $request->user();
+        $data = $user->documents()->get()->toArray();
+        $documents = collect($data)->map(function ($item) {
+            return [
+                'id' => $item['id'],
+                'path' => str_replace("public", "storage", asset($item['path'])),
+                'title' => $item['title'],
+            ];
+        })->all();
+
+        return Inertia::render('Documents/Index', [
+            'documents' => $documents
+        ]);
     }
 
     /**
@@ -23,7 +39,9 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('documents.create');
+        return Inertia::render('Documents/Create', [
+            'path' => session('path'),
+        ]);
     }
 
     /**
@@ -31,13 +49,19 @@ class DocumentController extends Controller
      */
     public function store(StoreDocumentRequest $request)
     {
-        $path = $request->file('file')->store('public/documents');
-        $user = User::find(1)->first();
+        $file = $request->file('file');
+        $path = $file->store('public/documents');
+        $user = $request->user();
         $pdf = $user->documents()->create([
-            'path' => $path
+            'path' => $path,
+            'title' => $file->getClientOriginalName()
         ]);
 
-        return back()->with('path', $path);
+        Queue::push(
+            new ProcessEmbeddingDocument($pdf)
+        );
+
+        return back()->with('path', str_replace("public", "storage", asset($path)));
     }
 
     /**
@@ -45,7 +69,15 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        $data = [
+            'id' => $document['id'],
+            'path' => str_replace("public", "storage", asset($document['path'])),
+            'title' => $document['title'],
+        ];
+
+        return Inertia::render('Documents/Show', [
+            'document' => $data
+        ]);
     }
 
     /**
