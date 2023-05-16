@@ -12,7 +12,7 @@ export default function DocumentCreate({
     auth,
     path,
 }: PageProps<{ path?: string }>) {
-    const currentFileInput = useRef<HTMLInputElement>();
+    const currentFileInput = useRef<HTMLInputElement | null>(null);
     const { data, setData, post, reset, progress } = useForm({
         file: null,
     });
@@ -64,8 +64,16 @@ export default function DocumentCreate({
                                     </p>
                                 )}
 
-                                <div className="flex justify-between items-center">
-                                    <TextInput
+                                {progress && (
+                                    <progress
+                                        value={progress.percentage}
+                                        max="100"
+                                    >
+                                        {progress.percentage}%
+                                    </progress>
+                                )}
+                                <div className="flex gap-2 justify-between items-center">
+                                    <input
                                         id="current_file"
                                         ref={currentFileInput}
                                         onChange={(e) => {
@@ -83,19 +91,6 @@ export default function DocumentCreate({
                                         hover:file:bg-violet-100 shadow-none mt-2
                                       "
                                     />
-                                    {/* 
-                                    <InputError
-                                        message={errors.current_file}
-                                        className="mt-2"
-                                    /> */}
-                                    {progress && (
-                                        <progress
-                                            value={progress.percentage}
-                                            max="100"
-                                        >
-                                            {progress.percentage}%
-                                        </progress>
-                                    )}
                                     <div className="flex items-center gap-4">
                                         <PrimaryButton>Upload</PrimaryButton>
 

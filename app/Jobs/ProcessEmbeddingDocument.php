@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Process;
 
 class ProcessEmbeddingDocument implements ShouldQueue
 {
@@ -28,6 +29,8 @@ class ProcessEmbeddingDocument implements ShouldQueue
      */
     public function handle(): void
     {
-        dump($this->document->path);
+        $home_dir = env('HOME_DIR');
+        $result = Process::run("python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path);
+        dump($result->output());
     }
 }

@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
-import { FileText } from "lucide-react";
+import { Upload } from "lucide-react";
 
 export default function DocumentIndex({
     auth,
@@ -22,11 +22,19 @@ export default function DocumentIndex({
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 space-y-6 min-h-[25vh]">
-                            <div>
-                                <Link href="/documents/create">
-                                    <button className="bg-blue-500 rounded-md text-white h-10 px-4 inline-flex items-center">
-                                        <FileText className="w-5 h-5 mr-3" />
-                                        Upload PDF
+                            <div className="flex w-full items-center gap-4">
+                                <input
+                                    type="text"
+                                    className="flex-1 p-2 px-4 rounded-md border-violet-200 focus:ring-0 active:ring-0 focus:border-violet-200"
+                                    placeholder="Search document"
+                                />
+                                <Link
+                                    href="/documents/create"
+                                    className="block"
+                                >
+                                    <button className="bg-violet-500 rounded-md text-white h-10 px-4 inline-flex items-center w-fit">
+                                        <Upload className="w-4 h-4 mr-3" />
+                                        Upload
                                     </button>
                                 </Link>
                             </div>

@@ -17,6 +17,7 @@ specifiers:
   add: ^2.0.6
   autoprefixer: ^10.4.12
   axios: ^1.1.2
+  clsx: ^1.2.1
   laravel-vite-plugin: ^0.7.5
   lucide-react: ^0.216.0
   pdfjs-dist: ^3.6.172
@@ -34,6 +35,7 @@ dependencies:
   '@react-pdf-viewer/core': 3.12.0_7mthp6o3kqxflqmuegzokgmv7a
   '@react-pdf-viewer/default-layout': 3.12.0_7mthp6o3kqxflqmuegzokgmv7a
   add: 2.0.6
+  clsx: 1.2.1
   lucide-react: 0.216.0_react@18.2.0
   pdfjs-dist: 3.6.172
 
@@ -1130,6 +1132,11 @@ packages:
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: true
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

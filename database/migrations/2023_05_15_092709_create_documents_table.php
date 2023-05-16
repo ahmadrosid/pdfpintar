@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("path");
             $table->string("title");
+            $table->integer("job_id")->nullable();
             $table->morphs("resource");
             $table->timestamps();
         });

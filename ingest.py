@@ -1,16 +1,23 @@
 import os
-from typing import List, Tuple
+import sys
 from dotenv import load_dotenv
 load_dotenv()
 
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.pgvector import PGVector, DistanceStrategy
-from langchain.docstore.document import Document
 from langchain.document_loaders import PyPDFLoader
-from langchain.chains.question_answering import load_qa_chain
-from langchain.chat_models import ChatOpenAI
 
-loader = PyPDFLoader('storage/app/public/documents/ZGW5WiqHcMPq8muw20IpV4qHC5MfcrhGp8aEYVLx.pdf')
+paths = []
+if len(sys.argv) > 1:
+    for i in range(1, len(sys.argv)):
+        arg = sys.argv[i]
+        paths.append(arg)
+        break
+else:
+    print("No command-line arguments provided.")
+    exit()
+
+loader = PyPDFLoader(paths[0])
 pages = loader.load_and_split()
 
 embeddings = OpenAIEmbeddings()
@@ -26,8 +33,9 @@ CONNECTION_STRING = PGVector.connection_string_from_db_params(
 db = PGVector.from_documents(
     embedding=embeddings,
     documents=pages,
-    collection_name="Learn Makefiles.pdf",
+    collection_name=paths[0],
     connection_string=CONNECTION_STRING,
+    distance_strategy=DistanceStrategy.COSINE
 )
 
 print("Finish embeddings!")

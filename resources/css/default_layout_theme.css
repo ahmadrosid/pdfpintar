@@ -1,0 +1,16 @@
+
+:root {
+    --rpv-default-layout__body-background-color: #fff;
+
+    --rpv-default-layout__container-border-color: #ddd6fe;
+
+    --rpv-default-layout__toolbar-background-color: #f5f3ff;
+    --rpv-default-layout__toolbar-border-bottom-color: #ddd6fe;
+
+    --rpv-default-layout__sidebar-border-color: rgba(0, 0, 0, 0.2);
+    --rpv-default-layout__sidebar--opened-background-color: #fff;
+    --rpv-default-layout__sidebar-headers-background-color: #f5f3ff;
+    --rpv-default-layout__sidebar-content--opened-background-color: #fff;
+    --rpv-default-layout__sidebar-content--opened-border-color: rgba(0, 0, 0, 0.2);
+    --rpv-default-layout__sidebar-content--opened-color: #000;
+}

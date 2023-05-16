@@ -57,11 +57,14 @@ class DocumentController extends Controller
             'title' => $file->getClientOriginalName()
         ]);
 
-        Queue::push(
+        $jobId = Queue::push(
             new ProcessEmbeddingDocument($pdf)
         );
 
-        return back()->with('path', str_replace("public", "storage", asset($path)));
+        $pdf->job_id = $jobId;
+        $pdf->save();
+
+        return back()->with('path', str_replace("public/documents", "", $path));
     }
 
     /**
@@ -76,7 +79,8 @@ class DocumentController extends Controller
         ];
 
         return Inertia::render('Documents/Show', [
-            'document' => $data
+            'document' => $data,
+            'chat' => session("chat")
         ]);
     }
 
