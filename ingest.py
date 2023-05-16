@@ -7,6 +7,7 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores.pgvector import PGVector, DistanceStrategy
 from langchain.document_loaders import PyPDFLoader
 
+home_dir = os.environ.get("HOME_DIR")
 paths = []
 if len(sys.argv) > 1:
     for i in range(1, len(sys.argv)):
@@ -30,10 +31,11 @@ CONNECTION_STRING = PGVector.connection_string_from_db_params(
     password=os.environ.get("DB_PASSWORD", ""),
 )
 
+path_name = paths[0].replace(f"{home_dir}/storage/app/", "")
 db = PGVector.from_documents(
     embedding=embeddings,
     documents=pages,
-    collection_name=paths[0],
+    collection_name=path_name,
     connection_string=CONNECTION_STRING,
     distance_strategy=DistanceStrategy.COSINE
 )

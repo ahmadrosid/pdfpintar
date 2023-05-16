@@ -13,10 +13,8 @@ class DocumentSearchController extends Controller
     {
         $question = $request->get('question');
         $document_id = $request->get('document_id');
-        $home_dir = env('HOME_DIR');
         $document = Document::find($document_id)->first();
-        $path = $home_dir . "/storage/app/" . $document->path;
-        $langchain_pg_collection = DB::table('langchain_pg_collection')->where('name', $path)->first();
+        $langchain_pg_collection = DB::table('langchain_pg_collection')->where('name',  $document->path)->first();
 
         $result = OpenAI::embeddings()->create([
             'model' => 'text-embedding-ada-002',
