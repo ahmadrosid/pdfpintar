@@ -21,7 +21,7 @@ export default function DocumentIndex({
             <div>
                 <div className="bg-white overflow-hidden">
                     <div className="flex justify-between items-center h-[7vh] bg-violet-100">
-                        <div className="px-4">
+                        <div>
                             <Link href={route("documents.index")}>
                                 <button className="h-9 px-4 hover:bg-violet-200 rounded-md inline-flex gap-2 items-center text-base">
                                     <ArrowLeft className="w-5 h-5" />

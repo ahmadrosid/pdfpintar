@@ -1,0 +1,5 @@
+pypdf
+langchain
+pgvector
+psycopg2
+tiktoken
