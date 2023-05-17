@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string("path");
-            $table->string("title");
-            $table->integer("job_id")->nullable();
-            $table->morphs("resource");
+            $table->uuid("chat_id");
+            $table->string("role");
+            $table->text("content");
+            $table->string("metadata");
             $table->timestamps();
+            $table->foreign('chat_id')->references('id')->on('chats');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('messages');
     }
 };

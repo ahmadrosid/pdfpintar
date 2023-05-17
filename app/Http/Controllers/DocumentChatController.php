@@ -2,18 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chat;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use OpenAI\Laravel\Facades\OpenAI;
+use Inertia\Inertia;
 
-class DocumentSearchController extends Controller
+use function PHPSTORM_META\map;
+
+class DocumentChatController extends Controller
 {
-    public function __invoke(Request $request)
+    public function index(Request $request)
+    {
+        $chats = Chat::query()->where('user_id', $request->user()->id)->get()->map(function ($chat) {
+            return [
+                'id' => $chat->id,
+                'title' => $chat->title,
+                'created_at' => $chat->created_at->diffForHumans(),
+            ];
+        });
+
+        return Inertia::render('Documents/Chat/Index', [
+            'chats' => $chats,
+        ]);
+    }
+
+    public function show(Chat $chat)
+    {
+        $document = $chat->document;
+
+        $data = [
+            'id' => $document['id'],
+            'path' => str_replace("public", "storage", asset($document['path'])),
+            'title' => $document['title'],
+        ];
+
+        return Inertia::render('Documents/Chat/Show', [
+            'document' => $data,
+            'chat' => $chat,
+            'message' => session("message")
+        ]);
+    }
+
+    public function update(Request $request, Chat $chat)
     {
         $question = $request->get('question');
-        $document_id = $request->get('document_id');
-        $document = Document::find($document_id)->first();
+        $document = $chat->document;
         $langchain_pg_collection = DB::table('langchain_pg_collection')->where('name',  $document->path)->first();
 
         $result = OpenAI::embeddings()->create([
@@ -59,10 +94,21 @@ class DocumentSearchController extends Controller
             ],
         ]);
 
-        return back()->with("chat", [
-            "message" => $response->choices[0]->message->content,
+        return back()->with("message", [
+            "content" => $response->choices[0]->message->content,
             "role" => "bot",
             "metadata" => $metadata
         ]);
+    }
+
+    public function create(Request $request, Document $document)
+    {
+        $chat = Chat::create([
+            'user_id' => $request->user()->id,
+            'document_id' => $document->id,
+            'title' => $document->title,
+        ]);
+
+        return redirect(route('document.chat', $chat->id));
     }
 }

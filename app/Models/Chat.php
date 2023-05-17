@@ -4,16 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ramsey\Uuid\Uuid;
 
-class Document extends Model
+class Chat extends Model
 {
     use HasFactory;
 
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    protected $fillable = [
+        "title", "user_id", "document_id"
+    ];
 
     protected static function booted()
     {
@@ -22,8 +26,8 @@ class Document extends Model
         });
     }
 
-    public function resource(): MorphTo
+    public function document(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(Document::class);
     }
 }

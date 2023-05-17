@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('chats', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string("path");
-            $table->string("title");
-            $table->integer("job_id")->nullable();
-            $table->morphs("resource");
+            $table->string('title');
+            $table->bigInteger('user_id');
+            $table->uuid('document_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('document_id')->references('id')->on('documents');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('chats');
     }
 };

@@ -5,6 +5,14 @@ export interface Document {
     created_at: string;
 }
 
+export interface Chat {
+    id: string;
+    title: string;
+    user: User;
+    document?: Document;
+    created_at: string;
+}
+
 export interface User {
     id: number;
     name: string;

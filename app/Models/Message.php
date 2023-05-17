@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Ramsey\Uuid\Uuid;
 
-class Document extends Model
+class Message extends Model
 {
     use HasFactory;
 
@@ -20,10 +19,5 @@ class Document extends Model
         static::creating(function ($model) {
             $model->id = Uuid::uuid4()->toString();
         });
-    }
-
-    public function resource(): MorphTo
-    {
-        return $this->morphTo();
     }
 }

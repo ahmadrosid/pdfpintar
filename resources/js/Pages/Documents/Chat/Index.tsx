@@ -1,18 +1,18 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
-import { Document, PageProps } from "@/types";
-import { Trash, Trash2, Upload } from "lucide-react";
+import { Chat, PageProps } from "@/types";
+import { Trash2, Upload } from "lucide-react";
 
 export default function DocumentIndex({
     auth,
-    documents,
-}: PageProps<{ documents?: Document[] }>) {
+    chats,
+}: PageProps<{ chats?: Chat[] }>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Documents
+                    Chat
                 </h2>
             }
         >
@@ -25,21 +25,21 @@ export default function DocumentIndex({
                             <div className="flex w-full items-center gap-4">
                                 <input
                                     type="text"
-                                    className="flex-1 p-2 px-4 rounded-md border-green-300 focus:ring-0 active:ring-0 focus:border-green-300"
-                                    placeholder="Search document"
+                                    className="flex-1 p-2 px-4 rounded-md border-green-200 focus:ring-0 active:ring-0 focus:border-green-200"
+                                    placeholder="Search chat"
                                 />
                                 <Link
                                     href="/documents/create"
                                     className="block"
                                 >
                                     <button className="bg-green-500 hover:bg-green-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit">
-                                        <Upload className="w-4 h-4 mr-2" />
-                                        Upload
+                                        <Trash2 className="w-4 h-4 mr-2" />
+                                        Clear All
                                     </button>
                                 </Link>
                             </div>
                             <div>
-                                {documents?.map((item, idx) => (
+                                {chats?.map((item, idx) => (
                                     <div
                                         key={idx}
                                         className="flex justify-between items-center"
@@ -47,7 +47,7 @@ export default function DocumentIndex({
                                         <p className="py-2">
                                             <a
                                                 href={route(
-                                                    "documents.update",
+                                                    "chat.show",
                                                     item.id
                                                 )}
                                                 className="font-medium hover:underline"

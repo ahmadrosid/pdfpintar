@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DocumentSearchController;
+use App\Http\Controllers\DocumentChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,17 +16,21 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post("/document/search", DocumentSearchController::class)->name("documents.search");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/documents', DocumentController::class);
+    Route::resource("/document/chat", DocumentChatController::class);
 });
 
 
