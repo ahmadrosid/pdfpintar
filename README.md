@@ -92,4 +92,6 @@ Add permission
 ```bash
 sudo chown -R www-data:www-data storage bootstrap/cache
 sudo chmod -R 775 storage bootstrap/cache
+sudo systemctl restart php8.1-fpm
+sudo systemctl restart nginx
 ```
