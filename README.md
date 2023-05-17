@@ -1,6 +1,6 @@
 ## Laravel PDF AI
 
-![demo.png](/demo.png)
+![demo.png](public/demo.png)
 
 ## Required ENV
 
