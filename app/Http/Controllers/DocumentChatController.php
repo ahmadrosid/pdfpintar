@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\DB;
 use OpenAI\Laravel\Facades\OpenAI;
 use Inertia\Inertia;
 
-use function PHPSTORM_META\map;
-
 class DocumentChatController extends Controller
 {
     public function index(Request $request)
