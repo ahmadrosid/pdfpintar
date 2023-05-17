@@ -46,13 +46,13 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                 },
             ];
         });
+        setData("question", "");
         router.put(route("chat.update", chat.id), data, {
             onSuccess: (response) => {
                 const props = response.props as any;
                 setMessage((prev) => {
                     return [...prev, props.message];
                 });
-                setData("question", "");
                 lastElement.current?.scrollIntoView({ behavior: "smooth" });
             },
         });
