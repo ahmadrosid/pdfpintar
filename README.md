@@ -57,10 +57,11 @@ server {
     listen 80;
     listen [::]:80;
     server_name 103.150.197.190;
-    root /home/insightq/pdfpintar/public;
+    root /var/www/pdfpintar/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
+    add_header X-XSS-Protection "1; mode=block";
 
     index index.php;
 
@@ -77,6 +78,7 @@ server {
 
     location ~ \.php$ {
         fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }
@@ -94,4 +96,36 @@ sudo chown -R www-data:www-data storage bootstrap/cache
 sudo chmod -R 775 storage bootstrap/cache
 sudo systemctl restart php8.1-fpm
 sudo systemctl restart nginx
+```
+
+## Queue Worker
+
+Install supervisor
+
+```bash
+bash apt install supervisor
+```
+
+```bash
+cd /etc/supervisor/conf.d
+vim queue-worker.conf
+```
+
+```yaml
+[program:queue-worker]
+process_name = %(program_name)s_%(process_num)02d
+command=php /var/www/pdfpintar/artisan queue:listen
+autostart=true
+autorestart=true
+user=root
+numprocs=1
+redirect_stderr=true
+stdout_logfile=/var/www/pdfpintar/storage/logs/worker.log
+```
+
+Update
+
+```bash
+sudo supervisorctl reread
+sudo supervisorctl update
 ```
