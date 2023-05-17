@@ -31,6 +31,8 @@ class ProcessEmbeddingDocument implements ShouldQueue
     {
         $home_dir = env('HOME_DIR');
         $result = Process::run("python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path);
+        dump("python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path);
         dump($result->output());
+        $this->document->update(["job_id" => null]);
     }
 }

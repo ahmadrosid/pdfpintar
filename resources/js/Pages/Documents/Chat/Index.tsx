@@ -1,12 +1,21 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router, useForm } from "@inertiajs/react";
 import { Chat, PageProps } from "@/types";
-import { Trash2, Upload } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import { FormEventHandler } from "react";
 
 export default function DocumentIndex({
     auth,
     chats,
 }: PageProps<{ chats?: Chat[] }>) {
+    const { reset } = useForm();
+    const handleDeleteChat: FormEventHandler = (e) => {
+        e.preventDefault();
+        // @ts-expect-error
+        router.delete(route("chat.destroy", e.currentTarget.chat_id.value), {
+            onSuccess: () => reset(),
+        });
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -57,9 +66,16 @@ export default function DocumentIndex({
                                         </p>
                                         <div className="flex items-center gap-4">
                                             <p>{item.created_at}</p>
-                                            <button className="hover:bg-green-100 rounded-md">
-                                                <Trash2 />
-                                            </button>
+                                            <form onSubmit={handleDeleteChat}>
+                                                <input
+                                                    type="hidden"
+                                                    name="chat_id"
+                                                    value={item.id}
+                                                />
+                                                <button>
+                                                    <Trash2 />
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 ))}

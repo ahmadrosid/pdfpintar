@@ -2,6 +2,7 @@ export interface Document {
     path: string;
     title: string;
     id: number;
+    job_id?: number;
     created_at: string;
 }
 

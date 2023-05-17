@@ -1,12 +1,23 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
-import { Trash, Trash2, Upload } from "lucide-react";
+import { Trash2, Upload } from "lucide-react";
+import { FormEventHandler } from "react";
 
 export default function DocumentIndex({
     auth,
     documents,
 }: PageProps<{ documents?: Document[] }>) {
+    const { reset } = useForm();
+
+    const handleDeleteDocument: FormEventHandler = (e) => {
+        e.preventDefault();
+        // @ts-expect-error
+        router.delete(route("documents.destroy", e.currentTarget.id.value), {
+            onSuccess: () => reset(),
+        });
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -57,9 +68,18 @@ export default function DocumentIndex({
                                         </p>
                                         <div className="flex items-center gap-4">
                                             <p>{item.created_at}</p>
-                                            <button className="hover:bg-green-100 rounded-md">
-                                                <Trash2 />
-                                            </button>
+                                            <form
+                                                onSubmit={handleDeleteDocument}
+                                            >
+                                                <input
+                                                    type="hidden"
+                                                    value={item.id}
+                                                    name="id"
+                                                />
+                                                <button>
+                                                    <Trash2 />
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 ))}

@@ -20,17 +20,6 @@ export default function DocumentCreate({
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route("documents.store"), { onSuccess: () => reset() });
-        // post(route("documents.store"), {
-        //     preserveScroll: true,
-        //     onSuccess: () => reset(),
-        //     onError: (errors) => {
-        //         console.log(errors);
-        //         if (errors.current_file) {
-        //             reset("current_file");
-        //             currentFileInput.current?.focus();
-        //         }
-        //     },
-        // });
     };
 
     return (

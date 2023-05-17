@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Document;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use OpenAI\Laravel\Facades\OpenAI;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Schema;
 
 class DocumentChatController extends Controller
 {
@@ -45,6 +47,10 @@ class DocumentChatController extends Controller
 
     public function update(Request $request, Chat $chat)
     {
+        if (!Schema::hasTable('langchain_pg_collection')) {
+            return abort(404);
+        }
+
         $question = $request->get('question');
         $document = $chat->document;
         $langchain_pg_collection = DB::table('langchain_pg_collection')->where('name',  $document->path)->first();
@@ -108,5 +114,12 @@ class DocumentChatController extends Controller
         ]);
 
         return redirect(route('document.chat', $chat->id));
+    }
+
+    public function destroy(Chat $chat)
+    {
+        Message::query()->where('chat_id', $chat->id)->delete();
+        $chat->delete();
+        return back()->with("status", "Chat {$chat->title} deleted!");
     }
 }

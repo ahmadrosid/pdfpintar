@@ -13,23 +13,23 @@ export default function Welcome({
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     {auth.user ? (
                         <Link
-                            href={route("dashboard")}
-                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            href={route("documents.index")}
+                            className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
                         >
-                            Dashboard
+                            Documents
                         </Link>
                     ) : (
                         <>
                             <Link
                                 href={route("login")}
-                                className="font-semibold py-2 px-3 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                className="py-2 px-3 text-gray-600 hover:text-green-500 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
                             >
                                 Log in
                             </Link>
 
                             <Link
                                 href={route("register")}
-                                className="ml-4 bg-green-500 py-2 px-3 rounded-md font-semibold text-gray-100 hover:bg-green-600 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-green-400"
+                                className="ml-4 py-2 px-3 rounded-md text-gray-600 hover:text-green-500 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
                             >
                                 Register
                             </Link>

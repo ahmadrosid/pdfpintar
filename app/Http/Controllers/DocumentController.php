@@ -64,7 +64,7 @@ class DocumentController extends Controller
         $pdf->job_id = $jobId;
         $pdf->save();
 
-        return back()->with('path', str_replace("public/documents", "", $path));
+        return back()->with('path', route("documents.show", $pdf->id));
     }
 
     public function show(Request $request, Document $document)
@@ -82,6 +82,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+        Chat::query()->where('document_id', $document->id)->delete();
         $document->delete();
         return back()->with("status", "Document {$document->title} deleted!");
     }
