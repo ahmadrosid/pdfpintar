@@ -63,7 +63,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
             <Head title="Documents"></Head>
             <div>
                 <div className="bg-white overflow-hidden">
-                    <div className="flex justify-between items-center h-[7vh] bg-teal-100">
+                    <div className="flex justify-between items-center h-[7vh] bg-teal-50">
                         <div className="px-4 flex items-center gap-2">
                             <Link href={route("documents.index")}>
                                 <button className="h-9 px-2 hover:bg-teal-200 rounded-md inline-flex gap-2 items-center text-base">
@@ -103,9 +103,9 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
-                                                "p-6 flex gap-4 items-start border-b border-teal-200",
+                                                "p-6 flex gap-4 items-start border-b border-teal-100",
                                                 item.role === "bot"
-                                                    ? "bg-teal-100"
+                                                    ? "bg-teal-50"
                                                     : "bg-white"
                                             )}
                                             key={idx}
@@ -127,7 +127,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     <div ref={lastElement}></div>
                                 </div>
                             </div>
-                            <div className="p-4 bg-teal-100">
+                            <div className="p-4 bg-teal-50">
                                 <form
                                     onSubmit={handleSubmitChat}
                                     className="flex items-center relative"

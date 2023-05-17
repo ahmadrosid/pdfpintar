@@ -17,6 +17,7 @@ specifiers:
   add: ^2.0.6
   autoprefixer: ^10.4.12
   axios: ^1.1.2
+  class-variance-authority: ^0.6.0
   clsx: ^1.2.1
   laravel-vite-plugin: ^0.7.5
   lucide-react: ^0.216.0
@@ -24,6 +25,7 @@ specifiers:
   postcss: ^8.4.18
   react: ^18.2.0
   react-dom: ^18.2.0
+  tailwind-merge: ^1.12.0
   tailwindcss: ^3.2.1
   typescript: ^5.0.2
   vite: ^4.0.0
@@ -35,9 +37,11 @@ dependencies:
   '@react-pdf-viewer/core': 3.12.0_7mthp6o3kqxflqmuegzokgmv7a
   '@react-pdf-viewer/default-layout': 3.12.0_7mthp6o3kqxflqmuegzokgmv7a
   add: 2.0.6
+  class-variance-authority: 0.6.0_typescript@5.0.4
   clsx: 1.2.1
   lucide-react: 0.216.0_react@18.2.0
   pdfjs-dist: 3.6.172
+  tailwind-merge: 1.12.0
 
 devDependencies:
   '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
@@ -1129,6 +1133,18 @@ packages:
     dev: false
     optional: true
 
+  /class-variance-authority/0.6.0_typescript@5.0.4:
+    resolution: {integrity: sha512-qdRDgfjx3GRb9fpwpSvn+YaidnT7IUJNe4wt5/SWwM+PmUwJUhQRk/8zAyNro0PmVfmen2635UboTjIBXXxy5A==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      clsx: 1.2.1
+      typescript: 5.0.4
+    dev: false
+
   /client-only/0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: true
@@ -2054,6 +2070,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /tailwind-merge/1.12.0:
+    resolution: {integrity: sha512-Y17eDp7FtN1+JJ4OY0Bqv9OA41O+MS8c1Iyr3T6JFLnOgLg3EvcyMKZAnQ8AGyvB5Nxm3t9Xb5Mhe139m8QT/g==}
+    dev: false
+
   /tailwindcss/3.3.2:
     resolution: {integrity: sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==}
     engines: {node: '>=14.0.0'}
@@ -2137,7 +2157,6 @@ packages:
     resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
     engines: {node: '>=12.20'}
     hasBin: true
-    dev: true
 
   /update-browserslist-db/1.0.11_browserslist@4.21.5:
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}

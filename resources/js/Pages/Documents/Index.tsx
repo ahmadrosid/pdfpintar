@@ -3,6 +3,7 @@ import { Head, Link, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
 import { Trash2, Upload } from "lucide-react";
 import { FormEventHandler } from "react";
+import { Badge } from "@/Components/Badge";
 
 export default function DocumentIndex({
     auth,
@@ -55,20 +56,33 @@ export default function DocumentIndex({
                                         key={idx}
                                         className="flex justify-between items-center"
                                     >
-                                        <p className="py-2">
-                                            <a
-                                                href={route(
-                                                    "documents.update",
-                                                    item.id
-                                                )}
-                                                className="font-medium hover:underline"
-                                            >
-                                                {item.title}
-                                            </a>
-                                        </p>
+                                        <div className="flex items-center gap-2">
+                                            <p className="py-2">
+                                                <a
+                                                    href={route(
+                                                        "documents.update",
+                                                        item.id
+                                                    )}
+                                                    className="font-medium hover:underline"
+                                                >
+                                                    {item.title}
+                                                </a>
+                                            </p>
+                                            {item.job_id && (
+                                                <Badge
+                                                    variant={"secondary"}
+                                                    className="bg-teal-400 text-white font-normal animate-pulse"
+                                                >
+                                                    Indexing...
+                                                </Badge>
+                                            )}
+                                        </div>
                                         <div className="flex items-center gap-4">
-                                            <p>{item.created_at}</p>
+                                            <p className="text-gray-500 text-sm">
+                                                {item.created_at}
+                                            </p>
                                             <form
+                                                className="flex items-center"
                                                 onSubmit={handleDeleteDocument}
                                             >
                                                 <input
@@ -77,7 +91,7 @@ export default function DocumentIndex({
                                                     name="id"
                                                 />
                                                 <button>
-                                                    <Trash2 />
+                                                    <Trash2 className="w-5 h-5" />
                                                 </button>
                                             </form>
                                         </div>

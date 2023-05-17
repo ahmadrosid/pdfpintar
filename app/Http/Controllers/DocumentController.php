@@ -19,12 +19,13 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $data = $user->documents()->get();
+        $data = $user->documents()->orderBy('created_at', 'desc')->get();
         $documents = collect($data)->map(function ($item) {
             return [
                 'id' => $item->id,
                 'path' => str_replace("public", "storage", asset($item->path)),
                 'title' => $item->title,
+                'job_id' => $item->job_id,
                 'created_at' => $item->created_at->diffForHumans()
             ];
         })->all();
