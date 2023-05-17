@@ -1,39 +1,49 @@
-import { useEffect, FormEventHandler } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, FormEventHandler } from "react";
+import Checkbox from "@/Components/Checkbox";
+import GuestLayout from "@/Layouts/GuestLayout";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
+export default function Login({
+    status,
+    canResetPassword,
+}: {
+    status?: string;
+    canResetPassword: boolean;
+}) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
         remember: false,
     });
 
     useEffect(() => {
         return () => {
-            reset('password');
+            reset("password");
         };
     }, []);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        post(route("login"));
     };
 
     return (
         <GuestLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && (
+                <div className="mb-4 font-medium text-sm text-green-600">
+                    {status}
+                </div>
+            )}
 
             <form onSubmit={submit}>
-                <div>
+                <div className="mt-4">
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -44,15 +54,24 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData("email", e.target.value)}
                     />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
+                    <div className="flex justify-between mt-4">
+                        <InputLabel htmlFor="password" value="Password" />
+                        {canResetPassword && (
+                            <Link
+                                href={route("password.request")}
+                                className="underline tracking-tight text-sm text-green-600 hover:text-green-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
+                    </div>
                     <TextInput
                         id="password"
                         type="password"
@@ -60,7 +79,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={(e) => setData("password", e.target.value)}
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -71,27 +90,34 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
+                            onChange={(e) =>
+                                setData("remember", e.target.checked)
+                            }
                         />
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span className="ml-2 text-sm text-gray-600">
+                            Remember me
+                        </span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
+                    <PrimaryButton
+                        className="w-full justify-center h-12"
+                        disabled={processing}
+                    >
+                        Continue
                     </PrimaryButton>
                 </div>
             </form>
+            <p className="text-center pt-6 pb-4">
+                <span className="mr-3">Don't have an account?</span>
+                <Link
+                    href={route("register")}
+                    className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                    Sign Up
+                </Link>
+            </p>
         </GuestLayout>
     );
 }
