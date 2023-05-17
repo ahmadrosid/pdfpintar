@@ -68,7 +68,7 @@ export default function Welcome({
                             </div>
                         </div>
                     </div>
-                    <div className="mx-auto max-w-6xl">
+                    <div className="mx-auto max-w-7xl">
                         <img
                             src="/demo.png"
                             className="rounded-2xl shadow-2xl ring-2 ring-teal-400"
