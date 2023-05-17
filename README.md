@@ -23,10 +23,19 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+## Setup Postgresql
+
+```sql
+CREATE USER pdfpintar WITH PASSWORD 'password';
+CREATE DATABASE pdfpintar OWNER pdfpintar;
+ALTER USER pdfpintar WITH SUPERUSER;
+```
+
 ## Install Pgvector extensions
 
 ```bash
 sudo apt-get install postgresql-server-dev-14 libpq-dev gcc make -y
+sudo apt-get install php8.1-pgsql
 cd /tmp
 git clone --branch v0.4.2 https://github.com/pgvector/pgvector.git
 cd pgvector

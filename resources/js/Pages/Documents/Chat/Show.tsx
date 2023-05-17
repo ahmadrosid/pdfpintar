@@ -64,13 +64,14 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
             <div>
                 <div className="bg-white overflow-hidden">
                     <div className="flex justify-between items-center h-[7vh] bg-green-100">
-                        <div className="px-4">
+                        <div className="px-4 flex items-center gap-2">
                             <Link href={route("documents.index")}>
                                 <button className="h-9 px-2 hover:bg-green-200 rounded-md inline-flex gap-2 items-center text-base">
                                     <ArrowLeft className="w-5 h-5" />
-                                    Go Back
                                 </button>
                             </Link>
+
+                            <h2 className="font-medium">{document?.title}</h2>
                         </div>
                         <div className="px-4">
                             <h2 className="font-medium">{document?.title}</h2>
