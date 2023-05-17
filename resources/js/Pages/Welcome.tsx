@@ -41,6 +41,9 @@ export default function Welcome({
                     <h1 className="text-7xl font-extrabold tracking-tight">
                         Welcome to PDF pintar.
                     </h1>
+                    <div>
+                        <img src="/demo.png" />
+                    </div>
                 </div>
             </div>
         </>
