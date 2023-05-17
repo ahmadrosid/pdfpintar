@@ -4,3 +4,4 @@ pgvector
 psycopg2
 tiktoken
 load_dotenv
+openai
