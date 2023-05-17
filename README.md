@@ -5,8 +5,8 @@
 ## Required ENV
 
 ```bash
-APP_NAME="PDF Pintar"
-APP_ENV=local
+APP_NAME=
+APP_ENV=
 APP_KEY=base64:wx+...
 APP_DEBUG=
 APP_URL=http://localhost:8000
