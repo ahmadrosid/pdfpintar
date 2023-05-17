@@ -22,7 +22,7 @@ export default function Authenticated({
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="h-9 w-auto text-green-500" />
+                                    <ApplicationLogo className="h-9 w-auto text-teal-500" />
                                 </Link>
                             </div>
 

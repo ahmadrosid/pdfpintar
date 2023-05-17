@@ -34,14 +34,14 @@ export default function DocumentIndex({
                             <div className="flex w-full items-center gap-4">
                                 <input
                                     type="text"
-                                    className="flex-1 p-2 px-4 rounded-md border-green-200 focus:ring-0 active:ring-0 focus:border-green-200"
+                                    className="flex-1 p-2 px-4 rounded-md border-teal-200 focus:ring-0 active:ring-0 focus:border-teal-200"
                                     placeholder="Search chat"
                                 />
                                 <Link
                                     href="/documents/create"
                                     className="block"
                                 >
-                                    <button className="bg-green-500 hover:bg-green-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit">
+                                    <button className="bg-teal-500 hover:bg-teal-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit">
                                         <Trash2 className="w-4 h-4 mr-2" />
                                         Clear All
                                     </button>

@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div className="py-4">
                 <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 text-green-500" />
+                    <ApplicationLogo className="w-20 h-20 text-teal-500" />
                 </Link>
             </div>
 
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
                         please contact us at{" "}
                         <a
                             href="mailto:contact@pdfpintar.com"
-                            className="text-green-700 underline hover:text-green-500"
+                            className="text-teal-700 underline hover:text-teal-500"
                         >
                             contact@pdfpintar.com
                         </a>

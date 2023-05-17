@@ -63,18 +63,18 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
             <Head title="Documents"></Head>
             <div>
                 <div className="bg-white overflow-hidden">
-                    <div className="flex justify-between items-center h-[7vh] bg-green-100">
+                    <div className="flex justify-between items-center h-[7vh] bg-teal-100">
                         <div className="px-4 flex items-center gap-2">
                             <Link href={route("documents.index")}>
-                                <button className="h-9 px-2 hover:bg-green-200 rounded-md inline-flex gap-2 items-center text-base">
+                                <button className="h-9 px-2 hover:bg-teal-200 rounded-md inline-flex gap-2 items-center text-base">
                                     <ArrowLeft className="w-5 h-5" />
                                 </button>
                             </Link>
 
                             <h2 className="font-medium">{document?.title}</h2>
                         </div>
-                        <div className="px-4">
-                            <h2 className="font-medium">{document?.title}</h2>
+                        <div className="px-6">
+                            <h2 className="">Share</h2>
                         </div>
                     </div>
                     <div className="grid grid-cols-2">
@@ -98,14 +98,14 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <div className="flex-1 border-t border-green-200">
+                            <div className="flex-1 border-t border-teal-200">
                                 <div className="h-[84vh] overflow-auto">
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
-                                                "p-6 flex gap-4 items-start border-b border-green-200",
+                                                "p-6 flex gap-4 items-start border-b border-teal-200",
                                                 item.role === "bot"
-                                                    ? "bg-green-100"
+                                                    ? "bg-teal-100"
                                                     : "bg-white"
                                             )}
                                             key={idx}
@@ -115,7 +115,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                                     <User className="w-5 h-5" />
                                                 </div>
                                             ) : (
-                                                <div className="w-[28px] flex justify-center items-center bg-green-500 rounded-md p-1 text-white">
+                                                <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
                                                     <Bot className="w-5 h-5" />
                                                 </div>
                                             )}
@@ -127,7 +127,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     <div ref={lastElement}></div>
                                 </div>
                             </div>
-                            <div className="p-4 bg-green-100">
+                            <div className="p-4 bg-teal-100">
                                 <form
                                     onSubmit={handleSubmitChat}
                                     className="flex items-center relative"
@@ -139,11 +139,11 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                         onChange={(e) =>
                                             setData("question", e.target.value)
                                         }
-                                        className="p-2 w-full rounded outline-none border-green-200 focus:ring-0 active:ring-0 focus:border-green-300"
+                                        className="p-2 w-full rounded outline-none border-teal-200 focus:ring-0 active:ring-0 focus:border-teal-300"
                                     />
                                     <button
                                         disabled={processing}
-                                        className="absolute rounded-md right-1 text-sm p-2 hover:bg-green-50"
+                                        className="absolute rounded-md right-1 text-sm p-2 hover:bg-teal-50"
                                     >
                                         <Send className="w-4 h-4" />
                                     </button>
@@ -157,14 +157,14 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
 :root {
     --rpv-default-layout__body-background-color: #fff;
 
-    --rpv-default-layout__container-border-color: #bbf7d0;
+    --rpv-default-layout__container-border-color: #99f6e4;
 
-    --rpv-default-layout__toolbar-background-color: #f0fdf4;
-    --rpv-default-layout__toolbar-border-bottom-color: #bbf7d0;
+    --rpv-default-layout__toolbar-background-color: #f0fdfa;
+    --rpv-default-layout__toolbar-border-bottom-color: #99f6e4;
 
     --rpv-default-layout__sidebar-border-color: rgba(0, 0, 0, 0.2);
     --rpv-default-layout__sidebar--opened-background-color: #fff;
-    --rpv-default-layout__sidebar-headers-background-color: #f0fdf4;
+    --rpv-default-layout__sidebar-headers-background-color: #f0fdfa;
     --rpv-default-layout__sidebar-content--opened-background-color: #fff;
     --rpv-default-layout__sidebar-content--opened-border-color: rgba(0, 0, 0, 0.2);
     --rpv-default-layout__sidebar-content--opened-color: #000;
