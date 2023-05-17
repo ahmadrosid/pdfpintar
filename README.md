@@ -11,7 +11,7 @@ APP_KEY=base64:wx+...
 APP_DEBUG=
 APP_URL=http://localhost:8000
 
-HOME_DIR=
+HOME_DIR=/var/www/pdfpintar
 
 OPENAI_API_KEY=
 
