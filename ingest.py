@@ -8,17 +8,15 @@ from langchain.vectorstores.pgvector import PGVector, DistanceStrategy
 from langchain.document_loaders import PyPDFLoader
 
 home_dir = os.environ.get("HOME_DIR")
-paths = []
+path = ""
 if len(sys.argv) > 1:
-    for i in range(1, len(sys.argv)):
-        arg = sys.argv[i]
-        paths.append(arg)
-        break
+    path = sys.argv[1]
 else:
     print("No command-line arguments provided.")
     exit()
 
-loader = PyPDFLoader(paths[0])
+print("Start extracting pdf file", path);
+loader = PyPDFLoader(path)
 pages = loader.load_and_split()
 
 embeddings = OpenAIEmbeddings()
@@ -31,11 +29,11 @@ CONNECTION_STRING = PGVector.connection_string_from_db_params(
     password=os.environ.get("DB_PASSWORD", ""),
 )
 
-path_name = paths[0].replace(f"{home_dir}/storage/app/", "")
+storage_path = path.replace(f"{home_dir}/storage/app/", "")
 db = PGVector.from_documents(
     embedding=embeddings,
     documents=pages,
-    collection_name=path_name,
+    collection_name=storage_path,
     connection_string=CONNECTION_STRING,
     distance_strategy=DistanceStrategy.COSINE
 )
