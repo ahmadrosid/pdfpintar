@@ -7,6 +7,7 @@ import { useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import { Progress } from "@/Components/Progress";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 export default function DocumentCreate({
     auth,
@@ -40,7 +41,7 @@ export default function DocumentCreate({
                         <div className="flex items-center justify-center text-gray-900 min-h-[25vh]">
                             <form
                                 onSubmit={submit}
-                                className="max-w-xl mx-auto"
+                                className="max-w-2xl mx-auto"
                             >
                                 {path && (
                                     <p className="py-4">
@@ -54,7 +55,7 @@ export default function DocumentCreate({
                                     </p>
                                 )}
 
-                                <div className="flex gap-2 justify-between items-center">
+                                <div className="grid gap-2 justify-between items-center">
                                     {progress ? (
                                         <Progress value={progress.percentage}>
                                             {progress.percentage}%
@@ -74,18 +75,24 @@ export default function DocumentCreate({
                                             type="file"
                                             name="file"
                                             className={cn(
+                                                "border border-teal-700 p-2 rounded border-dashed",
                                                 "block w-full text-sm text-slate-500",
                                                 "file:mr-4 file:py-2 file:px-4",
-                                                "file:rounded-full file:border-0",
+                                                "file:rounded-md file:border-0",
                                                 "file:text-sm file:font-semibold",
-                                                "file:bg-teal-50 file:text-teal-700",
-                                                "hover:file:bg-teal-100 shadow-none mt-2"
+                                                "file:bg-teal-100 file:text-teal-700",
+                                                "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2"
                                             )}
                                         />
                                     )}
 
-                                    <div className="flex items-center gap-4">
-                                        <PrimaryButton>Upload</PrimaryButton>
+                                    <div className="flex items-center gap-4 py-2">
+                                        <PrimaryButton className="px-3 w-full justify-center">
+                                            {progress && (
+                                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                                            )}
+                                            Upload
+                                        </PrimaryButton>
                                     </div>
                                 </div>
                             </form>
