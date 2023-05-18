@@ -15,6 +15,8 @@ class ProcessEmbeddingDocument implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $timeout = 60 * 5; //5 minutes
+
     /**
      * Create a new job instance.
      */

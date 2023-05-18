@@ -1,13 +1,12 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { useRef, FormEventHandler } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
-import { Transition } from "@headlessui/react";
 import { Progress } from "@/Components/Progress";
+import { cn } from "@/lib/utils";
 
 export default function DocumentCreate({
     auth,
@@ -38,7 +37,7 @@ export default function DocumentCreate({
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex items-center justify-center text-gray-900 h-[25vh]">
+                        <div className="flex items-center justify-center text-gray-900 min-h-[25vh]">
                             <form
                                 onSubmit={submit}
                                 className="max-w-xl mx-auto"
@@ -74,13 +73,14 @@ export default function DocumentCreate({
                                             }}
                                             type="file"
                                             name="file"
-                                            className="block w-full text-sm text-slate-500
-                                        file:mr-4 file:py-2 file:px-4
-                                        file:rounded-full file:border-0
-                                        file:text-sm file:font-semibold
-                                        file:bg-teal-50 file:text-teal-700
-                                        hover:file:bg-teal-100 shadow-none mt-2
-                                      "
+                                            className={cn(
+                                                "block w-full text-sm text-slate-500",
+                                                "file:mr-4 file:py-2 file:px-4",
+                                                "file:rounded-full file:border-0",
+                                                "file:text-sm file:font-semibold",
+                                                "file:bg-teal-50 file:text-teal-700",
+                                                "hover:file:bg-teal-100 shadow-none mt-2"
+                                            )}
                                         />
                                     )}
 
