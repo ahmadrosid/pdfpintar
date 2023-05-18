@@ -21,9 +21,9 @@ class StoreDocumentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $maxFileSize = 15 * 1024; // 15MB
+        $maxFileSize = 25 * 1024; // 25MB
         return [
-            'file' => 'required|mimes:pdf|max:' . $maxFileSize
+            'file' => 'required|mimes:pdf,bin|max:' . $maxFileSize
         ];
     }
 }
