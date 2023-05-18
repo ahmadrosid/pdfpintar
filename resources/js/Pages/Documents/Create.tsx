@@ -7,11 +7,13 @@ import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import { Transition } from "@headlessui/react";
+import { Progress } from "@/Components/Progress";
 
 export default function DocumentCreate({
     auth,
     path,
-}: PageProps<{ path?: string }>) {
+    errors,
+}: PageProps<{ path?: string; errors: any }>) {
     const currentFileInput = useRef<HTMLInputElement | null>(null);
     const { data, setData, post, reset, progress } = useForm({
         file: null,
@@ -53,46 +55,37 @@ export default function DocumentCreate({
                                     </p>
                                 )}
 
-                                {progress && (
-                                    <progress
-                                        value={progress.percentage}
-                                        max="100"
-                                    >
-                                        {progress.percentage}%
-                                    </progress>
-                                )}
                                 <div className="flex gap-2 justify-between items-center">
-                                    <input
-                                        id="current_file"
-                                        ref={currentFileInput}
-                                        onChange={(e) => {
-                                            if (!e.target.files) return;
-                                            // @ts-ignore
-                                            setData("file", e.target.files[0]);
-                                        }}
-                                        type="file"
-                                        name="file"
-                                        className="block w-full text-sm text-slate-500
+                                    {progress ? (
+                                        <Progress value={progress.percentage}>
+                                            {progress.percentage}%
+                                        </Progress>
+                                    ) : (
+                                        <input
+                                            id="current_file"
+                                            ref={currentFileInput}
+                                            onChange={(e) => {
+                                                if (!e.target.files) return;
+                                                setData(
+                                                    "file",
+                                                    // @ts-ignore
+                                                    e.target.files[0]
+                                                );
+                                            }}
+                                            type="file"
+                                            name="file"
+                                            className="block w-full text-sm text-slate-500
                                         file:mr-4 file:py-2 file:px-4
                                         file:rounded-full file:border-0
                                         file:text-sm file:font-semibold
                                         file:bg-teal-50 file:text-teal-700
                                         hover:file:bg-teal-100 shadow-none mt-2
                                       "
-                                    />
+                                        />
+                                    )}
+
                                     <div className="flex items-center gap-4">
                                         <PrimaryButton>Upload</PrimaryButton>
-
-                                        {/* <Transition
-                                            show={recentlySuccessful}
-                                            enterFrom="opacity-0"
-                                            leaveTo="opacity-0"
-                                            className="transition ease-in-out"
-                                        >
-                                            <p className="text-sm text-gray-600">
-                                                Uploaded.
-                                            </p>
-                                        </Transition> */}
                                     </div>
                                 </div>
                             </form>
