@@ -29,11 +29,11 @@ export default function DocumentCreate({
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Document Upload
+                    Upload document
                 </h2>
             }
         >
-            <Head title="Document Upload" />
+            <Head title="Upload document" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -55,9 +55,12 @@ export default function DocumentCreate({
                                     </p>
                                 )}
 
-                                <div className="grid gap-2 justify-between items-center">
+                                <div className="grid gap-2 justify-between items-center w-[350px]">
                                     {progress ? (
-                                        <Progress value={progress.percentage}>
+                                        <Progress
+                                            className="w-full"
+                                            value={progress.percentage}
+                                        >
                                             {progress.percentage}%
                                         </Progress>
                                     ) : (
@@ -87,11 +90,8 @@ export default function DocumentCreate({
                                     )}
 
                                     <div className="flex items-center gap-4 py-2">
-                                        <PrimaryButton className="px-3 w-full justify-center">
-                                            {progress && (
-                                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                            )}
-                                            Upload
+                                        <PrimaryButton className="px-3 h-10 w-full justify-center">
+                                            Submit
                                         </PrimaryButton>
                                     </div>
                                 </div>
