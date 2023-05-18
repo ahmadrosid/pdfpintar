@@ -32,9 +32,9 @@ class ProcessEmbeddingDocument implements ShouldQueue
     public function handle(): void
     {
         $home_dir = env('HOME_DIR');
-        $result = Process::run("python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path);
-        dump("python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path);
-        dump($result->output());
+        $command = "python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path;
+        $result = Process::timeout($this->timeout)->run($command);
+        dump($command, $result->output());
         $this->document->update(["job_id" => null]);
     }
 }
