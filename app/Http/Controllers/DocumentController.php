@@ -9,6 +9,7 @@ use App\Models\Chat;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class DocumentController extends Controller
@@ -84,6 +85,7 @@ class DocumentController extends Controller
     public function destroy(Document $document)
     {
         Chat::query()->where('document_id', $document->id)->delete();
+        Storage::delete($document->path);
         $document->delete();
         return back()->with("status", "Document {$document->title} deleted!");
     }
