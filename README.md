@@ -89,7 +89,7 @@ server {
 }
 ```
 
-Add permission
+Add permission to project directory:
 
 ```bash
 sudo chown -R www-data:www-data storage bootstrap/cache
@@ -106,10 +106,14 @@ Install supervisor
 bash apt install supervisor
 ```
 
+Add new worker config.
+
 ```bash
 cd /etc/supervisor/conf.d
 vim queue-worker.conf
 ```
+
+Point config value to the destination project folder.
 
 ```yaml
 [program:queue-worker]
@@ -123,7 +127,7 @@ redirect_stderr=true
 stdout_logfile=/var/www/pdfpintar/storage/logs/worker.log
 ```
 
-Update
+Update supervisorctl config
 
 ```bash
 sudo supervisorctl reread
