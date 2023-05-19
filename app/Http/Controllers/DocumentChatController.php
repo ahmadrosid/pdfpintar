@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\ServerEvent;
 use App\Http\Repository\DocumentRepository;
 use App\Models\Chat;
 use App\Models\Document;
@@ -83,25 +84,15 @@ class DocumentChatController extends Controller
         $embedding = $this->repository->findEmbedding($chat->document->path, $query_embedding);
         return response()->stream(function () use ($question, $embedding) {
             $stream = $this->repository->askQuestionStreamed($embedding['context'], $question);
-
             foreach ($stream as $response) {
                 $text = $response->choices[0]->delta->content;
                 if (connection_aborted()) {
                     break;
                 }
-
-                echo "event: update\n";
-                echo 'data: ' . $text;
-                echo "\n\n";
-                ob_flush();
-                flush();
+                ServerEvent::send("update", $text);
             }
 
-            echo "event: update\n";
-            echo 'data: <END_STREAMING_SSE>';
-            echo "\n\n";
-            ob_flush();
-            flush();
+            ServerEvent::send("update", "<END_STREAMING_SSE>");
         }, 200, [
             'Cache-Control' => 'no-cache',
             'Content-Type' => 'text/event-stream',

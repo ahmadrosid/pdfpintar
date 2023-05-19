@@ -36,7 +36,7 @@ type StreamingMessageProps = {
     show: boolean;
 };
 
-const StreamingMessage = forwardRef<ElementRef<"p">, StreamingMessageProps>(
+const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
     ({ show }, ref) => (
         <div
             className={clsx(
@@ -47,7 +47,10 @@ const StreamingMessage = forwardRef<ElementRef<"p">, StreamingMessageProps>(
             <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
                 <Bot className="w-5 h-5" />
             </div>
-            <p ref={ref} className="flex-1 text-base"></p>
+            <p className="flex-1 text-base">
+                <span ref={ref}></span>
+                <span className="inline-block w-1.5 h-4 bg-teal-300 animate-blink"></span>
+            </p>
         </div>
     )
 );
