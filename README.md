@@ -54,8 +54,6 @@ Setup nginx config:
 
 ```bash
 server {
-    listen 80;
-    listen [::]:80;
     server_name pdfpintar.ahmadrosid.com;
     root /var/www/pdfpintar/public;
 
@@ -84,7 +82,9 @@ server {
     }
 
     location /document/chat/streaming {
-        add_header Connection '';
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        chunked_transfer_encoding off;
         try_files $uri $uri/ /index.php?$query_string;
     }
 
