@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import { FormEventHandler, useRef, useState } from "react";
+import { FormEventHandler, useCallback, useRef, useState } from "react";
 import { router } from "@inertiajs/react";
 
 type Metadata = {
@@ -25,6 +25,42 @@ type DocumentIndexProps = PageProps<{
     message?: Message;
     chat: Chat;
 }>;
+
+type StreamingMessageProps = {
+    chat: Chat;
+};
+
+function StreamingMessage({ chat }: StreamingMessageProps) {
+    const [content, setContent] = useState("");
+
+    const triggerStreaming = useCallback(() => {
+        const question = "";
+        const queryQuestion = encodeURIComponent(question);
+        const source = new EventSource(
+            "/document/chat?question=" + queryQuestion
+        );
+        source.addEventListener("update", function (event) {
+            if (event.data === "<END_STREAMING>") {
+                source.close();
+                return;
+            }
+            setContent((prev) => prev + event.data);
+        });
+    }, [setContent]);
+
+    return (
+        <div
+            className={clsx(
+                "p-6 flex gap-4 items-start border-b border-teal-100 bg-teal-50"
+            )}
+        >
+            <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
+                <Bot className="w-5 h-5" />
+            </div>
+            <p className="flex-1 text-base">{content}</p>
+        </div>
+    );
+}
 
 export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();

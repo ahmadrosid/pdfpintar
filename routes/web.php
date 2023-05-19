@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/documents', DocumentController::class);
     Route::resource("/document/chat", DocumentChatController::class);
+    Route::get("/document/chat/streaming/{chat_id}", [DocumentChatController::class, "streaming"]);
 });
 
 
