@@ -1,4 +1,4 @@
-## Laravel PDF AI
+## PDFPINTAR
 
 ![demo.png](public/demo.png)
 
