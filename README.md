@@ -83,16 +83,21 @@ server {
         include fastcgi_params;
     }
 
-    location ^~ /document/chat/ {
-        proxy_set_header Connection '';
-        proxy_http_version 1.1;
-        chunked_transfer_encoding off;
+    location /document/chat/streaming {
+        add_header Connection '';
         try_files $uri $uri/ /index.php?$query_string;
     }
 
     location ~ /\.(?!well-known).* {
         deny all;
     }
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/pdfpintar.ahmadrosid.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/pdfpintar.ahmadrosid.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
 ```
 
