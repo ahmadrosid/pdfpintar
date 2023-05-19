@@ -83,6 +83,13 @@ server {
         include fastcgi_params;
     }
 
+    location ^~ /document/chat/ {
+        proxy_set_header Connection '';
+        proxy_http_version 1.1;
+        chunked_transfer_encoding off;
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
     location ~ /\.(?!well-known).* {
         deny all;
     }
