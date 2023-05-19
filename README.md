@@ -81,11 +81,17 @@ server {
         include fastcgi_params;
     }
 
-    location /document/chat/streaming {
-        proxy_set_header Connection '';
+    location ^~ /document/chat/streaming$ {
+        proxy_buffering off;
+        proxy_read_timeout 86400s;
         proxy_http_version 1.1;
-        chunked_transfer_encoding off;
-        try_files $uri $uri/ /index.php?$query_string;
+        add_header Connection '';
+        add_header X-Accel-Buffering no;
+
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
     }
 
     location ~ /\.(?!well-known).* {
