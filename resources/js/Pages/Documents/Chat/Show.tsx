@@ -15,6 +15,7 @@ import {
     useState,
 } from "react";
 import { router } from "@inertiajs/react";
+import LoadingDots from "@/Components/LoadingDots";
 
 type Metadata = {
     page: number;
@@ -209,7 +210,11 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                         disabled={processing}
                                         className="absolute rounded-md right-1 text-sm p-2 hover:bg-teal-50"
                                     >
-                                        <Send className="w-4 h-4" />
+                                        {isShowStreaming ? (
+                                            <LoadingDots size="large" />
+                                        ) : (
+                                            <Send className="w-4 h-4" />
+                                        )}
                                     </button>
                                 </form>
                             </div>
