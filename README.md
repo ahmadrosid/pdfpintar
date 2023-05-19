@@ -82,11 +82,8 @@ server {
     }
 
     location ^~ /document/chat/streaming$ {
-        proxy_buffering off;
-        proxy_read_timeout 86400s;
         proxy_http_version 1.1;
         add_header Connection '';
-        add_header X-Accel-Buffering no;
 
         fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
         fastcgi_index index.php;

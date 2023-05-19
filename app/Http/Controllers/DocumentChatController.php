@@ -95,6 +95,8 @@ class DocumentChatController extends Controller
             ServerEvent::send("update", "<END_STREAMING_SSE>");
         }, 200, [
             'Cache-Control' => 'no-cache',
+            'Connection' => 'keep-alive',
+            'X-Accel-Buffering' => 'no',
             'Content-Type' => 'text/event-stream',
         ]);
     }
