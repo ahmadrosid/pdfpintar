@@ -7,7 +7,13 @@ import clsx from "clsx";
 
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import { FormEventHandler, useCallback, useRef, useState } from "react";
+import {
+    ElementRef,
+    FormEventHandler,
+    forwardRef,
+    useRef,
+    useState,
+} from "react";
 import { router } from "@inertiajs/react";
 
 type Metadata = {
@@ -27,49 +33,65 @@ type DocumentIndexProps = PageProps<{
 }>;
 
 type StreamingMessageProps = {
-    chat: Chat;
+    show: boolean;
 };
 
-function StreamingMessage({ chat }: StreamingMessageProps) {
-    const [content, setContent] = useState("");
-
-    const triggerStreaming = useCallback(() => {
-        const question = "";
-        const queryQuestion = encodeURIComponent(question);
-        const source = new EventSource(
-            "/document/chat?question=" + queryQuestion
-        );
-        source.addEventListener("update", function (event) {
-            if (event.data === "<END_STREAMING>") {
-                source.close();
-                return;
-            }
-            setContent((prev) => prev + event.data);
-        });
-    }, [setContent]);
-
-    return (
+const StreamingMessage = forwardRef<ElementRef<"p">, StreamingMessageProps>(
+    ({ show }, ref) => (
         <div
             className={clsx(
+                !show && "hidden",
                 "p-6 flex gap-4 items-start border-b border-teal-100 bg-teal-50"
             )}
         >
             <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
                 <Bot className="w-5 h-5" />
             </div>
-            <p className="flex-1 text-base">{content}</p>
+            <p ref={ref} className="flex-1 text-base"></p>
         </div>
-    );
-}
+    )
+);
 
 export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
     const [messages, setMessage] = useState<Message[]>([]);
-    const lastElement = useRef<HTMLDivElement>(null);
+    const [isShowStreaming, setShowStreaming] = useState(false);
+    const resultRef = useRef<HTMLParagraphElement | null>(null);
 
     const { data, setData, processing } = useForm({
         question: "",
     });
+
+    const triggerStreaming = (question: string) => {
+        const queryQuestion = encodeURIComponent(question);
+        const source = new EventSource(
+            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${
+                chat.id
+            }`
+        );
+        setShowStreaming(true);
+        source.addEventListener("update", (event) => {
+            if (event.data === "<END_STREAMING_SSE>") {
+                source.close();
+                setMessage((prev) => {
+                    return [
+                        ...prev,
+                        {
+                            metadata: [],
+                            role: "bot",
+                            content: resultRef.current?.innerText!!,
+                        },
+                    ];
+                });
+                setShowStreaming(false);
+                // @ts-expect-error
+                resultRef.current.innerText = "";
+                return;
+            }
+            // @ts-expect-error
+            resultRef.current.innerText += event.data;
+        });
+    };
 
     const handleSubmitChat: FormEventHandler = async (e) => {
         e.preventDefault();
@@ -82,16 +104,16 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                 },
             ];
         });
+        triggerStreaming(data.question);
         setData("question", "");
-        router.put(route("chat.update", chat.id), data, {
-            onSuccess: (response) => {
-                const props = response.props as any;
-                setMessage((prev) => {
-                    return [...prev, props.message];
-                });
-                lastElement.current?.scrollIntoView({ behavior: "smooth" });
-            },
-        });
+        // router.put(route("chat.update", chat.id), data, {
+        //     onSuccess: (response) => {
+        //         const props = response.props as any;
+        //         setMessage((prev) => {
+        //             return [...prev, props.message];
+        //         });
+        //     },
+        // });
     };
 
     return (
@@ -160,7 +182,10 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                             </p>
                                         </div>
                                     ))}
-                                    <div ref={lastElement}></div>
+                                    <StreamingMessage
+                                        show={isShowStreaming}
+                                        ref={resultRef}
+                                    />
                                 </div>
                             </div>
                             <div className="p-4 bg-teal-50">

@@ -69,6 +69,45 @@ class DocumentChatController extends Controller
         ]);
     }
 
+    public function streaming(Request $request)
+    {
+        if (!Schema::hasTable('langchain_pg_collection')) {
+            return abort(404);
+        }
+
+        $question = $request->query('question');
+        $chat_id = $request->query('chat_id');
+        $chat = Chat::findOrFail($chat_id);
+
+        $query_embedding =  $this->repository->getQueryEmbedding($question);
+        $embedding = $this->repository->findEmbedding($chat->document->path, $query_embedding);
+        return response()->stream(function () use ($question, $embedding) {
+            $stream = $this->repository->askQuestionStreamed($embedding['context'], $question);
+
+            foreach ($stream as $response) {
+                $text = $response->choices[0]->delta->content;
+                if (connection_aborted()) {
+                    break;
+                }
+
+                echo "event: update\n";
+                echo 'data: ' . $text;
+                echo "\n\n";
+                ob_flush();
+                flush();
+            }
+
+            echo "event: update\n";
+            echo 'data: <END_STREAMING_SSE>';
+            echo "\n\n";
+            ob_flush();
+            flush();
+        }, 200, [
+            'Cache-Control' => 'no-cache',
+            'Content-Type' => 'text/event-stream',
+        ]);
+    }
+
     public function create(Request $request, Document $document)
     {
         $chat = Chat::create([
