@@ -56,7 +56,7 @@ Setup nginx config:
 server {
     listen 80;
     listen [::]:80;
-    server_name 103.150.197.190;
+    server_name pdfpintar.ahmadrosid.com;
     root /var/www/pdfpintar/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
