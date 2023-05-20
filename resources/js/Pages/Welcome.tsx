@@ -118,15 +118,14 @@ export default function Welcome({
                     <div className="mt-8 md:mt-0 md:order-1">
                         <p className="text-base text-center text-gray-400">
                             <span className="mx-auto mt-2 text-sm text-gray-500">
-                                Copyright © 2020 - 2021
+                                Copyright © 2023
                                 <a
                                     href="https://unwrapped.design"
-                                    className="mx-2 text-blue-500 hover:text-gray-500"
+                                    className="mx-2 text-blue-500 hover:underline"
                                     rel="noopener noreferrer"
                                 >
                                     @ahmadrosid
                                 </a>
-                                .Since 2023
                             </span>
                         </p>
                     </div>
