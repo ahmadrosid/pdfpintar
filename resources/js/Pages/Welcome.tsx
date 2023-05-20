@@ -1,5 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export default function Welcome({
     auth,
@@ -76,6 +77,61 @@ export default function Welcome({
                     </div>
                 </div>
             </div>
+
+            <footer className="bg-white">
+                <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+                    <div className="flex justify-center space-x-6 md:order-2">
+                        <span className="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
+                            <a
+                                href="https://github.com/ahmadrosid"
+                                className="w-6 h-6 transition fill-black hover:text-blue-500"
+                            >
+                                <span className="sr-only">github</span>
+                                <Github
+                                    className="w-5 h-5 md hydrated"
+                                    aria-label="logo github"
+                                />
+                            </a>
+                            <a
+                                href="https://twitter.com/_ahmadrosid"
+                                className="w-6 h-6 transition fill-black hover:text-blue-500"
+                            >
+                                <span className="sr-only">twitter</span>
+                                <Twitter
+                                    className="w-5 h-5 md hydrated"
+                                    aria-label="logo twitter"
+                                />
+                            </a>
+                            <a
+                                href="https://linkedin.com/in/ahmadrosid"
+                                className="w-6 h-6 transition fill-black hover:text-blue-500"
+                            >
+                                <span className="sr-only">Linkedin</span>
+                                <Linkedin
+                                    className="w-5 h-5 md hydrated"
+                                    role="img"
+                                    aria-label="logo linkedin"
+                                />
+                            </a>
+                        </span>
+                    </div>
+                    <div className="mt-8 md:mt-0 md:order-1">
+                        <p className="text-base text-center text-gray-400">
+                            <span className="mx-auto mt-2 text-sm text-gray-500">
+                                Copyright © 2020 - 2021
+                                <a
+                                    href="https://unwrapped.design"
+                                    className="mx-2 text-blue-500 hover:text-gray-500"
+                                    rel="noopener noreferrer"
+                                >
+                                    @ahmadrosid
+                                </a>
+                                .Since 2023
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </>
     );
 }
