@@ -17,3 +17,35 @@
 .animate-blink {
     animation: blink 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+.bg-square {
+    background-image: repeating-linear-gradient(
+        90deg,
+        hsla(78, 0%, 63%, 0.05) 0,
+        hsla(78, 0%, 63%, 0.05) 1px,
+        transparent 1px,
+        transparent 104px
+    ),
+    repeating-linear-gradient(
+        0deg,
+        hsla(78, 0%, 63%, 0.05) 0,
+        hsla(78, 0%, 63%, 0.05) 1px,
+        transparent 1px,
+        transparent 104px
+    ),
+    repeating-linear-gradient(
+        0deg,
+        hsla(78, 0%, 63%, 0.08) 0,
+        hsla(78, 0%, 63%, 0.08) 1px,
+        transparent 1px,
+        transparent 26px
+    ),
+    repeating-linear-gradient(
+        90deg,
+        hsla(78, 0%, 63%, 0.08) 0,
+        hsla(78, 0%, 63%, 0.08) 1px,
+        transparent 1px,
+        transparent 26px
+    ),
+    linear-gradient(45deg, #fff, #fff);
+}
