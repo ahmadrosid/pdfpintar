@@ -34,12 +34,29 @@ ALTER USER pdfpintar WITH SUPERUSER;
 ## Install Pgvector extensions
 
 ```bash
-sudo apt-get install postgresql-server-dev-14 libpq-dev gcc make -y
-sudo apt-get install php8.1-pgsql
+sudo apt-get install postgresql-server-dev-14 postgresql-contrib libpq-dev gcc make -y
+sudo apt-get install php8.1-pgsql php8.1-dom php8.1-curl php8.1-zip
 cd /tmp
 git clone --branch v0.4.2 https://github.com/pgvector/pgvector.git
 cd pgvector
 make clean && PG_CFLAGS=-DIVFFLAT_BENCH make && make install
+```
+
+## Build project
+
+Install nodejs.
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+Install and build nodejs package.
+
+```bash
+pnpm install
+pnpm build
 ```
 
 ## Nginx Config
