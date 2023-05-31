@@ -35,7 +35,7 @@ ALTER USER pdfpintar WITH SUPERUSER;
 
 ```bash
 sudo apt-get install postgresql-server-dev-14 postgresql-contrib libpq-dev gcc make -y
-sudo apt-get install php8.1-pgsql php8.1-dom php8.1-curl php8.1-zip
+sudo apt-get install php8.1-pgsql php8.1-dom php8.1-curl php8.1-zip php8.1-redis
 cd /tmp
 git clone --branch v0.4.2 https://github.com/pgvector/pgvector.git
 cd pgvector
