@@ -59,9 +59,11 @@ export default function Welcome({
                             journey.
                         </h2>
                         <div className="flex gap-4 py-8 justify-center items-center">
-                            <button className="h-10 px-4 bg-teal-500 hover:bg-teal-400 rounded-md text-white font-medium">
-                                Start a free trial
-                            </button>
+                            <a href="/login">
+                                <button className="h-10 px-4 bg-teal-500 hover:bg-teal-400 rounded-md text-white font-medium">
+                                    Start a free trial
+                                </button>
+                            </a>
                             <div>
                                 <button className="hover:border-teal-400 hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
                                     Learn more
