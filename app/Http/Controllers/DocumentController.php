@@ -26,7 +26,7 @@ class DocumentController extends Controller
                 'id' => $item->id,
                 'path' => str_replace("public", "storage", asset($item->path)),
                 'title' => $item->title,
-                'job_id' => $item->job_id,
+                'status' => $item->status,
                 'created_at' => $item->created_at->diffForHumans()
             ];
         })->all();
@@ -58,12 +58,11 @@ class DocumentController extends Controller
             'path' => $path,
             'title' => $file->getClientOriginalName()
         ]);
-
-        $jobId = Queue::push(
+        Queue::push(
             new ProcessEmbeddingDocument($pdf)
         );
 
-        $pdf->job_id = $jobId;
+        $pdf->status = "indexing";
         $pdf->save();
 
         return back()->with('path', route("documents.show", $pdf->id));

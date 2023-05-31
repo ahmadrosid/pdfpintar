@@ -72,10 +72,6 @@ class DocumentChatController extends Controller
 
     public function streaming(Request $request)
     {
-        if (!Schema::hasTable('langchain_pg_collection')) {
-            return abort(404);
-        }
-
         $question = $request->query('question');
         $chat_id = $request->query('chat_id');
         $chat = Chat::findOrFail($chat_id);

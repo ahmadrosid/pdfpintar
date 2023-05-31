@@ -24,15 +24,15 @@ class DocumentRepository
     public function findEmbedding($document_path, $query_embedding): array
     {
         $query = <<<EOT
-        SELECT langchain_pg_embedding.collection_id, langchain_pg_embedding.embedding, langchain_pg_embedding.document, langchain_pg_embedding.cmetadata, langchain_pg_embedding.custom_id, langchain_pg_embedding.uuid, langchain_pg_embedding.embedding <=> '%s'::vector AS distance 
-        FROM langchain_pg_embedding JOIN langchain_pg_collection ON langchain_pg_embedding.collection_id = langchain_pg_collection.uuid 
-        WHERE langchain_pg_embedding.collection_id = '{collection_id}'::UUID ORDER BY distance ASC 
+        SELECT embeddings.collection_id, embeddings.embedding, embeddings.document, embeddings.cmetadata, embeddings.custom_id, embeddings.uuid, embeddings.embedding <=> '%s'::vector AS distance 
+        FROM embeddings JOIN embedding_collections ON embeddings.collection_id = embedding_collections.uuid 
+        WHERE embeddings.collection_id = '{collection_id}'::UUID ORDER BY distance ASC 
         LIMIT 4
         EOT;
 
-        $langchain_pg_collection = DB::table('langchain_pg_collection')->where('name',  $document_path)->first();
+        $embedding_collections = DB::table('embedding_collections')->where('name',  $document_path)->first();
         $query = str_replace("%s", json_encode($query_embedding), $query);
-        $query = str_replace("{collection_id}", $langchain_pg_collection->uuid, $query);
+        $query = str_replace("{collection_id}", $embedding_collections->uuid, $query);
         $records = DB::cursor($query);
 
         $context = "";

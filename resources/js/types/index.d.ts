@@ -2,7 +2,7 @@ export interface Document {
     path: string;
     title: string;
     id: number;
-    job_id?: number;
+    status?: string;
     created_at: string;
 }
 

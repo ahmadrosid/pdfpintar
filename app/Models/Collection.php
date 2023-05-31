@@ -9,11 +9,10 @@ use Ramsey\Uuid\Uuid;
 class Collection extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     public $incrementing = false;
 
     protected $primaryKey = 'uuid';
-    protected $table = 'langchain_pg_collection';
+    protected $table = 'embedding_collections';
     protected $fillable = [
         "name", "cmetadata", "uuid"
     ];

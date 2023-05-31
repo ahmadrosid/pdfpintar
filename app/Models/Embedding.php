@@ -13,7 +13,7 @@ class Embedding extends Model
     public $incrementing = false;
 
     protected $primaryKey = 'uuid';
-    protected $table = 'langchain_pg_embedding';
+    protected $table = 'embeddings';
     protected $fillable = [
         "uuid", "custom_id", "collection_id", "cmetadata", "document", "embedding"
     ];

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string("path");
-            $table->string("title");
-            $table->string("status")->nullable();
-            $table->morphs("resource");
+        Schema::create('embedding_collections', function (Blueprint $table) {
+            $table->uuid('uuid');
+            $table->json('cmetadata');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('langchain_pg_collection');
     }
 };

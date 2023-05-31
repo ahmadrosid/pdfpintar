@@ -32,6 +32,16 @@ class ProcessEmbeddingDocument implements ShouldQueue
     }
 
     /**
+     * Get the tags that should be assigned to the job.
+     *
+     * @return array<int, string>
+     */
+    public function tags(): array
+    {
+        return ['embedding', 'document:' . $this->document->id];
+    }
+
+    /**
      * Execute the job.
      */
     public function handle(): void
@@ -39,16 +49,11 @@ class ProcessEmbeddingDocument implements ShouldQueue
         $home_dir = env('HOME_DIR');
         $collection = Collection::create([
             'name' => $this->document->path,
+            'cmetadata' => json_encode([
+                "total_token" => 0,
+                "title" => $this->document->title
+            ])
         ]);
-        // $command = "python3 {$home_dir}/ingest.py " . "{$home_dir}/storage/app/" . $this->document->path;
-        // dump($command);
-        // $process = Process::timeout($this->timeout)->start($command);
-        // while ($process->running()) {
-        //     echo $process->latestOutput();
-        //     echo $process->latestErrorOutput();
-        //     sleep(1);
-        // }
-        // $this->document->update(["job_id" => null]);
         $pdf_path =  "{$home_dir}/storage/app/" . $this->document->path;
         $texts = php_pdf_read_all($pdf_path);
         $total_token_embed = 0;
@@ -69,16 +74,21 @@ class ProcessEmbeddingDocument implements ShouldQueue
                     "title" => $this->document->title
                 ])
             ]);
+            $this->document->update([
+                'status' => "Embedding page {$page_number}"
+            ]);
         }
 
         $collection->update([
             'cmetadata' => json_encode([
-                "total_token" => $total_token_embed
+                "total_token" => $total_token_embed,
+                "title" => $this->document->title
             ])
         ]);
-        echo "total_token_embed: $total_token_embed\n";
 
-        $this->document->update(["job_id" => null]);
-        echo "DONE\n";
+        $this->document->update([
+            'status' => "complete"
+        ]);
+        echo "total_token_embed: $total_token_embed\n";
     }
 }
