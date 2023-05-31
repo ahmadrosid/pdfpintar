@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string("path");
             $table->string("title");
+            $table->string("status")->nullable();
             $table->integer("job_id")->nullable();
             $table->morphs("resource");
             $table->timestamps();

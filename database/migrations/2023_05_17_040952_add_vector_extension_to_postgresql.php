@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE EXTENSION vector;");
+        DB::statement("CREATE EXTENSION IF NOT EXISTS vector;");
     }
 
     /**
