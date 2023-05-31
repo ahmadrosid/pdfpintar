@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b4603be098eb07b8797195fcc3937e8a",
+    "content-hash": "847dfa94fbd813452e5ff943a6b2fe1b",
     "packages": [
         {
             "name": "brick/math",
@@ -1833,6 +1833,77 @@
             "time": "2022-04-17T13:12:02+00:00"
         },
         {
+            "name": "mis3085/tiktoken-for-laravel",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mis3085/tiktoken-for-laravel.git",
+                "reference": "3f588e42ed3ed2944e735b752885da9fb3d982bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mis3085/tiktoken-for-laravel/zipball/3f588e42ed3ed2944e735b752885da9fb3d982bf",
+                "reference": "3f588e42ed3ed2944e735b752885da9fb3d982bf",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.14.0",
+                "yethee/tiktoken": "^0.1.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^5.11|^6.0|^7.9",
+                "nunomaduro/larastan": "^1.0|^2.0.1",
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest": "^1.21|^2.0",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.0",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mis3085\\Tiktoken\\TiktokenServiceProvider"
+                    ],
+                    "aliases": {
+                        "Tiktoken": "Mis3085\\Tiktoken\\Facades\\Tiktoken"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mis3085\\Tiktoken\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mis3085",
+                    "email": "17059877+mis3085@users.noreply.github.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is tiktoken-php (yethee/tiktoken) wrapper for Laravel",
+            "homepage": "https://github.com/mis3085/tiktoken-for-laravel",
+            "keywords": [
+                "laravel",
+                "tiktoken",
+                "tiktoken-for-laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/mis3085/tiktoken-for-laravel/issues",
+                "source": "https://github.com/mis3085/tiktoken-for-laravel/tree/0.1.2"
+            },
+            "time": "2023-05-18T05:47:13+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.3.1",
             "source": {
@@ -3376,6 +3447,66 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "efab1844b8826443135201c4443690f032c3d533"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/efab1844b8826443135201c4443690f032c3d533",
+                "reference": "efab1844b8826443135201c4443690f032c3d533",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.15.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-04-27T08:09:01+00:00"
         },
         {
             "name": "symfony/console",
@@ -5907,6 +6038,55 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "yethee/tiktoken",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yethee/tiktoken-php.git",
+                "reference": "549cfaa2fa5336037f0f6b0b8aff1cc0663e3754"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yethee/tiktoken-php/zipball/549cfaa2fa5336037f0f6b0b8aff1cc0663e3754",
+                "reference": "549cfaa2fa5336037f0f6b0b8aff1cc0663e3754",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "symfony/service-contracts": "^2.5 || ^3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^11.1",
+                "phpunit/phpunit": "^10.0",
+                "psalm/plugin-phpunit": "^0.18.3",
+                "vimeo/psalm": "5.9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yethee\\Tiktoken\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP version of tiktoken",
+            "keywords": [
+                "bpe",
+                "decode",
+                "encode",
+                "openai",
+                "tiktoken",
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/yethee/tiktoken-php/issues",
+                "source": "https://github.com/yethee/tiktoken-php/tree/0.1.2"
+            },
+            "time": "2023-04-06T10:16:09+00:00"
         }
     ],
     "packages-dev": [
