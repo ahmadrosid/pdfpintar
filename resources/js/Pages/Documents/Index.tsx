@@ -2,14 +2,20 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
 import { Trash2, Upload } from "lucide-react";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import { Badge } from "@/Components/Badge";
+import Modal from "@/Components/Modal";
+import UploadTab from "@/Components/UploadTab";
 
 export default function DocumentIndex({
     auth,
     documents,
 }: PageProps<{ documents?: Document[] }>) {
     const { reset } = useForm();
+    const [isOpenUpload, setIsOpenUpload] = useState(false);
+
+    const openModal = () => setIsOpenUpload(true);
+    const closeModal = () => setIsOpenUpload(false);
 
     const handleDeleteDocument: FormEventHandler = (e) => {
         e.preventDefault();
@@ -40,15 +46,31 @@ export default function DocumentIndex({
                                     className="flex-1 p-2 px-4 rounded-md border-teal-300 focus:ring-0 active:ring-0 focus:border-teal-300"
                                     placeholder="Search document"
                                 />
-                                <Link
+                                {/* <Link
                                     href="/documents/create"
                                     className="block"
+                                > */}
+                                <button
+                                    onClick={openModal}
+                                    className="bg-teal-500 hover:bg-teal-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit"
                                 >
-                                    <button className="bg-teal-500 hover:bg-teal-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit">
-                                        <Upload className="w-4 h-4 mr-2" />
-                                        Upload
-                                    </button>
-                                </Link>
+                                    <Upload className="w-4 h-4 mr-2" />
+                                    Upload
+                                </button>
+
+                                <Modal show={isOpenUpload} onClose={closeModal}>
+                                    <form
+                                        onSubmit={() => false}
+                                        className="p-6"
+                                    >
+                                        <h2 className="text-lg font-medium text-gray-900">
+                                            Upload PDF document
+                                        </h2>
+
+                                        <UploadTab />
+                                    </form>
+                                </Modal>
+                                {/* </Link> */}
                             </div>
                             <div>
                                 {documents?.map((item, idx) => (
