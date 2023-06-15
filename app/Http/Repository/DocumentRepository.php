@@ -7,10 +7,13 @@ use OpenAI\Laravel\Facades\OpenAI;
 
 class DocumentRepository
 {
+    private string $chat_model = 'gpt-3.5-turbo-16k';
+    private string $embedding_model = 'text-embedding-ada-002';
+
     public function getQueryEmbedding($question): array
     {
         $result = OpenAI::embeddings()->create([
-            'model' => 'text-embedding-ada-002',
+            'model' => $this->embedding_model,
             'input' => $question,
         ]);
 
@@ -50,7 +53,7 @@ class DocumentRepository
     public function askQuestion(array $messages)
     {
         return Openai::chat()->create([
-            'model' => 'gpt-3.5-turbo',
+            'model' => $this->chat_model,
             'temperature' => 0.7,
             'messages' => $messages,
         ]);
@@ -67,7 +70,7 @@ class DocumentRepository
         $system_prompt = str_replace("{context}", $context, $system_template);
 
         return Openai::chat()->createStreamed([
-            'model' => 'gpt-3.5-turbo',
+            'model' => $this->chat_model,
             'temperature' => 0.7,
             'messages' => [
                 ['role' => 'system', 'content' => $system_prompt],
