@@ -9,9 +9,8 @@ use App\Models\Document;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Schema;
 
-class DocumentChatController extends Controller
+class ChatController extends Controller
 {
     private DocumentRepository $repository;
 

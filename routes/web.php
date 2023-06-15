@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DocumentChatController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -20,14 +20,14 @@ Route::get('/privacy-policy', function () {
     return Inertia::render('PrivacyPolicy');
 });
 
-Route::get("/document/chat/streaming", [DocumentChatController::class, "streaming"])->name("chat.streaming");
+Route::get("/document/chat/streaming", [ChatController::class, "streaming"])->name("chat.streaming");
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/documents', DocumentController::class);
-    Route::resource("/document/chat", DocumentChatController::class);
+    Route::resource("/document/chat", ChatController::class);
 });
 
 
