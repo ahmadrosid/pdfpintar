@@ -58,7 +58,7 @@ export default function DocumentCreate({
                                 <div className="grid gap-2 justify-between items-center w-[350px]">
                                     {progress ? (
                                         <Progress
-                                            className="w-full"
+                                            className="w-full block"
                                             value={progress.percentage}
                                         >
                                             {progress.percentage}%

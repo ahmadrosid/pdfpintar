@@ -54,7 +54,7 @@ class ProcessEmbeddingDocument implements ShouldQueue
                 "title" => $this->document->title
             ])
         ]);
-        $pdf_path =  "{$home_dir}/storage/app/" . $this->document->path;
+        $pdf_path =  storage_path("app/" . $this->document->path);
         $texts = php_pdf_read_all($pdf_path);
         $total_token_embed = 0;
         $page_number = 0;

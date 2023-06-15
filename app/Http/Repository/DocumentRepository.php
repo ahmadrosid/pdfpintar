@@ -47,23 +47,12 @@ class DocumentRepository
         return ['context' => $context, 'metadata' => $metadata];
     }
 
-    public function askQuestion($context, $question)
+    public function askQuestion(array $messages)
     {
-        $system_template = <<<EOT
-        Use the following pieces of context to answer the users question. 
-        If you don't know the answer, just say that you don't know, don't try to make up an answer.
-        ----------------
-        {context}
-        EOT;
-        $system_prompt = str_replace("{context}", $context, $system_template);
-
         return Openai::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'temperature' => 0.7,
-            'messages' => [
-                ['role' => 'system', 'content' => $system_prompt],
-                ['role' => 'user', 'content' => $question],
-            ],
+            'messages' => $messages,
         ]);
     }
 
@@ -85,5 +74,24 @@ class DocumentRepository
                 ['role' => 'user', 'content' => $question],
             ],
         ]);
+    }
+
+
+    public function generateTitleConversation(string $question, string $answer)
+    {
+        $messages = [
+            ['role' => 'user', 'content' => $question],
+            ['role' => 'assistant', 'content' => $answer],
+            ['role' => 'user', 'content' => 'Please generate title for this QA. Do not wrap in quotes. Please set max length to 15 words.'],
+        ];
+
+        $response = $this->askQuestion($messages);
+
+        $title = "";
+        foreach ($response->choices as $result) {
+            $title = $result->message->content;
+        }
+
+        return $title;
     }
 }

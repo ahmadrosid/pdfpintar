@@ -52,24 +52,6 @@ class DocumentChatController extends Controller
         ]);
     }
 
-    public function update(Request $request, Chat $chat)
-    {
-        if (!Schema::hasTable('langchain_pg_collection')) {
-            return abort(404);
-        }
-
-        $question = $request->get('question');
-        $query_embedding =  $this->repository->getQueryEmbedding($question);
-        $embedding = $this->repository->findEmbedding($chat->document->path, $query_embedding);
-        $response = $this->repository->askQuestion($embedding['context'], $question);
-
-        return back()->with("message", [
-            "content" => $response->choices[0]->message->content,
-            "role" => "bot",
-            "metadata" => $embedding['metadata']
-        ]);
-    }
-
     public function streaming(Request $request)
     {
         $question = $request->query('question');
@@ -78,23 +60,35 @@ class DocumentChatController extends Controller
 
         $query_embedding =  $this->repository->getQueryEmbedding($question);
         $embedding = $this->repository->findEmbedding($chat->document->path, $query_embedding);
-        return response()->stream(function () use ($question, $embedding) {
-            $stream = $this->repository->askQuestionStreamed($embedding['context'], $question);
-            foreach ($stream as $response) {
-                $text = $response->choices[0]->delta->content;
-                if (connection_aborted()) {
-                    break;
+        return response()->stream(
+            function () use ($question, $embedding, $chat) {
+                $stream = $this->repository->askQuestionStreamed($embedding['context'], $question);
+                $result_text = "";
+                foreach ($stream as $response) {
+                    $text = $response->choices[0]->delta->content;
+                    if (connection_aborted()) {
+                        break;
+                    }
+                    ServerEvent::send("update", $text);
+                    $result_text .= $text;
                 }
-                ServerEvent::send("update", $text);
-            }
 
-            ServerEvent::send("update", "<END_STREAMING_SSE>");
-        }, 200, [
-            'Cache-Control' => 'no-cache',
-            'Connection' => 'keep-alive',
-            'X-Accel-Buffering' => 'no',
-            'Content-Type' => 'text/event-stream',
-        ]);
+                if ($chat->document->title === $chat->title) {
+                    $chat->update([
+                        'title' => $this->repository->generateTitleConversation($question, $result_text),
+                    ]);
+                }
+
+                ServerEvent::send("update", "<END_STREAMING_SSE>");
+            },
+            200,
+            [
+                'Cache-Control' => 'no-cache',
+                'Connection' => 'keep-alive',
+                'X-Accel-Buffering' => 'no',
+                'Content-Type' => 'text/event-stream',
+            ]
+        );
     }
 
     public function create(Request $request, Document $document)
