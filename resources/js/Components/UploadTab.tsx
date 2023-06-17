@@ -28,7 +28,7 @@ export default function UploadTab() {
                 <Tab.Panels className="mt-2">
                     <Tab.Panel
                         className={cn(
-                            "rounded-xl bg-white p-3",
+                            "rounded-xl bg-white px-3 pt-3",
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2"
                         )}
                     >
