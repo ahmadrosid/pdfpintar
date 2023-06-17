@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import {
     forwardRef,
     useEffect,
@@ -31,10 +32,10 @@ export default forwardRef(function TextInput(
         <input
             {...props}
             type={type}
-            className={
-                "border-gray-300 focus:border-teal-500 focus:ring-teal-500 rounded-md shadow-sm " +
+            className={cn(
+                "border-gray-300 focus:border-teal-500 focus:ring-teal-500 rounded-md shadow-sm",
                 className
-            }
+            )}
             ref={localRef}
         />
     );

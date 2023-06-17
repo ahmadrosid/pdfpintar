@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
 import { Trash2, Upload } from "lucide-react";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import { Badge } from "@/Components/Badge";
 import Modal from "@/Components/Modal";
 import UploadTab from "@/Components/UploadTab";
@@ -24,6 +24,24 @@ export default function DocumentIndex({
             onSuccess: () => reset(),
         });
     };
+
+    const refetchDocuments = () => {
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    };
+
+    useEffect(() => {
+        if (!documents) return;
+        if (documents.length > 0) {
+            const isAllComplete = documents.every(
+                (item) => item.status === "complete"
+            );
+            if (!isAllComplete) {
+                refetchDocuments();
+            }
+        }
+    }, []);
 
     return (
         <AuthenticatedLayout

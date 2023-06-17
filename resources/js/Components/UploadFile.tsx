@@ -55,6 +55,7 @@ export default function UploadFile() {
             <div className="flex items-center gap-4 py-2 min-w-[100px]">
                 <PrimaryButton
                     onClick={submit}
+                    type="button"
                     className="px-3 h-10 w-full justify-center"
                 >
                     Submit

@@ -54,7 +54,7 @@ class DocumentRepository
     {
         return Openai::chat()->create([
             'model' => $this->chat_model,
-            'temperature' => 0.7,
+            'temperature' => 0.8,
             'messages' => $messages,
         ]);
     }
