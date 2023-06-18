@@ -27,32 +27,40 @@ export default function UploadFile() {
                     {progress.percentage}%
                 </Progress>
             ) : (
-                <input
-                    id="current_file"
-                    onChange={(e) => {
-                        if (!e.target.files) return;
-                        setData(
-                            "file",
-                            // @ts-ignore
-                            e.target.files[0]
-                        );
-                    }}
-                    type="file"
-                    name="file"
-                    accept="application/pdf"
-                    className={cn(
-                        "border border-teal-500 p-2 rounded border-dashed",
-                        "block w-full text-sm text-slate-500",
-                        "file:mr-4 file:py-2 file:px-4",
-                        "file:rounded-md file:border-0",
-                        "file:text-sm file:font-semibold",
-                        "file:bg-teal-100 file:text-teal-700",
-                        "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2"
-                    )}
-                />
+                <div>
+                    <label
+                        className="block text-sm font-medium text-gray-700"
+                        htmlFor="current_file"
+                    >
+                        Select file
+                    </label>
+                    <input
+                        id="current_file"
+                        onChange={(e) => {
+                            if (!e.target.files) return;
+                            setData(
+                                "file",
+                                // @ts-ignore
+                                e.target.files[0]
+                            );
+                        }}
+                        type="file"
+                        name="file"
+                        accept="application/pdf"
+                        className={cn(
+                            "border border-teal-500 p-2 rounded border-dashed",
+                            "block w-full text-sm text-slate-500",
+                            "file:mr-4 file:py-2 file:px-4",
+                            "file:rounded-md file:border-0",
+                            "file:text-sm file:font-semibold",
+                            "file:bg-teal-100 file:text-teal-700",
+                            "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2"
+                        )}
+                    />
+                </div>
             )}
 
-            <div className="flex items-center gap-4 py-2 min-w-[100px]">
+            <div className="flex items-center gap-4 py-2 min-w-[100px] pt-4">
                 <PrimaryButton
                     onClick={submit}
                     type="button"

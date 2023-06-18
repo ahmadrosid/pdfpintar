@@ -3,6 +3,7 @@
 namespace App\Http\Repository;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use OpenAI\Laravel\Facades\OpenAI;
 
 class DocumentRepository
@@ -68,6 +69,8 @@ class DocumentRepository
         {context}
         EOT;
         $system_prompt = str_replace("{context}", $context, $system_template);
+
+        // Log::info($system_prompt);
 
         return Openai::chat()->createStreamed([
             'model' => $this->chat_model,

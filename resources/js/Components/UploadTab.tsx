@@ -13,7 +13,7 @@ export default function UploadTab() {
     };
 
     return (
-        <div className="py-4">
+        <div className="pt-4">
             <Tab.Group>
                 <Tab.List className="flex space-x-1 rounded-xl bg-teal-950/20 p-1">
                     {data.map((item) => (
