@@ -8,6 +8,7 @@ use App\Jobs\ProcessEmbeddingDocument;
 use App\Models\Chat;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -64,6 +65,34 @@ class DocumentController extends Controller
 
         $pdf->status = "indexing";
         $pdf->save();
+
+        return back()->with('path', route("documents.show", $pdf->id));
+    }
+
+    /**
+     * Download pdf from url and run process embedding document
+     */
+    public function include(Request $request)
+    {
+        $url = $request->input('pdfUrl');
+        $user = $request->user();
+
+        $name = basename($url);
+        $path = storage_path('app/public/documents/' . basename($url));
+        $pdf = Http::withOptions([
+            'sink' => $path
+        ])->get($url);
+
+        $pdf = $user->documents()->create([
+            'path' => 'public/documents/' . $name,
+            'title' => $name
+        ]);
+        $pdf->status = "indexing";
+        $pdf->save();
+
+        Queue::push(
+            new ProcessEmbeddingDocument($pdf)
+        );
 
         return back()->with('path', route("documents.show", $pdf->id));
     }

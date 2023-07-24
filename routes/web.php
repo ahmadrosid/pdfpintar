@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/documents', DocumentController::class);
     Route::resource("/document/chat", ChatController::class);
+    Route::post('/documents/include', [DocumentController::class, 'include'])->name('documents.include');
 });
 
 

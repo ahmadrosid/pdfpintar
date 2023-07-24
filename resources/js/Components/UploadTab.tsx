@@ -3,20 +3,44 @@ import { Tab } from "@headlessui/react";
 import UploadFile from "./UploadFile";
 import TextInput from "./TextInput";
 import PrimaryButton from "./PrimaryButton";
-import React from "react";
+import { toast } from "react-hot-toast";
+import { useForm } from "@inertiajs/react";
+import LoadingDots from "./LoadingDots";
 
 export default function UploadTab() {
-    const data = ["Upload File", "From URL"];
+    const titles = ["Upload File", "From URL"];
 
-    const handleSubmitUrl = (e: React.FormEvent<HTMLFormElement>) => {
+    const { data, setData, post, processing, errors } = useForm({
+        pdfUrl: "",
+    });
+
+    const handleSubmitUrl = (e: any) => {
         e.preventDefault();
+        if (data.pdfUrl === "") {
+            toast.error("Please enter a valid url");
+            return;
+        }
+        post(route("documents.include"), {
+            onFinish: () => {
+                // toast.success("Uploading...\n" + data.pdfUrl);
+            },
+            onError: () => {
+                toast.error("Error uploading file");
+            },
+            onSuccess: () => {
+                toast.success("Upload finished!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 800);
+            },
+        });
     };
 
     return (
         <div className="pt-4">
             <Tab.Group>
                 <Tab.List className="flex space-x-1 rounded-xl bg-teal-950/20 p-1">
-                    {data.map((item) => (
+                    {titles.map((item) => (
                         <Tab
                             key={item}
                             className={({ selected }) =>
@@ -48,23 +72,35 @@ export default function UploadTab() {
                             "ring-white ring-opacity-60 ring-offset-2 ring-offset-teal-400 focus:outline-none focus:ring-2"
                         )}
                     >
-                        <form onSubmit={handleSubmitUrl} className="space-y-4">
+                        <form className="space-y-4">
                             <div className="space-y-1">
                                 <label
                                     className="block text-sm font-medium text-gray-700"
                                     htmlFor="url_pdf"
                                 >
-                                    Import PDF from url
+                                    Upload PDF from url
                                 </label>
                                 <TextInput
                                     id="url_pdf"
+                                    required
+                                    onChange={(e) =>
+                                        setData({ pdfUrl: e.target.value })
+                                    }
                                     placeholder="https://example.com/file.pdf"
-                                    className="w-full"
+                                    className="w-full p-2"
                                 />
                             </div>
                             <div>
-                                <PrimaryButton className="h-10 w-full justify-center">
-                                    Submit
+                                <PrimaryButton
+                                    type="button"
+                                    className="h-10 w-full justify-center"
+                                    onClick={handleSubmitUrl}
+                                >
+                                    {processing ? (
+                                        <LoadingDots color="white" />
+                                    ) : (
+                                        "Submit"
+                                    )}
                                 </PrimaryButton>
                             </div>
                         </form>
