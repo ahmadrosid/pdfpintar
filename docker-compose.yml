@@ -1,0 +1,45 @@
+version: "3"
+services:
+  server:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - pgvector
+    environment:
+      - AUTORUN_ENABLED=false
+      - SSL_MODE=off
+      - DB_HOST=pgvector
+      - DB_PORT=5432
+      - DB_DATABASE=homestead
+      - DB_USERNAME=homestead
+      - DB_PASSWORD=secret
+    env_file:
+      - .env
+    networks:
+      - web-dev
+
+  pgvector:
+    hostname: pgvector
+    restart: unless-stopped
+    platform: linux/x86_64
+    image: ankane/pgvector
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: homestead
+      POSTGRES_USER: homestead
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - database:/var/lib/pgsql/data:rw
+    networks:
+      - web-dev
+
+networks:
+  web-dev:
+
+volumes:
+  database:
