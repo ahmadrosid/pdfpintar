@@ -3,6 +3,9 @@ import { Head, Link, router, useForm } from "@inertiajs/react";
 import { Chat, PageProps } from "@/types";
 import { Trash2 } from "lucide-react";
 import { FormEventHandler } from "react";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Separator } from "@/Components/ui/separator";
 
 export default function DocumentIndex({
     auth,
@@ -31,23 +34,26 @@ export default function DocumentIndex({
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 space-y-6">
-                            <div className="flex w-full items-center gap-4">
-                                <input
+                            <div className="flex items-center gap-4">
+                                <Input
                                     type="text"
-                                    className="flex-1 p-2 px-4 rounded-md border-teal-200 focus:ring-0 active:ring-0 focus:border-teal-200"
                                     placeholder="Search chat"
+                                    className="flex-1"
                                 />
                                 <Link
                                     href="/documents/create"
                                     className="block"
                                 >
-                                    <button className="bg-teal-500 hover:bg-teal-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit">
+                                    <Button className="justify-between w-full">
                                         <Trash2 className="w-4 h-4 mr-2" />
-                                        Clear All
-                                    </button>
+                                        <span className="text-sm">
+                                            Clear All
+                                        </span>
+                                    </Button>
                                 </Link>
                             </div>
-                            <div>
+                            <Separator />
+                            <div className="grid gap-2">
                                 {chats?.map((item, idx) => (
                                     <div
                                         key={idx}
@@ -65,16 +71,21 @@ export default function DocumentIndex({
                                             </a>
                                         </p>
                                         <div className="flex items-center gap-4">
-                                            <p>{item.created_at}</p>
+                                            <p className="text-sm">
+                                                {item.created_at}
+                                            </p>
                                             <form onSubmit={handleDeleteChat}>
                                                 <input
                                                     type="hidden"
                                                     name="chat_id"
                                                     value={item.id}
                                                 />
-                                                <button>
-                                                    <Trash2 />
-                                                </button>
+                                                <Button
+                                                    size="sm"
+                                                    variant="ghost"
+                                                >
+                                                    <Trash2 className="w-4 h-4" />
+                                                </Button>
                                             </form>
                                         </div>
                                     </div>

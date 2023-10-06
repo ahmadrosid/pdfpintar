@@ -34,17 +34,17 @@ export default function DocumentIndex({
         }, 1500);
     };
 
-    useEffect(() => {
-        if (!documents) return;
-        if (documents.length > 0) {
-            const isAllComplete = documents.every(
-                (item) => item.status === "complete"
-            );
-            if (!isAllComplete) {
-                refetchDocuments();
-            }
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!documents) return;
+    //     if (documents.length > 0) {
+    //         const isAllComplete = documents.every(
+    //             (item) => item.status === "complete"
+    //         );
+    //         if (!isAllComplete) {
+    //             refetchDocuments();
+    //         }
+    //     }
+    // }, []);
 
     return (
         <AuthenticatedLayout
@@ -93,6 +93,7 @@ export default function DocumentIndex({
                                     </form>
                                 </Modal>
                             </div>
+                            <Separator />
                             <div>
                                 {documents?.map((item, idx) => (
                                     <div
@@ -111,7 +112,7 @@ export default function DocumentIndex({
                                                     {item.title}
                                                 </a>
                                             </p>
-                                            {item.status &&
+                                            {/* {item.status &&
                                                 item.status !== "complete" && (
                                                     <Badge
                                                         variant={"secondary"}
@@ -119,7 +120,7 @@ export default function DocumentIndex({
                                                     >
                                                         {item.status}
                                                     </Badge>
-                                                )}
+                                                )} */}
                                         </div>
                                         <div className="flex items-center gap-4">
                                             <p className="text-gray-500 text-sm">

@@ -14,7 +14,6 @@ import {
     useRef,
     useState,
 } from "react";
-import { router } from "@inertiajs/react";
 import LoadingDots from "@/Components/LoadingDots";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
@@ -44,15 +43,15 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
         <div
             className={clsx(
                 !show && "hidden",
-                "p-6 flex gap-4 items-start border-b border-teal-100 bg-teal-50"
+                "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50"
             )}
         >
-            <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
+            <div className="w-[28px] flex justify-center items-center bg-primary rounded-md p-1 text-white">
                 <Bot className="w-5 h-5" />
             </div>
             <p className="flex-1 text-base">
                 <span ref={ref}></span>
-                <span className="inline-block w-1.5 h-4 bg-teal-300 animate-blink"></span>
+                <span className="inline-block w-1.5 h-4 bg-primary animate-blink"></span>
             </p>
         </div>
     )

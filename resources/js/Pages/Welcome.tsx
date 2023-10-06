@@ -1,6 +1,7 @@
 import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import { Button } from "@/Components/ui/button";
 
 export default function Welcome({
     auth,
@@ -11,7 +12,7 @@ export default function Welcome({
         <>
             <Head title="Welcome" />
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-square bg-center bg-white dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="top-0 inset-x-0 absolute">
+                <div className="top-0 inset-x-0 absolute bg-gradient-to-b from-white to-white/0">
                     <div className="flex justify-between container mx-auto p-4">
                         <div>
                             <p className="font-extrabold tracking-wide text-black">
@@ -60,9 +61,7 @@ export default function Welcome({
                         </h2>
                         <div className="flex gap-4 py-8 justify-center items-center">
                             <a href="/login">
-                                <button className="h-10 px-4 bg-primary hover:bg-primary/80 rounded-md text-white font-medium">
-                                    Start a free trial
-                                </button>
+                                <Button>Get started now!</Button>
                             </a>
                             <div>
                                 <button className="hover:border-primary hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
@@ -73,8 +72,8 @@ export default function Welcome({
                     </div>
                     <div className="mx-auto max-w-7xl">
                         <img
-                            src="/demo.png"
-                            className="rounded-2xl shadow-2xl ring-2 ring-teal-400"
+                            src="/screenshot.png"
+                            className="rounded-3xl shadow-2xl ring-[10px] ring-gray-400/30"
                         />
                     </div>
                 </div>
@@ -122,7 +121,7 @@ export default function Welcome({
                             <span className="mx-auto mt-2 text-sm text-gray-500">
                                 Copyright © 2023
                                 <a
-                                    href="https://unwrapped.design"
+                                    href="https://ahmadrosid.com"
                                     className="mx-2 text-blue-500 hover:underline"
                                     rel="noopener noreferrer"
                                 >
