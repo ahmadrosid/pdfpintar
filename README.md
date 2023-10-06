@@ -1,6 +1,6 @@
 ## PDFPINTAR
 
-![demo.png](public/demo.png)
+![screenshot.png](public/screenshot.png)
 
 ## Required ENV
 

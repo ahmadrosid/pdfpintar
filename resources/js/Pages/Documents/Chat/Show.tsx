@@ -1,3 +1,4 @@
+// a comment with nothing
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Chat, Document, PageProps } from "@/types";
 import { Worker, Viewer, ProgressBar } from "@react-pdf-viewer/core";
@@ -49,6 +50,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
         <div
             className={clsx(
                 !show && "hidden",
+
                 "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50",
             )}
         >
@@ -57,7 +59,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
             </div>
             <p className="flex-1 text-base">
                 <span ref={ref}></span>
-                <span className="inline-block w-1.5 h-4 bg-primary animate-blink"></span>
+                <span className="inline-block w-1.5 h-4 bg-muted-foreground animate-blink"></span>
             </p>
         </div>
     ),
@@ -180,7 +182,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                         )}
                         <div className="flex flex-col">
                             <div className="flex-1 border-t border-gray-200">
-                                <div className="h-[84vh] overflow-auto">
+                                <div className="h-[83vh] overflow-auto">
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
@@ -206,7 +208,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                         </div>
                                     ))}
                                     {!messages.length ? (
-                                        <div className="flex w-full h-full flex-col justify-end px-6">
+                                        <div className="flex w-full h-full flex-col justify-end px-12">
                                             <div className="grid grid-cols-2 gap-4">
                                                 {sampleQuestions.map(
                                                     (q, idx) => (
@@ -217,12 +219,22 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                                                     q,
                                                                 )
                                                             }
-                                                            className="col border rounded p-4 hover:bg-gray-300 flex"
+                                                            className="col border rounded-lg p-4 hover:bg-gray-300 flex items-center text-left relative"
                                                         >
                                                             <div className="flex-1">
-                                                                {q}
+                                                                <p className="font-bold">
+                                                                    {q.substring(
+                                                                        0,
+                                                                        20,
+                                                                    )}
+                                                                </p>
+                                                                <p>
+                                                                    {q.substring(
+                                                                        20,
+                                                                    )}
+                                                                </p>
                                                             </div>
-                                                            <span>
+                                                            <span className="absolute w-full h-full bg-transparent opacity-0 hover:opacity-100 flex items-center justify-end p-6">
                                                                 <Send />
                                                             </span>
                                                         </button>
@@ -239,7 +251,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     />
                                 </div>
                             </div>
-                            <div className="p-4 bg-gray-50">
+                            <div className="p-4 bg-gray-50 border-t">
                                 <form
                                     onSubmit={handleSubmitChat}
                                     className="flex items-center relative"

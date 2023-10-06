@@ -8,8 +8,8 @@ use OpenAI\Laravel\Facades\OpenAI;
 
 class DocumentRepository
 {
-    // private string $chat_model = 'gpt-3.5-turbo-16k';
-    private string $chat_model = 'gpt-4';
+    private string $chat_model = 'gpt-3.5-turbo-16k';
+    // private string $chat_model = 'gpt-4';
     private string $embedding_model = 'text-embedding-ada-002';
 
     public function getQueryEmbedding($question): array
