@@ -14,7 +14,7 @@ export default function Welcome({
                 <div className="top-0 inset-x-0 absolute">
                     <div className="flex justify-between container mx-auto p-4">
                         <div>
-                            <p className="font-extrabold tracking-wide text-teal-500">
+                            <p className="font-extrabold tracking-wide text-black">
                                 PDFPINTAR
                             </p>
                         </div>
@@ -30,14 +30,14 @@ export default function Welcome({
                                 <>
                                     <Link
                                         href={route("login")}
-                                        className="font-medium text-sm py-2 px-3 text-gray-600 hover:text-teal-500 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
+                                        className="font-medium text-sm py-2 px-3 text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
                                     >
                                         Log in
                                     </Link>
 
                                     <Link
                                         href={route("register")}
-                                        className="font-medium text-sm ml-4 py-2 px-3 rounded-md text-gray-600 hover:text-teal-500 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
+                                        className="font-medium text-sm ml-4 py-2 px-3 rounded-md text-gray-600 hover:text-primary dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-none"
                                     >
                                         Register
                                     </Link>
@@ -60,12 +60,12 @@ export default function Welcome({
                         </h2>
                         <div className="flex gap-4 py-8 justify-center items-center">
                             <a href="/login">
-                                <button className="h-10 px-4 bg-teal-500 hover:bg-teal-400 rounded-md text-white font-medium">
+                                <button className="h-10 px-4 bg-primary hover:bg-primary/80 rounded-md text-white font-medium">
                                     Start a free trial
                                 </button>
                             </a>
                             <div>
-                                <button className="hover:border-teal-400 hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
+                                <button className="hover:border-primary hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
                                     Learn more
                                 </button>
                             </div>

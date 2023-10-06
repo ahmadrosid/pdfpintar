@@ -16,6 +16,8 @@ import {
 } from "react";
 import { router } from "@inertiajs/react";
 import LoadingDots from "@/Components/LoadingDots";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
 
 type Metadata = {
     page: number;
@@ -122,15 +124,15 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
 
     return (
         <>
-            <Head title="Documents"></Head>
+            <Head title="Documents" />
             <div>
                 <div className="bg-white overflow-hidden">
-                    <div className="flex justify-between items-center h-[7vh] bg-teal-50">
+                    <div className="flex justify-between items-center h-[7vh] bg-white">
                         <div className="px-4 flex items-center gap-2">
                             <Link href={route("documents.index")}>
-                                <button className="h-9 px-2 hover:bg-teal-200 rounded-md inline-flex gap-2 items-center text-base">
+                                <Button variant={"ghost"} size="sm">
                                     <ArrowLeft className="w-5 h-5" />
-                                </button>
+                                </Button>
                             </Link>
 
                             <h2 className="font-medium">{document?.title}</h2>
@@ -160,24 +162,24 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <div className="flex-1 border-t border-teal-200">
+                            <div className="flex-1 border-t border-gray-200">
                                 <div className="h-[84vh] overflow-auto">
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
-                                                "p-6 flex gap-4 items-start border-b border-teal-100",
+                                                "p-6 flex gap-4 items-start border-b border-gray-100",
                                                 item.role === "bot"
-                                                    ? "bg-teal-50"
+                                                    ? "bg-gray-50"
                                                     : "bg-white"
                                             )}
                                             key={idx}
                                         >
                                             {item.role === "user" ? (
-                                                <div className="w-[28px] flex justify-center items-center bg-stone-500 rounded-md p-1 text-white">
+                                                <div className="w-[28px] flex justify-center items-center bg-stone-500 rounded p-1 text-white">
                                                     <User className="w-5 h-5" />
                                                 </div>
                                             ) : (
-                                                <div className="w-[28px] flex justify-center items-center bg-teal-500 rounded-md p-1 text-white">
+                                                <div className="w-[28px] flex justify-center items-center bg-primary rounded p-1 text-white">
                                                     <Bot className="w-5 h-5" />
                                                 </div>
                                             )}
@@ -192,19 +194,18 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     />
                                 </div>
                             </div>
-                            <div className="p-4 bg-teal-50">
+                            <div className="p-4 bg-gray-50">
                                 <form
                                     onSubmit={handleSubmitChat}
                                     className="flex items-center relative"
                                 >
-                                    <input
+                                    <Input
                                         type="text"
                                         placeholder="Type your message here"
                                         value={data.question}
                                         onChange={(e) =>
                                             setData("question", e.target.value)
                                         }
-                                        className="p-2 w-full rounded outline-none border-teal-200 focus:ring-0 active:ring-0 focus:border-teal-300"
                                     />
                                     <button
                                         disabled={processing}
@@ -222,20 +223,19 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                     </div>
                 </div>
             </div>
-            <style>{`
-:root {
+            <style>{`:root {
     --rpv-default-layout__body-background-color: #fff;
 
-    --rpv-default-layout__container-border-color: #99f6e4;
+    --rpv-default-layout__container-border-color: rgb(229 231 235 / 1);
 
-    --rpv-default-layout__toolbar-background-color: #f0fdfa;
-    --rpv-default-layout__toolbar-border-bottom-color: #99f6e4;
+    --rpv-default-layout__toolbar-background-color: #fff;
+    --rpv-default-layout__toolbar-border-bottom-color: rgb(229 231 235 / 1);
 
-    --rpv-default-layout__sidebar-border-color: rgba(0, 0, 0, 0.2);
+    --rpv-default-layout__sidebar-border-color: rgb(229 231 235 / 1);
     --rpv-default-layout__sidebar--opened-background-color: #fff;
-    --rpv-default-layout__sidebar-headers-background-color: #f0fdfa;
+    --rpv-default-layout__sidebar-headers-background-color: #fff;
     --rpv-default-layout__sidebar-content--opened-background-color: #fff;
-    --rpv-default-layout__sidebar-content--opened-border-color: rgba(0, 0, 0, 0.2);
+    --rpv-default-layout__sidebar-content--opened-border-color: rgb(229 231 235 / 1);
     --rpv-default-layout__sidebar-content--opened-color: #000;
 }`}</style>
         </>

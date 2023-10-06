@@ -1,8 +1,9 @@
-import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
 import { Progress } from "@/Components/Progress";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { Label } from "./ui/label";
+import { Button } from "./ui/button";
 
 export default function UploadFile() {
     const { setData, post, progress } = useForm({
@@ -28,12 +29,7 @@ export default function UploadFile() {
                 </Progress>
             ) : (
                 <div>
-                    <label
-                        className="block text-sm font-medium text-gray-700"
-                        htmlFor="current_file"
-                    >
-                        Select file
-                    </label>
+                    <Label htmlFor="current_file">Or upload from file</Label>
                     <input
                         id="current_file"
                         onChange={(e) => {
@@ -48,26 +44,26 @@ export default function UploadFile() {
                         name="file"
                         accept="application/pdf"
                         className={cn(
-                            "border border-teal-500 p-2 rounded border-dashed",
+                            "border border-primary p-2 rounded border-dashed",
                             "block w-full text-sm text-slate-500",
                             "file:mr-4 file:py-2 file:px-4",
                             "file:rounded-md file:border-0",
                             "file:text-sm file:font-semibold",
-                            "file:bg-teal-100 file:text-teal-700",
-                            "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2"
+                            "file:bg-primary file:text-primary-foreground",
+                            "hover:file:bg-primary/70 hover:file:cursor-pointer shadow-none mt-2"
                         )}
                     />
                 </div>
             )}
 
             <div className="flex items-center gap-4 py-2 min-w-[100px] pt-4">
-                <PrimaryButton
+                <Button
                     onClick={submit}
                     type="button"
                     className="px-3 h-10 w-full justify-center"
                 >
                     Submit
-                </PrimaryButton>
+                </Button>
             </div>
         </div>
     );

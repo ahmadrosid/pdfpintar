@@ -2,10 +2,10 @@ import { useEffect, FormEventHandler } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
+import { Label } from "@/Components/ui/label";
 
 export default function Login({
     status,
@@ -44,16 +44,15 @@ export default function Login({
 
             <form onSubmit={submit}>
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <Label htmlFor="email">Email</Label>
 
-                    <TextInput
+                    <Input
                         id="email"
                         type="email"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        isFocused={true}
                         onChange={(e) => setData("email", e.target.value)}
                     />
 
@@ -62,7 +61,8 @@ export default function Login({
 
                 <div className="mt-4">
                     <div className="flex justify-between mt-4">
-                        <InputLabel htmlFor="password" value="Password" />
+                        <Label htmlFor="password">Password</Label>
+
                         {canResetPassword && (
                             <Link
                                 href={route("password.request")}
@@ -72,7 +72,7 @@ export default function Login({
                             </Link>
                         )}
                     </div>
-                    <TextInput
+                    <Input
                         id="password"
                         type="password"
                         name="password"
@@ -101,19 +101,19 @@ export default function Login({
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton
+                    <Button
                         className="w-full justify-center h-12"
                         disabled={processing}
                     >
                         Continue
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
             <p className="text-center pt-6 pb-4">
                 <span className="mr-3">Don't have an account?</span>
                 <Link
                     href={route("register")}
-                    className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="underline text-sm text-gray-600 hover:text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 >
                     Sign Up
                 </Link>

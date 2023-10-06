@@ -1,11 +1,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, useForm, router } from "@inertiajs/react";
+import { Head, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
-import { Trash2, Upload } from "lucide-react";
+import { Trash2, Upload, XIcon } from "lucide-react";
 import { FormEventHandler, useEffect, useState } from "react";
 import { Badge } from "@/Components/Badge";
 import Modal from "@/Components/Modal";
 import UploadTab from "@/Components/UploadTab";
+import { Separator } from "@/Components/ui/separator";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
 
 export default function DocumentIndex({
     auth,
@@ -59,36 +62,36 @@ export default function DocumentIndex({
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 space-y-6">
                             <div className="flex w-full items-center gap-4">
-                                <input
+                                <Input
                                     type="text"
-                                    className="flex-1 p-2 px-4 rounded-md border-teal-300 focus:ring-0 active:ring-0 focus:border-teal-300"
                                     placeholder="Search document"
                                 />
-                                {/* <Link
-                                    href="/documents/create"
-                                    className="block"
-                                > */}
-                                <button
-                                    onClick={openModal}
-                                    className="bg-teal-500 hover:bg-teal-600 rounded-md text-white h-10 px-3 inline-flex items-center w-fit"
-                                >
+                                <Button onClick={openModal}>
                                     <Upload className="w-4 h-4 mr-2" />
                                     Upload
-                                </button>
+                                </Button>
 
                                 <Modal show={isOpenUpload} onClose={closeModal}>
-                                    <form
-                                        onSubmit={() => false}
-                                        className="p-6"
-                                    >
-                                        <h2 className="text-lg font-medium text-gray-900">
-                                            Upload PDF document
-                                        </h2>
-
-                                        <UploadTab />
+                                    <form onSubmit={() => false}>
+                                        <div className="flex justify-between items-center px-4 py-3">
+                                            <h2 className="text-lg font-medium text-gray-900">
+                                                Upload PDF document
+                                            </h2>
+                                            <Button
+                                                type="button"
+                                                onClick={closeModal}
+                                                variant="ghost"
+                                                size="sm"
+                                            >
+                                                <XIcon className="w-4 h-4" />
+                                            </Button>
+                                        </div>
+                                        <Separator />
+                                        <div className="py-4 px-6">
+                                            <UploadTab />
+                                        </div>
                                     </form>
                                 </Modal>
-                                {/* </Link> */}
                             </div>
                             <div>
                                 {documents?.map((item, idx) => (
@@ -112,7 +115,7 @@ export default function DocumentIndex({
                                                 item.status !== "complete" && (
                                                     <Badge
                                                         variant={"secondary"}
-                                                        className="bg-teal-400 text-white font-normal animate-pulse"
+                                                        className="bg-primary/70 text-white font-normal animate-pulse"
                                                     >
                                                         {item.status}
                                                     </Badge>
