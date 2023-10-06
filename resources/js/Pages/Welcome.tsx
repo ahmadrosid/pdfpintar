@@ -73,7 +73,7 @@ export default function Welcome({
                     <div className="mx-auto max-w-7xl">
                         <img
                             src="/screenshot.png"
-                            className="rounded-3xl shadow-2xl ring-[10px] ring-gray-400/30"
+                            className="rounded-3xl shadow-2xl ring-[10px] ring-primary/30"
                         />
                     </div>
                 </div>
