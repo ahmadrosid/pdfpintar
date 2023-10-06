@@ -3,6 +3,7 @@ import { Chat, Document, PageProps } from "@/types";
 import { Worker, Viewer, ProgressBar } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import { ArrowLeft, Bot, User, Send } from "lucide-react";
+
 import clsx from "clsx";
 
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -38,12 +39,17 @@ type StreamingMessageProps = {
     show: boolean;
 };
 
+const sampleQuestions: string[] = [
+    "Give me the summary of the document please!",
+    "What are the key takeaways from the document?",
+];
+
 const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
     ({ show }, ref) => (
         <div
             className={clsx(
                 !show && "hidden",
-                "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50"
+                "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50",
             )}
         >
             <div className="w-[28px] flex justify-center items-center bg-primary rounded-md p-1 text-white">
@@ -54,7 +60,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
                 <span className="inline-block w-1.5 h-4 bg-primary animate-blink"></span>
             </p>
         </div>
-    )
+    ),
 );
 
 export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
@@ -70,9 +76,8 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
     const triggerStreaming = (question: string) => {
         const queryQuestion = encodeURIComponent(question);
         const source = new EventSource(
-            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${
-                chat.id
-            }`
+            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${chat.id
+            }`,
         );
         setShowStreaming(true);
         source.addEventListener("update", (event) => {
@@ -121,6 +126,19 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
         // });
     };
 
+    const handlePromptButton = (text: string) => {
+        setMessage((prev) => {
+            return [
+                ...prev,
+                {
+                    content: text,
+                    role: "user",
+                },
+            ];
+        });
+        triggerStreaming(data.question);
+    };
+
     return (
         <>
             <Head title="Documents" />
@@ -151,7 +169,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                             <div style={{ width: "240px" }}>
                                                 <ProgressBar
                                                     progress={Math.round(
-                                                        percentages
+                                                        percentages,
                                                     )}
                                                 />
                                             </div>
@@ -169,7 +187,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                                 "p-6 flex gap-4 items-start border-b border-gray-100",
                                                 item.role === "bot"
                                                     ? "bg-gray-50"
-                                                    : "bg-white"
+                                                    : "bg-white",
                                             )}
                                             key={idx}
                                         >
@@ -187,6 +205,32 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                             </p>
                                         </div>
                                     ))}
+                                    {
+                                        <div className="flex w-full h-full flex-col justify-end px-6">
+                                            <div className="grid grid-cols-2 gap-4">
+                                                {sampleQuestions.map(
+                                                    (q, idx) => (
+                                                        <button
+                                                            key={idx}
+                                                            onClick={() =>
+                                                                handlePromptButton(
+                                                                    q,
+                                                                )
+                                                            }
+                                                            className="col border rounded p-4 hover:bg-gray-300 flex"
+                                                        >
+                                                            <div className="flex-1">
+                                                                {q}
+                                                            </div>
+                                                            <span>
+                                                                <Send />
+                                                            </span>
+                                                        </button>
+                                                    ),
+                                                )}
+                                            </div>
+                                        </div>
+                                    }
                                     <StreamingMessage
                                         show={isShowStreaming}
                                         ref={resultRef}
