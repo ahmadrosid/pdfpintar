@@ -43,7 +43,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
         <div
             className={clsx(
                 !show && "hidden",
-                "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50"
+                "p-6 flex gap-4 items-start bg-muted"
             )}
         >
             <div className="w-[28px] flex justify-center items-center bg-primary rounded-md p-1 text-white">
@@ -51,7 +51,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
             </div>
             <p className="flex-1 text-base">
                 <span ref={ref}></span>
-                <span className="inline-block w-1.5 h-4 bg-primary animate-blink"></span>
+                <span className="inline-block w-1.5 h-4 bg-muted-foreground animate-blink"></span>
             </p>
         </div>
     )
@@ -162,7 +162,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                         )}
                         <div className="flex flex-col">
                             <div className="flex-1 border-t border-gray-200">
-                                <div className="h-[84vh] overflow-auto">
+                                <div className="h-[83vh] overflow-auto">
                                     {messages.map((item, idx) => (
                                         <div
                                             className={clsx(
@@ -193,7 +193,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                     />
                                 </div>
                             </div>
-                            <div className="p-4 bg-gray-50">
+                            <div className="p-4 bg-gray-50 border-t">
                                 <form
                                     onSubmit={handleSubmitChat}
                                     className="flex items-center relative"
