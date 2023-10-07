@@ -136,7 +136,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                 },
             ];
         });
-        triggerStreaming(data.question);
+        triggerStreaming(text);
     };
 
     return (
@@ -205,7 +205,7 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                             </p>
                                         </div>
                                     ))}
-                                    {
+                                    {!messages.length ? (
                                         <div className="flex w-full h-full flex-col justify-end px-6">
                                             <div className="grid grid-cols-2 gap-4">
                                                 {sampleQuestions.map(
@@ -230,7 +230,9 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                                 )}
                                             </div>
                                         </div>
-                                    }
+                                    ) : (
+                                        ""
+                                    )}
                                     <StreamingMessage
                                         show={isShowStreaming}
                                         ref={resultRef}
