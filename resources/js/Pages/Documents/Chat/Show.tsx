@@ -50,8 +50,7 @@ const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
         <div
             className={clsx(
                 !show && "hidden",
-
-                "p-6 flex gap-4 items-start border-b border-primary/50 bg-teal-50",
+                "p-6 flex gap-4 items-start bg-muted"
             )}
         >
             <div className="w-[28px] flex justify-center items-center bg-primary rounded-md p-1 text-white">
