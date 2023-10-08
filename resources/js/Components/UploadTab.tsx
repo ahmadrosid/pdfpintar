@@ -35,16 +35,13 @@ export default function UploadTab() {
     const submitURL = () => {
         post(route("documents.include"), {
             onFinish: () => {
-                toast.success("Uploading...\n" + data.pdfUrl);
-            },
-            onError: () => {
-                toast.error("Error uploading file");
-            },
-            onSuccess: () => {
                 toast.success("Upload finished!");
                 setTimeout(() => {
                     window.location.reload();
                 }, 800);
+            },
+            onError: () => {
+                toast.error("Error uploading file");
             },
         });
     };
@@ -70,7 +67,7 @@ export default function UploadTab() {
                     <Label htmlFor="url_pdf">Upload from url</Label>
                     <Input
                         id="url_pdf"
-                        onChange={(e) => setData({ pdfUrl: e.target.value })}
+                        onChange={(e) => setData("pdfUrl", e.target.value )}
                         placeholder="https://example.com/file.pdf"
                         className="w-full p-2"
                     />
