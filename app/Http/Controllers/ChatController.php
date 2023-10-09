@@ -8,6 +8,7 @@ use App\Models\Chat;
 use App\Models\Document;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class ChatController extends Controller
@@ -68,7 +69,14 @@ class ChatController extends Controller
                     if (connection_aborted()) {
                         break;
                     }
-                    ServerEvent::send("update", $text);
+                    $data = [
+                        'chat_id' => $chat->id,
+                        'user_id' => $chat->user_id,
+                        'text' => $text,
+                    ];
+                    ServerEvent::send("update", json_encode($data));
+                    ob_flush();
+                    flush();
                     $result_text .= $text;
                 }
 

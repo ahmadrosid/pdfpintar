@@ -1,34 +1,16 @@
-// a comment with nothing
-import { Head, Link, useForm } from "@inertiajs/react";
-import { Chat, Document, PageProps } from "@/types";
-import { Worker, Viewer, ProgressBar } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import { ArrowLeft, Bot, User, Send } from "lucide-react";
-
-import clsx from "clsx";
-
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-import {
-    ElementRef,
-    FormEventHandler,
-    forwardRef,
-    useRef,
-    useState,
-} from "react";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { Chat, Document, PageProps } from "@/types";
+import { ArrowLeft, Send } from "lucide-react";
+import { FormEventHandler, useState } from "react";
 import LoadingDots from "@/Components/LoadingDots";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
-
-type Metadata = {
-    page: number;
-};
-
-type Message = {
-    content: string;
-    role: string;
-    metadata?: Metadata[];
-};
+import { MessageList, type Message } from "@/Components/chat/message-list";
+import { StreamingMessage } from "@/Components/chat/streaming-message";
+import { SampleQuestions } from "@/Components/chat/sample-question";
+import { DocumentDisplay } from "@/Components/chat/document-display";
 
 type DocumentIndexProps = PageProps<{
     document?: Document;
@@ -36,39 +18,10 @@ type DocumentIndexProps = PageProps<{
     chat: Chat;
 }>;
 
-type StreamingMessageProps = {
-    show: boolean;
-};
-
-const sampleQuestions: [string, string][] = [
-    ["Give me the summary", "of the document please!"],
-    ["What are the key takeaways", "from the document?"],
-];
-
-const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
-    ({ show }, ref) => (
-        <div
-            className={clsx(
-                !show && "hidden",
-                "p-6 flex gap-4 items-start bg-muted",
-            )}
-        >
-            <div className="w-[28px] flex justify-center items-center bg-primary rounded-md p-1 text-white">
-                <Bot className="w-5 h-5" />
-            </div>
-            <p className="flex-1 text-base">
-                <span ref={ref}></span>
-                <span className="inline-block w-1.5 h-4 bg-muted-foreground animate-blink"></span>
-            </p>
-        </div>
-    ),
-);
-
 export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
-    const defaultLayoutPluginInstance = defaultLayoutPlugin();
     const [messages, setMessage] = useState<Message[]>([]);
     const [isShowStreaming, setShowStreaming] = useState(false);
-    const resultRef = useRef<HTMLParagraphElement | null>(null);
+    const [streamText, setStreamingText] = useState("");
 
     const { data, setData, processing } = useForm({
         question: "",
@@ -77,10 +30,12 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
     const triggerStreaming = (question: string) => {
         const queryQuestion = encodeURIComponent(question);
         const source = new EventSource(
-            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${chat.id
-            }`,
+            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${
+                chat.id
+            }`
         );
         setShowStreaming(true);
+        let sseText = "";
         source.addEventListener("update", (event) => {
             if (event.data === "<END_STREAMING_SSE>") {
                 source.close();
@@ -90,17 +45,19 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                         {
                             metadata: [],
                             role: "bot",
-                            content: resultRef.current?.innerText!!,
+                            content: sseText,
                         },
                     ];
                 });
                 setShowStreaming(false);
-                // @ts-expect-error
-                resultRef.current.innerText = "";
+                setStreamingText("");
                 return;
             }
-            // @ts-expect-error
-            resultRef.current.innerText += event.data;
+            const data = JSON.parse(event.data);
+            if (data.text) {
+                sseText += data.text;
+                setStreamingText((prev) => prev + data.text);
+            }
         });
     };
 
@@ -117,14 +74,6 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
         });
         triggerStreaming(data.question);
         setData("question", "");
-        // router.put(route("chat.update", chat.id), data, {
-        //     onSuccess: (response) => {
-        //         const props = response.props as any;
-        //         setMessage((prev) => {
-        //             return [...prev, props.message];
-        //         });
-        //     },
-        // });
     };
 
     const handlePromptButton = (text: string) => {
@@ -160,83 +109,21 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                         </div>
                     </div>
                     <div className="grid grid-cols-2">
-                        {document && (
-                            <div className="max-h-[93vh]">
-                                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.6.172/build/pdf.worker.min.js">
-                                    <Viewer
-                                        fileUrl={document.path}
-                                        plugins={[defaultLayoutPluginInstance]}
-                                        renderLoader={(percentages: number) => (
-                                            <div style={{ width: "240px" }}>
-                                                <ProgressBar
-                                                    progress={Math.round(
-                                                        percentages,
-                                                    )}
-                                                />
-                                            </div>
-                                        )}
-                                    />
-                                </Worker>
-                            </div>
-                        )}
+                        {document && <DocumentDisplay document={document} />}
                         <div className="flex flex-col">
                             <div className="flex-1 border-t border-gray-200">
                                 <div className="h-[83vh] overflow-auto">
-                                    {messages.map((item, idx) => (
-                                        <div
-                                            className={clsx(
-                                                "p-6 flex gap-4 items-start border-b border-gray-100",
-                                                item.role === "bot"
-                                                    ? "bg-gray-50"
-                                                    : "bg-white",
-                                            )}
-                                            key={idx}
-                                        >
-                                            {item.role === "user" ? (
-                                                <div className="w-[28px] flex justify-center items-center bg-stone-500 rounded p-1 text-white">
-                                                    <User className="w-5 h-5" />
-                                                </div>
-                                            ) : (
-                                                <div className="w-[28px] flex justify-center items-center bg-primary rounded p-1 text-white">
-                                                    <Bot className="w-5 h-5" />
-                                                </div>
-                                            )}
-                                            <p className="flex-1 text-base">
-                                                {item.content}
-                                            </p>
-                                        </div>
-                                    ))}
-                                    {!messages.length ? (
-                                        <div className="flex w-full h-full flex-col justify-end px-12">
-                                            <div className="grid grid-cols-2 gap-4">
-                                                {sampleQuestions.map(
-                                                    (q, idx) => (
-                                                        <button
-                                                            key={idx}
-                                                            onClick={() =>
-                                                                handlePromptButton(
-                                                                    q.join(" "),
-                                                                )
-                                                            }
-                                                            className="col border rounded-lg p-4 hover:bg-gray-300 flex items-center text-left"
-                                                        >
-                                                            <div className="flex-1">
-                                                                <p className="font-bold">
-                                                                    {q[0]}
-                                                                </p>
-                                                                <p>{q[1]}</p>
-                                                            </div>
-                                                        </button>
-                                                    ),
-                                                )}
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        ""
+                                    <MessageList messages={messages} />
+                                    {messages.length === 0 && (
+                                        <SampleQuestions
+                                            handlePromptButton={
+                                                handlePromptButton
+                                            }
+                                        />
                                     )}
                                     <StreamingMessage
                                         show={isShowStreaming}
-                                        ref={resultRef}
+                                        text={streamText}
                                     />
                                 </div>
                             </div>
@@ -269,21 +156,6 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                     </div>
                 </div>
             </div>
-            <style>{`:root {
-    --rpv-default-layout__body-background-color: #fff;
-
-    --rpv-default-layout__container-border-color: rgb(229 231 235 / 1);
-
-    --rpv-default-layout__toolbar-background-color: #fff;
-    --rpv-default-layout__toolbar-border-bottom-color: rgb(229 231 235 / 1);
-
-    --rpv-default-layout__sidebar-border-color: rgb(229 231 235 / 1);
-    --rpv-default-layout__sidebar--opened-background-color: #fff;
-    --rpv-default-layout__sidebar-headers-background-color: #fff;
-    --rpv-default-layout__sidebar-content--opened-background-color: #fff;
-    --rpv-default-layout__sidebar-content--opened-border-color: rgb(229 231 235 / 1);
-    --rpv-default-layout__sidebar-content--opened-color: #000;
-}`}</style>
         </>
     );
 }
