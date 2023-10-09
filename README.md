@@ -24,6 +24,12 @@ Then run database migration:
 docker-compose exec server php artisan migrate
 ```
 
+If you are working with the UI stuff make sure to run vite dev.
+
+```bash
+npm run dev
+```
+
 ## LICENSE
 
 MIT
