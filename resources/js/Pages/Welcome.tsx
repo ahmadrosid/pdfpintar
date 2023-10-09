@@ -1,6 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, X } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import Modal from "@/Components/modal";
 import { useState } from "react";
@@ -143,6 +143,12 @@ export default function Welcome({
                 show={demoModalShown}
                 onClose={() => setDemoModalShown(false)}
             >
+                <div className="flex justify-between px-4 pt-2">
+                    <h3 className="font-bold">Demo</h3>
+                    <button onClick={() => setDemoModalShown(false)}>
+                        <X size={18} />
+                    </button>
+                </div>
                 <iframe
                     width="650"
                     height="400"
