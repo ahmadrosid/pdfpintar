@@ -2,12 +2,15 @@ import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { Button } from "@/Components/ui/button";
+import Modal from "@/Components/Modal";
+import { useState } from "react";
 
 export default function Welcome({
     auth,
     laravelVersion,
     phpVersion,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+    const [demoModalShown, setDemoModalShown] = useState(false);
     return (
         <>
             <Head title="Welcome" />
@@ -64,8 +67,11 @@ export default function Welcome({
                                 <Button>Get started now!</Button>
                             </a>
                             <div>
-                                <button className="hover:border-primary hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
-                                    Learn more
+                                <button
+                                    onClick={() => setDemoModalShown(true)}
+                                    className="hover:border-primary hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2"
+                                >
+                                    Watch Demo
                                 </button>
                             </div>
                         </div>
@@ -132,6 +138,20 @@ export default function Welcome({
                     </div>
                 </div>
             </footer>
+
+            <Modal
+                show={demoModalShown}
+                onClose={() => setDemoModalShown(false)}
+            >
+                <div className="p-4">
+                    <iframe
+                        width="620"
+                        height="400"
+                        className="mx-auto"
+                        src="https://www.youtube.com/embed/PZbvBXEPvFk?si=9Ew0yHgN10Q3GVY_"
+                    ></iframe>
+                </div>
+            </Modal>
         </>
     );
 }
