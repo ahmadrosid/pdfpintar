@@ -143,14 +143,15 @@ export default function Welcome({
                 show={demoModalShown}
                 onClose={() => setDemoModalShown(false)}
             >
-                <div className="p-4">
-                    <iframe
-                        width="620"
-                        height="400"
-                        className="mx-auto"
-                        src="https://www.youtube.com/embed/PZbvBXEPvFk?si=9Ew0yHgN10Q3GVY_"
-                    ></iframe>
-                </div>
+                <iframe
+                    width="650"
+                    height="400"
+                    className="mx-auto rounded-md my-3"
+                    src="https://www.youtube.com/embed/2AR02P5-RQk?si=QfX2QzGGt3_ZZHW-"
+                    title="Demo PDFPINTAR"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                ></iframe>
             </Modal>
         </>
     );
