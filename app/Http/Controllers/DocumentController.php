@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateDocumentRequest;
 use App\Jobs\ProcessEmbeddingDocument;
 use App\Models\Chat;
 use App\Models\Document;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
@@ -112,7 +113,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        Chat::query()->where('document_id', $document->id)->delete();
+        Chat::where('document_id', $document->id)->delete();
         Storage::delete($document->path);
         $document->delete();
         return back()->with("status", "Document {$document->title} deleted!");
