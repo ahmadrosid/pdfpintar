@@ -24,7 +24,7 @@ export const MessageList = React.memo(({ messages }: MessageListProps) => {
                 <div
                     className={clsx(
                         "p-6 flex gap-4 items-start border-b border-gray-100",
-                        item.role === "bot" ? "bg-gray-50" : "bg-white"
+                        item.role === "assistant" ? "bg-gray-50" : "bg-white"
                     )}
                     key={idx}
                 >

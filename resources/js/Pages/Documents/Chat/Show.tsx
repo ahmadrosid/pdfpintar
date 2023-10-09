@@ -14,12 +14,16 @@ import { DocumentDisplay } from "@/Components/chat/document-display";
 
 type DocumentIndexProps = PageProps<{
     document?: Document;
-    message?: Message;
+    message?: Message[];
     chat: Chat;
 }>;
 
-export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
-    const [messages, setMessage] = useState<Message[]>([]);
+export default function DocumentIndex({
+    chat,
+    document,
+    message,
+}: DocumentIndexProps) {
+    const [messages, setMessage] = useState<Message[]>(message || []);
     const [isShowStreaming, setShowStreaming] = useState(false);
     const [streamText, setStreamingText] = useState("");
 

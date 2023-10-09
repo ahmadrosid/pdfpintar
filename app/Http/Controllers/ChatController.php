@@ -8,7 +8,6 @@ use App\Models\Chat;
 use App\Models\Document;
 use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class ChatController extends Controller
@@ -45,10 +44,21 @@ class ChatController extends Controller
             'title' => $document['title'],
         ];
 
+        $messages = Message::query()->where('chat_id', $chat->id)->orderBy("created_at", "asc")->get()->map(function ($message) {
+            return [
+                'id' => $message->id,
+                'chat_id' => $message->chat_id,
+                'content' => $message->content,
+                'role' => $message->role,
+                'metadata' => $message->metadata,
+                'created_at' => $message->created_at->diffForHumans(),
+            ];
+        });
+
         return Inertia::render('Documents/Chat/Show', [
             'document' => $data,
             'chat' => $chat,
-            'message' => session("message")
+            'message' => $messages
         ]);
     }
 
@@ -58,12 +68,25 @@ class ChatController extends Controller
         $chat_id = $request->query('chat_id');
         $chat = Chat::findOrFail($chat_id);
 
+        Message::create([
+            'chat_id' => $chat->id,
+            'metadata' => "",
+            'content' => $question,
+            'role' => 'user',
+        ]);
+
         $query_embedding =  $this->repository->getQueryEmbedding($question);
         $embedding = $this->repository->findEmbedding($chat->document->path, $query_embedding);
+
         return response()->stream(
             function () use ($question, $embedding, $chat) {
                 $stream = $this->repository->askQuestionStreamed($embedding['context'], $question);
                 $result_text = "";
+                $metadata = [
+                    'user_id' => $chat->user_id,
+                    'document_id' => $chat->document_id,
+                    'page' => $embedding['metadata'],
+                ];
                 foreach ($stream as $response) {
                     $text = $response->choices[0]->delta->content;
                     if (connection_aborted()) {
@@ -73,6 +96,7 @@ class ChatController extends Controller
                         'chat_id' => $chat->id,
                         'user_id' => $chat->user_id,
                         'text' => $text,
+                        'metadata' => $metadata,
                     ];
                     ServerEvent::send("update", json_encode($data));
                     ob_flush();
@@ -87,6 +111,12 @@ class ChatController extends Controller
                 }
 
                 ServerEvent::send("update", "<END_STREAMING_SSE>");
+                Message::create([
+                    'chat_id' => $chat->id,
+                    'metadata' => json_encode($metadata),
+                    'content' => $result_text,
+                    'role' => 'assistant',
+                ]);
             },
             200,
             [

@@ -13,6 +13,7 @@ class Message extends Model
     protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = ['chat_id', 'content', 'message', 'metadata'];
 
     protected static function booted()
     {
