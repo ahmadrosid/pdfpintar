@@ -30,4 +30,9 @@ class Chat extends Model
     {
         return $this->belongsTo(Document::class);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }
