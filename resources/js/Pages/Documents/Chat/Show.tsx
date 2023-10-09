@@ -40,9 +40,9 @@ type StreamingMessageProps = {
     show: boolean;
 };
 
-const sampleQuestions: string[] = [
-    "Give me the summary of the document please!",
-    "What are the key takeaways from the document?",
+const sampleQuestions: [string, string][] = [
+    ["Give me the summary", "of the document please!"],
+    ["What are the key takeaways", "from the document?"],
 ];
 
 const StreamingMessage = forwardRef<ElementRef<"span">, StreamingMessageProps>(
@@ -215,23 +215,16 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
                                                             key={idx}
                                                             onClick={() =>
                                                                 handlePromptButton(
-                                                                    q,
+                                                                    q.join(" "),
                                                                 )
                                                             }
                                                             className="col border rounded-lg p-4 hover:bg-gray-300 flex items-center text-left"
                                                         >
                                                             <div className="flex-1">
                                                                 <p className="font-bold">
-                                                                    {q.substring(
-                                                                        0,
-                                                                        20,
-                                                                    )}
+                                                                    {q[0]}
                                                                 </p>
-                                                                <p>
-                                                                    {q.substring(
-                                                                        20,
-                                                                    )}
-                                                                </p>
+                                                                <p>{q[1]}</p>
                                                             </div>
                                                         </button>
                                                     ),
