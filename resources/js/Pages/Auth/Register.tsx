@@ -1,6 +1,6 @@
 import { useEffect, FormEventHandler } from "react";
-import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
+import GuestLayout from "@/Layouts/guest-layout";
+import InputError from "@/Components/input-error";
 import { Label } from "@/Components/ui/label";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";

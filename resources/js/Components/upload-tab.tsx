@@ -1,10 +1,10 @@
 import { toast } from "react-hot-toast";
 import { useForm } from "@inertiajs/react";
-import LoadingDots from "./LoadingDots";
+import LoadingDots from "./loading-dots";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Separator } from "./ui/separator";
-import { Progress } from "@/Components/Progress";
+import { Progress } from "@/Components/progress";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 

@@ -16,7 +16,7 @@ import {
     useRef,
     useState,
 } from "react";
-import LoadingDots from "@/Components/LoadingDots";
+import LoadingDots from "@/Components/loading-dots";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 
@@ -77,7 +77,8 @@ export default function DocumentIndex({ chat, document }: DocumentIndexProps) {
     const triggerStreaming = (question: string) => {
         const queryQuestion = encodeURIComponent(question);
         const source = new EventSource(
-            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${chat.id
+            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${
+                chat.id
             }`,
         );
         setShowStreaming(true);

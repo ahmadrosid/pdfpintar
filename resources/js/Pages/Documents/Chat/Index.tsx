@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/authenticated-layout";
 import { Head, Link, router, useForm } from "@inertiajs/react";
 import { Chat, PageProps } from "@/types";
 import { Trash2 } from "lucide-react";
@@ -63,7 +63,7 @@ export default function DocumentIndex({
                                             <a
                                                 href={route(
                                                     "chat.show",
-                                                    item.id
+                                                    item.id,
                                                 )}
                                                 className="font-medium hover:underline"
                                             >

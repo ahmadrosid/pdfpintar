@@ -1,5 +1,5 @@
 import { useForm } from "@inertiajs/react";
-import { Progress } from "@/Components/Progress";
+import { Progress } from "@/Components/progress";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { Label } from "./ui/label";
