@@ -4,9 +4,9 @@ import LoadingDots from "./LoadingDots";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Separator } from "./ui/separator";
-import { Progress } from "@/Components/Progress";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import AnimationLoader from "./animation-loader";
 
 export default function UploadTab() {
     const { data, setData, post, processing, progress, errors } = useForm({
@@ -27,7 +27,7 @@ export default function UploadTab() {
         }
 
         toast.error(
-            "Please provide either url of the document or upload one from your device!",
+            "Please provide either url of the document or upload one from your device!"
         );
         return;
     };
@@ -63,24 +63,23 @@ export default function UploadTab() {
     return (
         <div className="pt-4">
             <form onSubmit={handleSubmit} className="pb-4">
-                <div className="space-y-2">
-                    <Label htmlFor="url_pdf">Upload from url</Label>
-                    <Input
-                        id="url_pdf"
-                        onChange={(e) => setData("pdfUrl", e.target.value )}
-                        placeholder="https://example.com/file.pdf"
-                        className="w-full p-2"
-                    />
-                </div>
+                {processing && data.pdfUrl !== "" ? (
+                    <AnimationLoader />
+                ) : (
+                    <div className="space-y-2">
+                        <Label htmlFor="url_pdf">Upload from url</Label>
+                        <Input
+                            id="url_pdf"
+                            onChange={(e) => setData("pdfUrl", e.target.value)}
+                            placeholder="https://example.com/file.pdf"
+                            className="w-full p-2"
+                        />
+                    </div>
+                )}
                 <Separator className="my-4" />
                 <div className="">
-                    {progress ? (
-                        <Progress
-                            className="w-full block"
-                            value={progress.percentage}
-                        >
-                            {progress.percentage}%
-                        </Progress>
+                    {processing && data.file !== null ? (
+                        <AnimationLoader />
                     ) : (
                         <div>
                             <Label htmlFor="current_file">
@@ -93,7 +92,7 @@ export default function UploadTab() {
                                     setData(
                                         "file",
                                         // @ts-ignore
-                                        e.target.files[0],
+                                        e.target.files[0]
                                     );
                                 }}
                                 type="file"
@@ -106,7 +105,7 @@ export default function UploadTab() {
                                     "file:rounded-md file:border-0",
                                     "file:text-sm file:font-semibold",
                                     "file:bg-primary file:text-primary-foreground",
-                                    "hover:file:bg-primary/70 hover:file:cursor-pointer shadow-none mt-2",
+                                    "hover:file:bg-primary/70 hover:file:cursor-pointer shadow-none mt-2"
                                 )}
                             />
                         </div>
