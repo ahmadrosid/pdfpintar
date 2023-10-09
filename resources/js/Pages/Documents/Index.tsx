@@ -72,7 +72,7 @@ export default function DocumentIndex({
                                 </Button>
 
                                 <Modal show={isOpenUpload} onClose={closeModal}>
-                                    <form onSubmit={() => false}>
+                                    <div>
                                         <div className="flex justify-between items-center px-4 py-3">
                                             <h2 className="text-lg font-medium text-gray-900">
                                                 Upload PDF document
@@ -90,7 +90,7 @@ export default function DocumentIndex({
                                         <div className="py-4 px-6">
                                             <UploadTab />
                                         </div>
-                                    </form>
+                                    </div>
                                 </Modal>
                             </div>
                             <Separator />
@@ -105,7 +105,7 @@ export default function DocumentIndex({
                                                 <a
                                                     href={route(
                                                         "documents.update",
-                                                        item.id
+                                                        item.id,
                                                     )}
                                                     className="font-medium hover:underline"
                                                 >
