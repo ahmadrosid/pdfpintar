@@ -4,7 +4,7 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import { Chat, Document, PageProps } from "@/types";
 import { ArrowLeft, Send } from "lucide-react";
 import { FormEventHandler, useState } from "react";
-import LoadingDots from "@/Components/LoadingDots";
+import LoadingDots from "@/Components/loading-dots";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { MessageList, type Message } from "@/Components/chat/message-list";
@@ -34,9 +34,8 @@ export default function DocumentIndex({
     const triggerStreaming = (question: string) => {
         const queryQuestion = encodeURIComponent(question);
         const source = new EventSource(
-            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${
-                chat.id
-            }`
+            `${route("chat.streaming")}?question=${queryQuestion}&chat_id=${chat.id
+            }`,
         );
         setShowStreaming(true);
         let sseText = "";

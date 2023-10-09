@@ -1,4 +1,4 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
+import ApplicationLogo from "@/Components/application-logo";
 import { Link } from "@inertiajs/react";
 
 export default function PrivacyPolicy() {

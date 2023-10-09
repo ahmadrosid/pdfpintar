@@ -1,11 +1,11 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/authenticated-layout";
 import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { useRef, FormEventHandler } from "react";
-import PrimaryButton from "@/Components/PrimaryButton";
+import PrimaryButton from "@/Components/primary-button";
 import { useForm } from "@inertiajs/react";
-import InputError from "@/Components/InputError";
-import { Progress } from "@/Components/Progress";
+import InputError from "@/Components/input-error";
+import { Progress } from "@/Components/progress";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
@@ -72,7 +72,7 @@ export default function DocumentCreate({
                                                 setData(
                                                     "file",
                                                     // @ts-ignore
-                                                    e.target.files[0]
+                                                    e.target.files[0],
                                                 );
                                             }}
                                             type="file"
@@ -84,7 +84,7 @@ export default function DocumentCreate({
                                                 "file:rounded-md file:border-0",
                                                 "file:text-sm file:font-semibold",
                                                 "file:bg-teal-100 file:text-teal-700",
-                                                "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2"
+                                                "hover:file:bg-teal-200 hover:file:cursor-pointer shadow-none mt-2",
                                             )}
                                         />
                                     )}

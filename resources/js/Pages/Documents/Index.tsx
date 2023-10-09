@@ -1,10 +1,10 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/authenticated-layout";
 import { Head, useForm, router } from "@inertiajs/react";
 import { Document, PageProps } from "@/types";
 import { Trash2, Upload, XIcon } from "lucide-react";
 import { FormEventHandler, useState } from "react";
-import Modal from "@/Components/Modal";
-import UploadTab from "@/Components/UploadTab";
+import Modal from "@/Components/modal";
+import UploadTab from "@/Components/upload-tab";
 import { Separator } from "@/Components/ui/separator";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
@@ -86,7 +86,7 @@ export default function DocumentIndex({
                                                 <a
                                                     href={route(
                                                         "documents.update",
-                                                        item.id
+                                                        item.id,
                                                     )}
                                                     className="font-medium hover:underline"
                                                 >

@@ -1,12 +1,11 @@
 import { toast } from "react-hot-toast";
 import { useForm } from "@inertiajs/react";
+import LoadingDots from "./loading-dots";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Separator } from "./ui/separator";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { Loader2 } from "lucide-react";
-import LoadingDots from "./LoadingDots";
 
 export default function UploadTab() {
     const { data, setData, post, processing, progress, errors } = useForm({
@@ -27,7 +26,7 @@ export default function UploadTab() {
         }
 
         toast.error(
-            "Please provide either url of the document or upload one from your device!"
+            "Please provide either url of the document or upload one from your device!",
         );
         return;
     };
@@ -85,7 +84,7 @@ export default function UploadTab() {
                                 setData(
                                     "file",
                                     // @ts-ignore
-                                    e.target.files[0]
+                                    e.target.files[0],
                                 );
                             }}
                             type="file"
@@ -98,7 +97,7 @@ export default function UploadTab() {
                                 "file:rounded-md file:border-0",
                                 "file:text-sm file:font-semibold",
                                 "file:bg-primary file:text-primary-foreground",
-                                "hover:file:bg-primary/70 hover:file:cursor-pointer shadow-none mt-2"
+                                "hover:file:bg-primary/70 hover:file:cursor-pointer shadow-none mt-2",
                             )}
                         />
                     </div>

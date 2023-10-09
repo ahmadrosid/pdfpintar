@@ -2,7 +2,7 @@ import { Link, Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { Button } from "@/Components/ui/button";
-import Modal from "@/Components/Modal";
+import Modal from "@/Components/modal";
 import { useState } from "react";
 
 export default function Welcome({
