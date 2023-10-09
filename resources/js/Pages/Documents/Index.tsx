@@ -93,15 +93,6 @@ export default function DocumentIndex({
                                                     {item.title}
                                                 </a>
                                             </p>
-                                            {/* {item.status &&
-                                                item.status !== "complete" && (
-                                                    <Badge
-                                                        variant={"secondary"}
-                                                        className="bg-primary/70 text-white font-normal animate-pulse"
-                                                    >
-                                                        {item.status}
-                                                    </Badge>
-                                                )} */}
                                         </div>
                                         <div className="flex items-center gap-4">
                                             <p className="text-gray-500 text-sm">
