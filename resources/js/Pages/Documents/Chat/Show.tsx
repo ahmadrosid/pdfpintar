@@ -98,7 +98,7 @@ export default function DocumentIndex({
             <Head title="Documents" />
             <div>
                 <div className="bg-white overflow-hidden">
-                    <div className="flex justify-between items-center h-[7vh] bg-white">
+                    <div className="flex justify-between items-center py-2 bg-white">
                         <div className="px-4 flex items-center gap-2">
                             <Link href={route("documents.index")}>
                                 <Button variant={"ghost"} size="sm">
@@ -109,7 +109,11 @@ export default function DocumentIndex({
                             <h2 className="font-medium">{document?.title}</h2>
                         </div>
                         <div className="px-6">
-                            <h2 className="">Share</h2>
+                            <Link href={route("chat.index")}>
+                                <Button variant={"ghost"} size="sm">
+                                    Chat list
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                     <div className="grid grid-cols-2">
