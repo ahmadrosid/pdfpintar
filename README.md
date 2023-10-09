@@ -1,6 +1,6 @@
 ## PDFPINTAR
 
-![screenshot.png](public/screenshot.png)
+![demo.png](https://res.cloudinary.com/dr15yjl8w/image/upload/v1696665108/pdfpintar_ycqgqs.png)
 
 ## Required ENV
 
