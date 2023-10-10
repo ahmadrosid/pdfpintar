@@ -31,9 +31,12 @@ If you are working on the UI, make sure to run Vite dev:
 npm run dev
 ```
 
-## Contributing
+## Contribution
 
-Contributions are welcome. Please open an issue before creating a pull request.
+If you want to contribute to this project, I really appreciate it. Here are some things you can do:
+
+1. Report [issues](https://github.com/ahmadrosid/pdfpintar/issues) if you encounter errors or bugs.
+1. Submit [pull requests](https://github.com/ahmadrosid/pdfpintar/pulls) for bug fixes, adding new features, or improving documentation.
 
 ## LICENSE
 
