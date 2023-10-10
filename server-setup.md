@@ -1,6 +1,6 @@
 ## Installing in your own VPS server
 
-This project is created using this tech stack:
+PDFPintar is built using the following tech stack:
 
 -   Laravel
 -   PostgresDB
@@ -11,17 +11,17 @@ This project is created using this tech stack:
 
 ## Requirement
 
-Before you run this project make sure you have this app installed in your system:
+Before running this project ensure you have the following software installed on your system.
 
 1. PHP >= 8.1
-1. PostgresDB >= 15.3
-1. [pgvector](https://github.com/pgvector/pgvector)
-1. NodeJS >= 18
-1. Redis (optional)
+2. PostgresDB >= 15.3
+3. [pgvector](https://github.com/pgvector/pgvector)
+4. NodeJS >= 18
+5. Redis (optional)
 
 ## Docker (optional and fastest way)
 
-If you don't want to setup everything manually the easiest way is to use docker.
+If you prefer not to set up everything manually, the easiest way it to use Docker. Install Docker with the following commands (if not installed yet):
 
 ```bash
 sudo apt update
@@ -31,7 +31,7 @@ sudo systemctl enable docker
 sudo docker --version # Docker version 24.0.4
 ```
 
-After docker installed you can just start docker with `docker-compose`:
+Once Docker is installed, start PDFPIntar using `docker-compose`:
 
 ```bash
 docker-compose up -d
@@ -43,22 +43,26 @@ Then run database migration:
 docker-compose exec server php artisan migrate
 ```
 
-## Install Postgre with pgvector extension
+## Installing Postgres with pgvector extension
 
-We don't use mysql because it doesn't support vector data, so we will use postgre with pgvector to save embedding text. Here's how to setup in linux debian env.
+PDFPintar uses Postgres instead of MySQL due to its support for vector data. Below are the steps to configure Postgres with the pgvector extension on a Linux Debian environment.
 
 ```bash
 sudo apt-get install postgresql-server-dev-14 postgresql-contrib libpq-dev gcc make -y
+# Depending on your operating system, you might need another version of postgresql-server-dev
+
 sudo apt-get install php8.1-pgsql php8.1-dom php8.1-curl php8.1-zip php8.1-redis
+# If the above line fails, try removing the version number. For example, use 'sudo apt-get install php-pgsql php-dom php-curl' and so on. If you get PHP 8.2 or higher, then you're good to go.
+
 cd /tmp
 git clone --branch v0.4.2 https://github.com/pgvector/pgvector.git
 cd pgvector
 make clean && PG_CFLAGS=-DIVFFLAT_BENCH make && make install
 ```
 
-## Enable pgvector
+## Enabling pgvector
 
-Once pgvector installed we need to enable the extension, here's how to enable it. You can learn more about pgvector [here](https://github.com/pgvector/pgvector).
+Once pgvector ins installed, enable the extension. You can learn more about pgvector [here](https://github.com/pgvector/pgvector).
 
 ```sql
 CREATE USER pdfpintar WITH PASSWORD 'password';
@@ -66,7 +70,7 @@ CREATE DATABASE pdfpintar OWNER pdfpintar;
 ALTER USER pdfpintar WITH SUPERUSER;
 ```
 
-## Install PHP
+## Installing PHP
 
 The minimum requirement for php version is 8.1, here's how you can install it in ubuntu >= 20.
 
@@ -75,11 +79,12 @@ sudo apt install software-properties-common
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
 sudo apt install php8.1 php8.1-fpm php8.1-pgsql -y
+# Here again, you might need to remove the version number. For example, `sudo apt-get install php php-fpm php-pgsql`
 ```
 
-## Install php-pdf
+## Installing php-pdf
 
-By default php doesn't support extracting pdf file, so we need to use [php-pdf](https://github.com/ahmadrosid/php-pdf).
+By default php doesn't support pdf file extraction. We'll need [php-pdf](https://github.com/ahmadrosid/php-pdf) for this purpose.
 
 Install required dependencies:
 
@@ -94,13 +99,13 @@ git clone https://github.com/ahmadrosid/php-pdf.git
 cd php-pdf
 ```
 
-Build release php-pdf :
+Ensure your system has Rust installed, (or follow this [instruction](https://www.rust-lang.org/learn/get-started) to install it) then proceed with building php-pdf:
 
 ```bash
 cargo build --release
 ```
 
-Copy the build into php extensions folder :
+Copy the build binary into php extensions folder:
 
 ```bash
 # get php extension folder
@@ -110,11 +115,11 @@ php -i | grep extension_dir
 cp target/release/libphp_pdf.so /path/to/lib/php/pecl/20210902
 ```
 
-## Build UI
+## Building the UI
 
 Now let's get the laravel project up and running, we need to build the UI ready for production.
 
-Make sure you have nodejs installed, here's how to install nodejs:
+Ensure you have nodejs installed, here's how:
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -129,9 +134,9 @@ npm install
 npm build
 ```
 
-## Setup laravel
+## Setting Up Laravel
 
-Add this env:
+Add the following environment variables to your `.env` file:
 
 ```bash
 APP_NAME=pdfpintar
@@ -162,11 +167,9 @@ Enable storage link :
 php artisan storage:link
 ```
 
-## Nginx Config
+## Nginx Configuration
 
-In this example I use my domain to setup nginx
-
-Setup nginx config:
+In this example I configure it to work on my domain.
 
 ```bash
 server {
@@ -215,7 +218,7 @@ server {
 }
 ```
 
-Add permission to project directory:
+Adjust permission for the project directory:
 
 ```bash
 sudo chown -R www-data:www-data storage bootstrap/cache
@@ -226,7 +229,7 @@ sudo systemctl restart nginx
 
 ## Queue Worker
 
-The queue will be used to indexing the pdf document from background, make sure you have redis installed.
+A queue worker is used for indexing PDF documents in the background. Ensure Redis is available:
 
 ```bash
 sudo apt install redis-server
@@ -245,7 +248,7 @@ cd /etc/supervisor/conf.d
 vim queue-worker.conf
 ```
 
-Point config value to the destination project folder.
+Configure the worker to point to the destination folder:
 
 ```yaml
 [program:queue-worker]
