@@ -11,8 +11,6 @@ PDFPintar is built using the following tech stack:
 
 ## Requirement
 
-<!-- Before you run this project make sure you have this app installed in your system: -->
-
 Before running this project ensure you have the following software installed on your system.
 
 1. PHP >= 8.1
