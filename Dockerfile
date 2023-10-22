@@ -25,6 +25,7 @@ RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progre
 RUN php ./artisan key:generate && \
     php ./artisan view:cache && \
     php ./artisan route:cache && \
+    php ./artisan ziggy:generate && \
     php ./artisan storage:link
 
 USER root:root
