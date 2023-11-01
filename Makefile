@@ -13,3 +13,6 @@ stop:
 
 deploy:
 	flyctl deploy
+
+dev:
+	npx concurrently "npm run dev" "php artisan serve"
