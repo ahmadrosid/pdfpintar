@@ -25,16 +25,16 @@
             </div>
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
-                <div class="mt-[70px] max-w-3xl mx-auto pb-8 text-center">
+                <div class="mt-[70px] max-w-4xl mx-auto pb-8 text-center">
                     <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-5xl xl:leading-tight">
-                        Effortless PDF Comprehension with AI-powered Chatbot
+                        Get instant answers from your PDFs with pdfpintar's conversational AI
                     </h1>
                     <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
                         Discover a smarter way to read PDFs, where intelligent conversations unlock deeper comprehension and effectiveness in your reading journey.
                     </h2>
                     <div class="flex gap-4 py-8 justify-center items-center">
                         <a href="{{ route('login') }}">
-                            <x-primary-button>Get started now!</x-primary-button>
+                            <x-primary-button>Try pdfpintar for Free!</x-primary-button>
                         </a>
                         <livewire:modal-demo />
                     </div>

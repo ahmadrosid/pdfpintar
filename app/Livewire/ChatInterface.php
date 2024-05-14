@@ -66,7 +66,7 @@ class ChatInterface extends Component
     public function render()
     {
         return <<<'HTML'
-            <div class="flex flex-col p-2 border rounded-md h-screen">
+            <div class="flex flex-col p-2 border rounded-md h-full">
                 <div class="flex-1 overflow-y-auto">
                     @if(count($messages) == 0)
                     <div class="flex items-center justify-center w-full h-full">
