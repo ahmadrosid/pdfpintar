@@ -12,6 +12,7 @@ class UploadDocument extends Component
     use WithFileUploads;
 
     public $file;
+    public $show_modal = false;
 
     public function uploadDocument()
     {
@@ -31,7 +32,7 @@ class UploadDocument extends Component
         ]);
 
         $this->reset('file'); // Reset the file input
-        $this->dispatch('close-modal', detail: 'upload-document-modal');
+        $this->show_modal = false;
     }
 
     public function render()

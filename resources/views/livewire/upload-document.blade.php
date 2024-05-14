@@ -1,10 +1,10 @@
 <div>
     <div class="p-4">
-        <x-primary-button wire:click="$dispatch('open-modal', 'upload-document-modal')">
-            <x-icon-square-plus /> <span class="ml-3">Add new document</span>
-        </x-primary-button>
+        <button wire:click="$dispatch('open-modal', 'upload-document-modal')" class="bg-gray-800 flex justify-between items-center text-white font-light py-2 px-3 rounded-md">
+            <x-icon-square-plus /> <span class="ml-2">Upload Document</span>
+        </button>
     </div>
-    <x-modal name="upload-document-modal" :show="false" maxWidth="2xl">
+    <x-modal name="upload-document-modal" :show="$show_modal" maxWidth="2xl">
         <div class="p-4">
             <div class="mb-3">
                 <h2 class="text-xl font-bold">Upload Document</h2>
@@ -28,7 +28,7 @@
                         >
                     </label>
                 </div>
-                <x-primary-button type="submit">Upload</x-primary-button>
+                <x-primary-button type="submit">Submit</x-primary-button>
             </form>
         </div>
     </x-modal>
