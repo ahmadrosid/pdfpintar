@@ -15,6 +15,10 @@ class ChatInterface extends Component
 
     public function sendMessage()
     {
+        if ($this->userInput === '') {
+            return;
+        }
+
         if (count($this->messages) == 0) {
             $this->messages[] = ['role' => 'system', 'content' => 'You are a helpful assistant.'];
         }
@@ -30,12 +34,6 @@ class ChatInterface extends Component
     #[On('getAIStreamingResponse')]
     public function getAIStreamingResponse()
     {
-        // if the last message role is not user then ignore
-        if ($this->messages[count($this->messages) - 1]['role'] != 'user') {
-            $this->isWriting = false;
-            return;
-        }
-
         $client = OpenAI::factory()->withApiKey(env('OPENAI_API_KEY'))->make();
 
         $response = $client->chat()->createStreamed([
@@ -66,10 +64,10 @@ class ChatInterface extends Component
     public function render()
     {
         return <<<'HTML'
-            <div class="flex flex-col p-2 border rounded-md h-full">
+            <div class="flex flex-col p-2 border border-gray-300 bg-white rounded-md h-full">
                 <div class="flex-1 overflow-y-auto">
                     @if(count($messages) == 0)
-                    <div class="flex items-center justify-center w-full h-full">
+                    <div class="flex items-center justify-center w-full h-full text-xl">
                         Ask any question about the document.
                     </div>
                     @endif
