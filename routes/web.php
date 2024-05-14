@@ -13,5 +13,6 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::get('/documents/{document}', [DocumentController::class, 'show'])->name('documents.show');
+Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
 
 require __DIR__.'/auth.php';
