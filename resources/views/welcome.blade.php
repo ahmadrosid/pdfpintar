@@ -39,8 +39,8 @@
                         <livewire:modal-demo />
                     </div>
                 </div>
-                <div class="mx-auto max-w-7xl rounded-3xl shadow-2xl overflow-hidden p-2 bg-gray-300">
-                    <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1715710151/public/pllajueah4ce2nf1weq3.png" class="rounded-2xl" />
+                <div class="mx-auto max-w-7xl rounded-3xl shadow-2xl overflow-hidden p-2 bg-gray-800/50">
+                    <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1715710738/public/ybrlrhsatsi58zr67dow.png" class="rounded-2xl" />
                 </div>
             </div>
         </div>
