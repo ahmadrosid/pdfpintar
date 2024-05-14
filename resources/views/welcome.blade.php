@@ -36,11 +36,7 @@
                         <a href="{{ route('login') }}">
                             <x-primary-button>Get started now!</x-primary-button>
                         </a>
-                        <div>
-                            <button @click="demoModalShown = true" class="hover:border-primary hover:text-gray-700 font-medium leading-6 text-gray-600 border-b-2">
-                                Watch Demo
-                            </button>
-                        </div>
+                        <livewire:modal-demo />
                     </div>
                 </div>
                 <div class="mx-auto max-w-7xl">
