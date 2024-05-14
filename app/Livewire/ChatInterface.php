@@ -8,7 +8,25 @@ use Livewire\Attributes\On;
 
 class ChatInterface extends Component
 {
-    public $messages = [];
+    public $messages = [
+        [
+            'role' => 'system',
+            'content' => 'You are a helpful assistant. The author name is Ahmad Rosid, I have over 7+ years of experience as a Software Engineer specializing in
+            Backend development. Proficient in working with Golang and Google Cloud
+            Infrastructure, successfully delivering efficient software solutions based on
+            these technologies.
+            Technologies: Golang, Javascript, Typescript, NodeJS, Docker, GCP, PostgreSQL,
+            MySQL, Elasticsearch, Redis, KeyDB, Kafka and more.',
+        ],
+        [
+            'role' => 'user',
+            'content' => 'What is the author name?'
+        ],
+        [
+            'role' => 'assistant',
+            'content' => 'The author name is Ahmad Rosid',
+        ]
+    ];
 
     public $userInput = '';
     public $isWriting = false;
@@ -20,8 +38,9 @@ class ChatInterface extends Component
         }
 
         if (count($this->messages) == 0) {
-            $this->messages[] = ['role' => 'system', 'content' => 'You are a helpful assistant.'];
+            $this->messages[] = ['role' => 'system', 'content' => 'You are a helpful assistant. The author name is Ahmad Rosid'];
         }
+
         $this->messages[] = [
             'role' => 'user',
             'content' => $this->userInput,
@@ -64,38 +83,53 @@ class ChatInterface extends Component
     public function render()
     {
         return <<<'HTML'
-            <div class="flex flex-col p-2 border border-gray-300 bg-white rounded-md h-full">
+            <div class="flex flex-col border border-gray-300 bg-white rounded-md h-full overflow-hidden">
                 <div class="flex-1 overflow-y-auto">
                     @if(count($messages) == 0)
                     <div class="flex items-center justify-center w-full h-full text-xl">
                         Ask any question about the document.
                     </div>
                     @endif
-                    <div class="chat-messages flex flex-col gap-2">
+                    <div class="chat-messages flex flex-col">
                         @foreach ($messages as $message)
-                        @if ($message['role'] == 'user' &&  $message['content'] != '')
-                            <div class="message bg-gray-200 p-2 rounded-md {{ $message['role'] }}">
-                                {{ $message['content'] }}
+                        @if ($message['role'] == 'user')
+                            <div class="message bg-gray-50 p-4 {{ $message['role'] }}">
+                                <div class="font-semibold">
+                                    You
+                                </div>
+                                <p>
+                                    {{ $message['content'] }}
+                                </p>
                             </div>
                         @elseif ($message['role'] == 'assistant')
-                            <div class="message bg-gray-100 p-2 rounded-md">
-                                {{ $message['content'] }}
+                            <div class="message bg-gray-200/75 p-4">
+                                <div class="font-semibold">
+                                    Pdfpintar
+                                </div>
+                                <p>
+                                    {{ $message['content'] }}
+                                </p>
                             </div>
                         @endif
                         @endforeach
 
-                        <div class="message ai">
+                        <div>
                             @if ($isWriting)
-                                <span wire:stream="ai-response" class="p-2 block bg-gray-100 rounded-md">Thinking...</span>
+                            <div class="message bg-gray-200 p-4">
+                                <div class="font-semibold">
+                                    Pdfpintar
+                                </div>
+                                <div wire:stream="ai-response">Thinking...</div>
+                            </div>
                             @endif
                         </div>
                     </div>
                 </div>
 
-                <form wire:submit.prevent="sendMessage">
+                <form wire:submit.prevent="sendMessage" class="p-2">
                     <div class="flex items-center gap-2">
-                        <x-text-input class="flex-1" label="Message" wire:model="userInput" placeholder="Type your message here..."></x-text-input>
-                        <x-primary-button wire:click="sendMessage">Send</x-primary-button>
+                        <textarea class="flex-1 resize-none rounded-md border border-gray-300 bg-gray-50 p-2 focus:outline-none" wire:model="userInput" rows="1" placeholder="Type your message here..."></textarea>
+                        <button wire:click="sendMessage" class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-3 rounded">Send</button>
                     </div>
                 </form>
             </div>
