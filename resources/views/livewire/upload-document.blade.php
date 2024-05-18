@@ -4,7 +4,7 @@
             <x-icon-square-plus /> <span class="ml-2">Upload Document</span>
         </button>
     </div>
-    <x-modal name="upload-document-modal" :show="$show_modal" maxWidth="2xl">
+    <x-modal name="upload-document-modal" :show="$show_modal">
         <div class="p-4">
             <div class="mb-3">
                 <h2 class="text-xl font-bold">Upload Document</h2>
@@ -28,7 +28,8 @@
                         >
                     </label>
                 </div>
-                <x-primary-button type="submit">Submit</x-primary-button>
+                <x-secondary-button type="button" wire:click="$dispatch('close-modal', 'upload-document-modal')">Cancel</x-secondary-button>
+                <x-primary-button type="submit" wire:loading.attr="disabled">Upload</x-primary-button>
             </form>
         </div>
     </x-modal>

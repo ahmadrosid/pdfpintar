@@ -13,6 +13,7 @@ class Document extends Model
      */
     protected $fillable = [
         'file_id',
+        'file_path',
         'file_name',
         'file_size',
         'user_id',

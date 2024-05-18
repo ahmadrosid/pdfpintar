@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Document;
+use Livewire\Attributes\On;
 
 class DocumentList extends Component
 {
@@ -11,7 +12,7 @@ class DocumentList extends Component
 
     public function boot()
     {
-        $this->documents = Document::where('user_id', auth()->id())->get();
+        $this->documents = Document::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
     }
 
     public function deleteDocument($id)
@@ -21,6 +22,14 @@ class DocumentList extends Component
             $document->delete();
         }
         $this->documents = Document::where('user_id', auth()->id())->get();
+    }
+
+    #[On('close-modal')] 
+    public function reloadDocuments($event)
+    {
+        if ($event == 'document-list-modal') {
+            $this->documents = Document::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
+        }
     }
 
     public function render()

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
+use OpenAI\Laravel\Facades\OpenAI;
 
 class UploadDocument extends Component
 {
@@ -24,8 +25,16 @@ class UploadDocument extends Component
         $fileName = $file->getClientOriginalName();
         $fileSize = $file->getSize();
 
+        $filePath = $file->store('documents', 'public');
+        $response = OpenAI::files()->upload([
+            'file' => fopen(storage_path("app/public/" . $filePath), 'r'),
+            'purpose' => 'assistants',
+        ]);
+
+        $fileId = $response->id;
         $document = Document::create([
-            'file_id' => $file->store('documents', 'public'),
+            'file_path' => $filePath,
+            'file_id' => $fileId,
             'file_name' => $fileName,
             'file_size' => $fileSize,
             'user_id' => Auth::id(),
@@ -33,6 +42,7 @@ class UploadDocument extends Component
 
         $this->reset('file'); // Reset the file input
         $this->show_modal = false;
+        $this->dispatch('close-modal', 'upload-document-modal');
     }
 
     public function render()
