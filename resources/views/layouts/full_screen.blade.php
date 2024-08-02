@@ -19,5 +19,6 @@
     <div class="w-full h-full bg-gray-100">
         {{ $slot }}
     </div>
+    @stack('scripts')
 </body>
 </html>

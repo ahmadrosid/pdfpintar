@@ -16,16 +16,8 @@ class ChatInterface extends Component
             Infrastructure, successfully delivering efficient software solutions based on
             these technologies.
             Technologies: Golang, Javascript, Typescript, NodeJS, Docker, GCP, PostgreSQL,
-            MySQL, Elasticsearch, Redis, KeyDB, Kafka and more.',
+            MySQL, Elasticsearch, Redis, KeyDB, Kafka and more. alahmadrosid@gmail.com',
         ],
-        [
-            'role' => 'user',
-            'content' => 'What is the author name?'
-        ],
-        [
-            'role' => 'assistant',
-            'content' => 'The author name is Ahmad Rosid',
-        ]
     ];
 
     public $userInput = '';
@@ -126,10 +118,34 @@ class ChatInterface extends Component
                     </div>
                 </div>
 
-                <form wire:submit.prevent="sendMessage" class="p-2">
-                    <div class="flex items-center gap-2">
-                        <textarea class="flex-1 resize-none rounded-md border border-gray-300 bg-gray-50 p-2 focus:outline-none" wire:model="userInput" rows="1" placeholder="Type your message here..."></textarea>
-                        <button wire:click="sendMessage" class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-3 rounded">Send</button>
+                <form wire:submit.prevent="sendMessage" class="p-4">
+                    <div class="flex items-end gap-2">
+                        <textarea
+                                x-data="{
+                                    resize: () => {
+                                        $el.style.height = '5px';
+                                        $el.style.height = $el.scrollHeight + 'px';
+                                    },
+                                    handleSubmit: (e) => {
+                                        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                                            $wire.sendMessage();
+                                            e.preventDefault();
+                                            e.target.value = '';
+                                            $el.style.height = '5px';
+                                            $el.style.height = $el.scrollHeight + 'px';
+                                        }
+                                    }
+                                }"
+                                @keydown="handleSubmit"
+                                @paste="handlePaste"
+                                @input="resize"
+                                type="text" 
+                                wire:model="userInput" 
+                                placeholder="Type your message here..." 
+                                rows="1"
+                                class="resize-none flex w-full h-auto max-h-[400px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                        ></textarea>
+                        <div><button wire:click="sendMessage" class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-3 rounded text-sm">Send</button></div>
                     </div>
                 </form>
             </div>
