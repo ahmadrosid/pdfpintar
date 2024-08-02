@@ -25,16 +25,30 @@
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <div class="mt-[70px] max-w-4xl mx-auto pb-8 text-center">
-                <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-5xl xl:leading-tight">
-                    Get instant answers from your PDFs with pdfpintar's conversational AI
+            <div class="mt-[70px] max-w-5xl mx-auto pb-8 text-center">
+                <!-- <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-5xl xl:leading-tight">
+                    Stop Wasting Time Reading PDFs. Start Asking Questions.
                 </h1>
                 <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
-                    Discover a smarter way to read PDFs, where intelligent conversations unlock deeper comprehension and effectiveness in your reading journey.
-                </h2>
+                    pdfpintar's AI turns your PDFs into a conversation, giving you the answers you need in seconds, not hours.
+                </h2> -->
+                <!-- <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-5xl xl:leading-tight">
+                    Uncover Hidden Knowledge in Your PDFs
+                </h1>
+                <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
+                    With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know you didn't know.
+                </h2> -->
+                <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-6xl xl:leading-tight">
+                    Imagine if your PDFs could talk. 
+                </h1>
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
+                        With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know.
+                    </h2>
+                </div>
                 <div class="flex gap-4 py-8 justify-center items-center">
                     <a href="{{ route('login') }}">
-                        <x-primary-button>Try pdfpintar for Free!</x-primary-button>
+                        <x-primary-button>Try for Free</x-primary-button>
                     </a>
                     <livewire:modal-demo />
                 </div>
