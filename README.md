@@ -1,8 +1,84 @@
 ## PDFPintar
 
-PDFPintar is an AI web application designed for interacting with PDFs. It's built using Laravel and React.
+PDFPintar is an web application designed for interacting with PDFs. It's built using Laravel, Livewire and a little bit of React.
 
 ![demo.png](http://res.cloudinary.com/dr15yjl8w/image/upload/v1722672310/public/shc84ttvanftn575crkl.png)
+
+## Requirements
+
+- PHP 8.1+
+- Composer
+- Node.js and npm
+- Laravel 10.x
+- MySQL or SQLite
+- OpenAI API key
+
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/pdfpintar.git
+   cd pdfpintar
+   ```
+
+2. Install PHP dependencies:
+   ```
+   composer install
+   ```
+
+3. Install JavaScript dependencies:
+   ```
+   npm install
+   ```
+
+4. Copy the `.env.example` file to `.env` and configure your environment variables:
+   ```
+   cp .env.example .env
+   ```
+
+5. Generate an application key:
+   ```
+   php artisan key:generate
+   ```
+
+6. Run database migrations:
+   ```
+   php artisan migrate
+   ```
+
+7. Build frontend assets:
+   ```
+   npm run build
+   ```
+
+8. Start the development server:
+   ```
+   php artisan serve
+   ```
+
+## Environment Variables
+
+Make sure to set the following environment variables in your `.env` file:
+
+```
+APP_NAME=PDFPintar
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pdfpintar
+DB_USERNAME=root
+DB_PASSWORD=
+
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_ORGANIZATION=your_openai_organization_id_here
+```
+
+Replace `your_openai_api_key_here` with your actual OpenAI API key, and `your_openai_organization_id_here` with your OpenAI organization ID if applicable.
 
 ## Contribution
 
