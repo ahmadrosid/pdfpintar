@@ -9,7 +9,6 @@ PDFPintar is a web application designed for chatting with your PDF documents. It
 - PHP 8.1+
 - Composer
 - Node.js and npm
-- Laravel 10.x
 - MySQL or SQLite
 - OpenAI API key
 
