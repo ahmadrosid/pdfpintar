@@ -128,23 +128,30 @@ class ChatInterface extends Component
             }
         }
 
-        Message::create([
-            'thread_id' => $this->threadId,
-            'role' => 'user',
-            'content' => $this->messages[count($this->messages) - 1]['content'],
-        ]);
-        Message::create([
-            'thread_id' => $this->threadId,
-            'role' => 'assistant',
-            'content' => $message_content,
+        $this->isWriting = false;
+        if ($message_content === '') {
+            return;
+        }
+
+        $lastMessage = end($this->messages);
+
+        Message::insert([
+            [
+                'thread_id' => $this->threadId,
+                'role' => 'user',
+                'content' => $lastMessage['content'],
+            ],
+            [
+                'thread_id' => $this->threadId,
+                'role' => 'assistant',
+                'content' => $message_content,
+            ]
         ]);
 
         $this->messages[] = [
             'role' => 'assistant',
             'content' => $message_content,
         ];
-
-        $this->isWriting = false;
     }
 
     private function createMessage()

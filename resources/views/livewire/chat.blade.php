@@ -8,8 +8,8 @@
         <div class="chat-messages flex flex-col">
             @foreach ($messages as $message)
             @if ($message['role'] == 'user')
-            <div class="message bg-gray-50 p-4 {{ $message['role'] }}">
-                <div class="font-semibold text-orange-500">
+            <div class="message bg-white p-4 {{ $message['role'] }}">
+                <div class="font-semibold text-orange-400 text-sm">
                     You
                 </div>
                 <div class="prose prose-sm">
@@ -17,8 +17,8 @@
                 </div>
             </div>
             @elseif ($message['role'] == 'assistant')
-            <div class="message bg-gray-400/15 p-4">
-                <div class="font-semibold text-orange-500">
+            <div class="message bg-gray-300/25 p-4">
+                <div class="font-semibold text-sm">
                     pdfpintar
                 </div>
                 <div class="prose prose-sm">
@@ -31,8 +31,8 @@
             <div>
                 @if ($isWriting)
                 <div class="message bg-gray-200 p-4">
-                    <div class="font-semibold">
-                        Pdfpintar
+                    <div class="font-semibold text-sm">
+                        pdfpintar
                     </div>
                     <div x-data="{
                             init() {

@@ -50,7 +50,12 @@ PDFPintar is a web application designed for chatting with your PDF documents. It
    npm run build
    ```
 
-8. Start the development server:
+8. Link storage:
+   ```
+   php artisan storage:link
+   ```
+
+9. Start the development server:
    ```
    php artisan serve
    ```
