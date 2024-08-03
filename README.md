@@ -61,19 +61,6 @@ PDFPintar is an web application designed for interacting with PDFs. It's built u
 Make sure to set the following environment variables in your `.env` file:
 
 ```
-APP_NAME=PDFPintar
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_URL=http://localhost
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=pdfpintar
-DB_USERNAME=root
-DB_PASSWORD=
-
 OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_ORGANIZATION=your_openai_organization_id_here
 ```
