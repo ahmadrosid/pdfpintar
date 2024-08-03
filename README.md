@@ -2,7 +2,7 @@
 
 PDFPintar is a web application designed for chatting with your PDF documents. It's built using Laravel, Livewire, and a bit of React.
 
-![demo.png](http://res.cloudinary.com/dr15yjl8w/image/upload/v1722672310/public/shc84ttvanftn575crkl.png)
+![demo.png](http://res.cloudinary.com/dr15yjl8w/image/upload/v1722683617/public/q20eyoka6tcayz84icmj.png)
 
 ## Requirements
 
