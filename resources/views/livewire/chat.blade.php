@@ -1,5 +1,5 @@
-<div class="flex flex-col border border-gray-300 bg-white h-full">
-    <div class="flex-1 overflow-y-auto rounded-t">
+<div class="flex flex-col border border-gray-200 bg-white h-full">
+    <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl">
             Ask any question about the document.
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <form wire:submit.prevent="sendMessage" class="p-4">
+    <form wire:submit.prevent="sendMessage" class="p-4 bg-gray-50">
         <div class="flex items-end gap-2">
             <x-chat-setting />
             <textarea x-data="{

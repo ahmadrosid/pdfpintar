@@ -24,34 +24,40 @@ class ChatInterface extends Component
         $this->loadMessages();
     }
 
-    private function initializeThread()
+    private function createAssistant()
     {
-        if (!$this->assistant_id) {
-            $assistant = OpenAI::assistants()->create([
-                'name' => $this->document->file_name,
-                'tools' => [
-                    [
-                        'type' => 'file_search',
-                    ],
+        $assistant = OpenAI::assistants()->create([
+            'name' => $this->document->file_name,
+            'tools' => [
+                [
+                    'type' => 'file_search',
                 ],
-                'tool_resources' => [
-                    'file_search' => [
-                        'vector_stores' => [
-                            [
-                                'file_ids' => [
-                                    $this->document->file_id,
-                                ]
+            ],
+            'tool_resources' => [
+                'file_search' => [
+                    'vector_stores' => [
+                        [
+                            'file_ids' => [
+                                $this->document->file_id,
                             ]
                         ]
                     ]
-                ],
-                'instructions' => 'Your are a helpful assistant. Use the provided document to answer the user\'s question.',
-                'model' => 'gpt-4o',
-            ]);
+                ]
+            ],
+            'instructions' => 'Your are a helpful assistant. Use the provided document to answer the user\'s question.',
+            'model' => 'gpt-4o',
+        ]);
+        return $assistant;
+    }
+
+    private function initializeThread()
+    {
+        if (!$this->assistant_id) {
+            $assistant = $this->createAssistant();
             $this->assistant_id = $assistant->id;
         }
 
-        $existingThread = Thread::where('document_id', $this->document->id)->first();
+        $existingThread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
 
         if (!$existingThread) {
             $openaiThread = OpenAI::threads()->create([]);
@@ -69,12 +75,15 @@ class ChatInterface extends Component
 
     private function loadMessages()
     {
-        $existingThread = Thread::where('document_id', $this->document->id)->first();
+        $existingThread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
         if (!$existingThread) {
             return;
         }
 
-        $dbMessages = Message::where('thread_id', $existingThread->id)->orderBy('created_at', 'asc')->get();
+        $this->threadId = $existingThread->id;
+        $this->openaiThreadId = $existingThread->openai_thread_id;
+        $this->assistant_id = $existingThread->assistant_id;
+        $dbMessages = Message::where('thread_id', $this->threadId)->orderBy('id', 'asc')->get();
         
         foreach ($dbMessages as $message) {
             $this->messages[] = [
@@ -140,11 +149,15 @@ class ChatInterface extends Component
                 'thread_id' => $this->threadId,
                 'role' => 'user',
                 'content' => $lastMessage['content'],
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'thread_id' => $this->threadId,
                 'role' => 'assistant',
                 'content' => $message_content,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
 
@@ -162,6 +175,34 @@ class ChatInterface extends Component
             'role' => 'user',
             'content' => $this->messages[count($this->messages) - 1]['content'],
         ]);
+    }
+
+    public function clearMessages()
+    {
+        Message::where('thread_id', $this->threadId)->delete();
+        $this->messages = [];
+        $this->dispatch('settingsActionCompleted');
+    }
+
+    public function newChat() {
+        $this->threadId = null;
+        $this->messages = [];
+        $this->assistant_id = null;
+
+        $assistant = $this->createAssistant();
+        $this->assistant_id = $assistant->id;
+        
+        $openaiThread = OpenAI::threads()->create([]);
+        $existingThread = Thread::create([
+            'openai_thread_id' => $openaiThread->id,
+            'assistant_id' => $this->assistant_id,
+            'document_id' => $this->document->id,
+        ]);
+
+        $this->threadId = $existingThread->id;
+        $this->openaiThreadId = $existingThread->openai_thread_id;
+        $this->assistant_id = $existingThread->assistant_id;
+        $this->dispatch('settingsActionCompleted');
     }
 
     public function render()
