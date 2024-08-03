@@ -9,10 +9,27 @@ use Livewire\Attributes\On;
 class DocumentList extends Component
 {
     public $documents;
+    public $search = '';
 
     public function boot()
     {
-        $this->documents = Document::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
+        $this->loadDocuments();
+    }
+
+    public function loadDocuments()
+    {
+        $this->documents = Document::where('user_id', auth()->id())
+            ->where(function ($query) {
+                $query->where('file_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('content', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    public function updatedSearch()
+    {
+        $this->loadDocuments();
     }
 
     public function deleteDocument($id)
@@ -21,14 +38,14 @@ class DocumentList extends Component
         if ($document->user_id == auth()->id()) {
             $document->delete();
         }
-        $this->documents = Document::where('user_id', auth()->id())->get();
+        $this->loadDocuments();
     }
 
     #[On('close-modal')] 
     public function reloadDocuments($event)
     {
         if ($event == 'document-list-modal') {
-            $this->documents = Document::where('user_id', auth()->id())->orderBy('created_at', 'desc')->get();
+            $this->loadDocuments();
         }
     }
 
