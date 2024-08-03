@@ -13,7 +13,7 @@ class ChatInterface extends Component
 {
     public Document $document;
     public $messages = [];
-    public $userInput = 'Please summarize the following document in a few sentences.';
+    public $userInput = '';
     public $isWriting = false;
     public $threadId;
     public $openaiThreadId;
