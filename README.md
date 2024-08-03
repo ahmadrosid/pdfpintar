@@ -2,7 +2,7 @@
 
 PDFPintar is an AI web application designed for interacting with PDFs. It's built using Laravel and React.
 
-![demo.png](https://res.cloudinary.com/dr15yjl8w/image/upload/v1696665108/pdfpintar_ycqgqs.png)
+![demo.png](http://res.cloudinary.com/dr15yjl8w/image/upload/v1722672310/public/shc84ttvanftn575crkl.png)
 
 ## Contribution
 
