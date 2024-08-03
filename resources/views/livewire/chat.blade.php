@@ -1,5 +1,5 @@
-<div class="flex flex-col border border-gray-300 bg-white rounded h-full overflow-hidden">
-    <div class="flex-1 overflow-y-auto">
+<div class="flex flex-col border border-gray-300 bg-white h-full">
+    <div class="flex-1 overflow-y-auto rounded-t">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl">
             Ask any question about the document.
@@ -76,18 +76,29 @@
 
     <form wire:submit.prevent="sendMessage" class="p-4">
         <div class="flex items-end gap-2">
+            <x-chat-setting />
             <textarea x-data="{
+                        init() {
+                            $el.style.height = '5px';
+                            $el.style.height = $el.scrollHeight + 'px';
+                        },
                         resize: () => {
                             $el.style.height = '5px';
                             $el.style.height = $el.scrollHeight + 'px';
                         },
                         handleSubmit: (e) => {
-                            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                            if (e.key === 'Enter') {
+                                if (e.shiftKey) {
+                                    return;
+                                }
                                 $wire.sendMessage();
                                 e.preventDefault();
                             }
                         }
-                    }" @keydown="handleSubmit" @input="resize" type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full h-auto max-h-[400px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:ring-0 focus:border-neutral-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
+                    }" 
+                    @keydown="handleSubmit" 
+                    @input="resize" 
+                    type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full max-h-[400px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:ring-0 focus:border-neutral-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
             <div>
                 <button wire:click="sendMessage" class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-3 rounded text-sm">Send</button>
             </div>
