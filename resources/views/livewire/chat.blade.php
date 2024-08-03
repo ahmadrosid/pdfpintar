@@ -1,4 +1,4 @@
-<div class="flex flex-col border border-gray-200 bg-white h-full">
+<div class="flex flex-col border border-gray-200 bg-white h-full max-h-[92vh]">
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl">

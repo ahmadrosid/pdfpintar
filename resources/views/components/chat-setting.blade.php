@@ -55,17 +55,17 @@
                     <p class="text-sm text-gray-600">Configure the chat interface.</p>
                 </div>
                 <div class="grid gap-2">
-                    <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
-                        <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Clear chat history
-                        </span>
-                        <x-icon-trash class="size-5" />
-                    </button>
                     <button wire:click="newChat" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             New chat
                         </span>
                         <x-icon-message-square-plus class="size-5" />
+                    </button>
+                    <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
+                        <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Clear chat history
+                        </span>
+                        <x-icon-trash class="size-5" />
                     </button>
                 </div>
             </div>
