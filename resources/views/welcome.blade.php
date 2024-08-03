@@ -35,9 +35,15 @@
                     </h2>
                 </div>
                 <div class="flex gap-4 py-8 justify-center items-center">
+                    @auth
+                    <a href="{{ route('dashboard') }}">
+                        <x-primary-button>Dashboard</x-primary-button>
+                    </a>
+                    @else
                     <a href="{{ route('login') }}">
                         <x-primary-button>Try for Free</x-primary-button>
                     </a>
+                    @endif
                     <livewire:modal-demo />
                 </div>
             </div>

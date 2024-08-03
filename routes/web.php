@@ -19,7 +19,5 @@ Route::get('/documents', function () {
 Route::get('/documents/{document}', function (Document $document) {
     return view('documents.show', compact('document'));
 })->name('documents.show');
-
-    
     
 require __DIR__.'/auth.php';
