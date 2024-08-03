@@ -9,28 +9,17 @@
             <div class="mb-3">
                 <h2 class="text-xl font-bold">Upload Document</h2>
             </div>
-            <form wire:submit.prevent="uploadDocument">
-                <div class="mb-3">
-                    <label class="block">
-                        <span class="sr-only">Upload Document</span>
-                        <input type="file" class="block w-full text-sm text-gray-500
-                            file:me-4 file:py-2 file:px-4
-                            file:rounded-lg file:border-0
-                            file:text-sm file:font-semibold
-                            file:bg-blue-600 file:text-white
-                            hover:file:bg-blue-700
-                            file:disabled:opacity-50 file:disabled:pointer-events-none
-                            dark:text-neutral-500
-                            dark:file:bg-blue-500
-                            dark:hover:file:bg-blue-400
-                        "
-                               wire:model="file" id="file"
-                        >
-                    </label>
-                </div>
-                <x-secondary-button type="button" wire:click="$dispatch('close-modal', 'upload-document-modal')">Cancel</x-secondary-button>
-                <x-primary-button type="submit" wire:loading.attr="disabled">Upload</x-primary-button>
-            </form>
+            <div class="mt-2">
+                <x-filepond::upload wire:model="file" acceptedFileTypes="application/pdf" maxFileSize="120480000" />
+                <x-input-error :messages="$errors->get('file')" class="mt-2" />
+            </div>
+            <div class="flex justify-end mt-4 gap-4">
+                <x-secondary-button type="button" x-on:click="$dispatch('close')">Cancel</x-secondary-button>
+                <x-primary-button wire:click="uploadDocument" wire:loading.attr="disabled">
+                    <span wire:loading.remove>Submit</span>
+                    <span wire:loading>Uploading...</span>
+                </x-primary-button>
+            </div>
         </div>
     </x-modal>
 </div>
