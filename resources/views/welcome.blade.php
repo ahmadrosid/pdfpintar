@@ -39,9 +39,9 @@
                     With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know you didn't know.
                 </h2> -->
                 <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-6xl xl:leading-tight">
-                    Imagine if your PDFs could talk. 
+                    Stop Wasting Time Reading PDFs. Start Asking Questions.
                 </h1>
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-2xl mx-auto">
                     <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
                         With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know.
                     </h2>

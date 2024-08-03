@@ -40,6 +40,9 @@ $register = function () {
 ?>
 
 <div>
+    <div class="p-6 pt-2 text-xl font-bold text-center">
+        <p>Get started in minutes</p>
+    </div>
     <form wire:submit="register">
         <!-- Name -->
         <div>
