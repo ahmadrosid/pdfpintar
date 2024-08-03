@@ -16,7 +16,7 @@ PDFPintar is a web application designed for chatting with your PDF documents. It
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/pdfpintar.git
+   git clone https://github.com/ahmadrosid/pdfpintar.git
    cd pdfpintar
    ```
 
