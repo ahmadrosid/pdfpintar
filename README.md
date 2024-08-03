@@ -34,6 +34,7 @@ PDFPintar is a web application designed for chatting with your PDF documents. It
    ```
    cp .env.example .env
    ```
+   Make sure to set `OPENAI_API_KEY` and `OPENAI_ORGANIZATION` in your `.env` file.
 
 5. Generate an application key:
    ```
