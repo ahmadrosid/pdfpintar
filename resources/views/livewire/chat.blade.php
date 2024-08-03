@@ -1,4 +1,4 @@
-<div class="flex flex-col border border-gray-300 bg-white rounded-md h-full overflow-hidden">
+<div class="flex flex-col border border-gray-300 bg-white rounded h-full overflow-hidden">
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl">
@@ -21,9 +21,9 @@
                 <div class="font-semibold pb-1">
                     Pdfpintar
                 </div>
-                <p>
+                <div class="prose">
                     {{ $message['content'] }}
-                </p>
+                </div>
             </div>
             @endif
             @endforeach
