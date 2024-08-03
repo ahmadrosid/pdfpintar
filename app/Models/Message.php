@@ -2,24 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'id',
+        'thread_id',
         'role',
         'content',
-        'conversation_id',
-        'created_at',
-        'updated_at',
     ];
 
-    public function conversation()
+    public function thread()
     {
-        return $this->belongsTo(Conversation::class);
+        return $this->belongsTo(Thread::class);
     }
 }

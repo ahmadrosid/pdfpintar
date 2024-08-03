@@ -19,6 +19,6 @@
         <div class="flex flex-col bg-white h-full overflow-hidden">
             <div id="pdf-viewer" data-url="{{ asset(Storage::url($document->file_path)) }}"></div>
         </div>
-        <livewire:chat-interface />
+        <livewire:chat-interface :document="$document" />
     </div>
 </x-full-screen-layout>

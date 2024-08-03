@@ -9,20 +9,20 @@
             @foreach ($messages as $message)
             @if ($message['role'] == 'user')
             <div class="message bg-gray-50 p-4 {{ $message['role'] }}">
-                <div class="font-semibold pb-1">
+                <div class="font-semibold text-orange-500">
                     You
                 </div>
-                <p>
-                    {{ $message['content'] }}
-                </p>
+                <div class="prose prose-sm">
+                    <x-markdown>{{ $message['content'] }}</x-markdown>
+                </div>
             </div>
             @elseif ($message['role'] == 'assistant')
-            <div class="message bg-gray-200/75 p-4">
-                <div class="font-semibold pb-1">
-                    Pdfpintar
+            <div class="message bg-gray-400/15 p-4">
+                <div class="font-semibold text-orange-500">
+                    pdfpintar
                 </div>
-                <div class="prose">
-                    {{ $message['content'] }}
+                <div class="prose prose-sm">
+                    <x-markdown>{{ $message['content'] }}</x-markdown>
                 </div>
             </div>
             @endif
@@ -34,7 +34,40 @@
                     <div class="font-semibold">
                         Pdfpintar
                     </div>
-                    <div wire:stream="ai-response">Thinking...</div>
+                    <div x-data="{
+                            init() {
+                                const observer = new MutationObserver((mutations) => {
+                                    mutations.forEach((mutation) => {
+                                        if (mutation.type === 'childList') {
+                                            const textContent = $refs.stream.textContent.trim();
+                                            if ($refs.loader) {
+                                                $refs.loader.remove();
+                                            }
+                                            if (textContent) {
+                                                setTimeout(() => {
+                                                    document.getElementById('scroll_target').scrollIntoView({ behavior: 'smooth' });
+                                                }, 100);
+                                                const markdownHtml = marked.parse(textContent);
+                                                const markdownElement = $refs.markdown;
+                                                markdownElement.innerHTML = DOMPurify.sanitize(markdownHtml);
+                                            } else {
+                                                observer.disconnect();
+                                            }
+                                        }
+                                    });
+                                });
+                                observer.observe($refs.stream, {childList: true, subtree: true, characterData: true});
+                            }
+                        }">
+                        <div x-ref="stream" class="hidden" wire:stream="ai-response"></div>
+                        <div x-ref="markdown" class="prose prose-sm">
+                            <div class="thinking-container pt-2">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 @endif
             </div>
@@ -54,14 +87,7 @@
                                 e.preventDefault();
                             }
                         }
-                    }" 
-                    @keydown="handleSubmit" 
-                    @input="resize" 
-                    type="text" 
-                    wire:model="userInput"
-                    placeholder="Type your message here..." 
-                    rows="1" 
-                    class="resize-none flex w-full h-auto max-h-[400px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:ring-0 focus:border-neutral-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
+                    }" @keydown="handleSubmit" @input="resize" type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full h-auto max-h-[400px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:ring-0 focus:border-neutral-300 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
             <div>
                 <button wire:click="sendMessage" class="bg-gray-800 hover:bg-gray-700 text-white py-2 px-3 rounded text-sm">Send</button>
             </div>
