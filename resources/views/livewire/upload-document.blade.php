@@ -4,7 +4,7 @@
             <x-icon-square-plus /> <span class="ml-2 text-sm">Upload Document</span>
         </button>
     </div>
-    <x-modal name="upload-document-modal" :show="$show_modal">
+    <x-modal name="upload-document-modal">
         <div class="p-4">
             <div class="mb-3">
                 <h2 class="text-xl font-bold">Upload Document</h2>

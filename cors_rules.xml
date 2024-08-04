@@ -1,0 +1,17 @@
+<CORSConfiguration>
+    <CORSRule>
+        <ID>Allow pdfpintar digitalocean storage for pdfpintar.com</ID>
+        <AllowedOrigin>https://www.pdfpintar.com</AllowedOrigin>
+        <AllowedOrigin>https://pdfpintar.com</AllowedOrigin>
+        <AllowedOrigin>https://app.pdfpintar.com</AllowedOrigin>
+        <AllowedOrigin>https://dev.pdfpintar.com</AllowedOrigin>
+        <AllowedOrigin>http://127.0.0.1:8000</AllowedOrigin>
+        <AllowedOrigin>http://localhost:8000</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedMethod>HEAD</AllowedMethod>
+        <AllowedHeader>*</AllowedHeader>
+        <ExposeHeader>ETag</ExposeHeader>
+        <MaxAgeSeconds>86400</MaxAgeSeconds>
+    </CORSRule>
+</CORSConfiguration>
