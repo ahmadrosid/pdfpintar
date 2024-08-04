@@ -126,7 +126,8 @@ class ChatInterface extends Component
 
             foreach ($content as $item) {
                 if (isset($item['type']) && $item['type'] === 'text') {
-                    $text = preg_replace('/\【\d+:\d+†source\】/', '', $item['text']['value']);
+                    $pattern = '/【\d+:\d+†.*?】/';
+                    $text = preg_replace($pattern, '', $item['text']['value']);
                     $this->stream(
                         to: 'ai-response',
                         content: $text,
