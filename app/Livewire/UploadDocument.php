@@ -23,7 +23,11 @@ class UploadDocument extends Component
 
         $this->isUploading = true;
 
-        $filePath = $this->file->storePublicly('documents', 's3');
+        if (config('filesystem.default') == 's3') {
+            $filePath = $this->file->storePublicly('documents', 's3');
+        } else {
+            $filePath = $this->file->store('documents', 'public');
+        }
         
         $response = OpenAI::files()->upload([
             'file' => fopen($this->file->getPathname(), 'r'),

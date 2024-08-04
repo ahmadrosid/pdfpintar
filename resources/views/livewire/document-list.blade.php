@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ showDeleteModal: false, documentToDelete: null }">
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -24,7 +24,7 @@
                                 <a href="{{ route('documents.show', $document->id) }}">
                                     {{ $document->created_at->diffForHumans() }}
                                 </a>
-                                <button class="hover:text-rose-500 px-2" wire:click="deleteDocument({{ $document->id }})" wire:loading.attr="disabled">
+                                <button class="hover:text-rose-500 px-2" @click="$dispatch('open-modal', 'delete-document-modal'); documentToDelete = {{ $document->id }}">
                                     <x-icon-trash />
                                 </button>
                             </div>
@@ -35,4 +35,22 @@
             </div>
         </div>
     </div>
+
+    <x-modal name="delete-document-modal">
+        <div class="p-4">
+            <div class="mb-3">
+                <h2 class="text-xl font-bold">Delete Document</h2>
+            </div>
+            <div class="mt-2 text-sm">
+                <p>Are you sure you want to delete this document?</p>
+                <p>This action cannot be undone.</p>
+            </div>
+            <div class="flex justify-end mt-4 gap-4">
+                <x-secondary-button @click="$dispatch('close-modal', 'delete-document-modal');">Cancel</x-secondary-button>
+                <x-danger-button @click="$wire.deleteDocument(documentToDelete).then(() => { $dispatch('close-modal', 'delete-document-modal'); documentToDelete = null; })">
+                    Delete
+                </x-danger-button>
+            </div>
+        </div>
+    </x-modal>
 </div>
