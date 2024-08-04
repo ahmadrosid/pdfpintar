@@ -4,11 +4,26 @@ import { Worker, Viewer, ProgressBar } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import jumpToPagePlugin from "./jump-to-page-plugin";
 
 const container = document.getElementById("pdf-viewer");
 
 function PDFView() {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
+    const jumpPluginInstance = jumpToPagePlugin();
+
+    React.useEffect(() => {
+
+        window.addEventListener('jumpToPage', (e) => {
+            const pageIndex = e.detail.pageIndex;
+            console.log(pageIndex);
+            jumpPluginInstance.jumpToPage(pageIndex > 0 ? pageIndex - 1 : 0);
+        });
+
+        return () => {
+            window.removeEventListener('jumpToPage');
+        };
+    }, []);
 
     return (
         <>
@@ -19,7 +34,7 @@ function PDFView() {
                     }}>
                     <Viewer
                         fileUrl={container.dataset.url}
-                        plugins={[defaultLayoutPluginInstance]}
+                        plugins={[defaultLayoutPluginInstance,jumpPluginInstance]}
                         renderLoader={(percentages) => (
                             <div style={{ width: "240px" }}>
                                 <ProgressBar progress={Math.round(percentages)} />

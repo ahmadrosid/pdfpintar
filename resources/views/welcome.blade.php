@@ -27,11 +27,12 @@
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="mt-[70px] max-w-5xl mx-auto pb-8 text-center">
                 <h1 class="text-3xl font-bold text-gray-900 md:text-4xl xl:text-6xl xl:leading-tight">
-                    Stop Wasting Time Reading PDFs. Start Asking Questions.
+                    Ubah Cara Anda Membaca PDF <br />
+                    Gali Informasi Lebih Cepat
                 </h1>
                 <div class="max-w-2xl mx-auto">
                     <h2 class="mt-6 leading-snug text-gray-500 xl:mt-5 xl:text-xl">
-                        With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know.
+                        PDFPINTAR membantu Anda menggali informasi penting dengan mudah. Ajukan pertanyaan, dapatkan jawaban instan.
                     </h2>
                 </div>
                 <div class="flex gap-4 py-8 justify-center items-center">
@@ -48,7 +49,7 @@
                 </div>
             </div>
             <div class="mx-auto max-w-7xl rounded-3xl shadow-2xl overflow-hidden p-2 bg-gray-700">
-                <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1722619896/public/pqcgjjbwjgmrk4yipix6.png" class="rounded-2xl" />
+                <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1722754220/public/dgmrm5rxzsyretvuh3sy.png" class="rounded-2xl" />
             </div>
         </div>
     </div>

@@ -26,7 +26,7 @@
             popoverPositionCalculate();
         });
         $watch('popoverOpen', function(value){
-            if(value){ popoverPositionCalculate(); document.getElementById('width').focus();  }
+            if(value){ popoverPositionCalculate(); document.getElementById('width')?.focus();  }
         });
         Livewire.on('settingsActionCompleted', () => {
             popoverOpen = false;
