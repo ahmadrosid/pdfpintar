@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="mx-auto max-w-7xl rounded-3xl shadow-2xl overflow-hidden p-2 bg-gray-700">
-                <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1722754220/public/dgmrm5rxzsyretvuh3sy.png" class="rounded-2xl" />
+                <img src="http://res.cloudinary.com/dr15yjl8w/image/upload/v1722770981/public/e6w5shtwz1thgozzsoxb.png" class="rounded-2xl" />
             </div>
         </div>
     </div>
