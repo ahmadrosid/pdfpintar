@@ -23,7 +23,7 @@ class UploadDocument extends Component
 
         $this->isUploading = true;
 
-        if (config('filesystem.default') == 's3') {
+        if (env('FILESYSTEM_DISK') == 's3') {
             $filePath = $this->file->storePublicly('documents', 's3');
         } else {
             $filePath = $this->file->store('documents', 'public');
