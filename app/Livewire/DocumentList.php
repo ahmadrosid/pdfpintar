@@ -20,8 +20,7 @@ class DocumentList extends Component
     {
         $this->documents = Document::where('user_id', auth()->id())
             ->where(function ($query) {
-                $query->where('file_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('content', 'like', '%' . $this->search . '%');
+                $query->where('file_name', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
             ->get();
