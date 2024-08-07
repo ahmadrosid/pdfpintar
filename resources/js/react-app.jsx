@@ -30,7 +30,7 @@ function PDFView() {
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                 <div 
                     style={{
-                        height: '750px',
+                        height: '92vh',
                     }}>
                     <Viewer
                         fileUrl={container.dataset.url}
