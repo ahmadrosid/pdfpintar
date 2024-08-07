@@ -29,7 +29,9 @@
             if(value){ popoverPositionCalculate(); document.getElementById('width')?.focus();  }
         });
         Livewire.on('settingsActionCompleted', () => {
-            popoverOpen = false;
+            setTimeout(() => {
+                popoverOpen = false;
+            }, 100);
         });
     "
     class="relative">
@@ -59,13 +61,19 @@
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             New chat
                         </span>
-                        <x-icon-message-square-plus class="size-5" />
+                        <x-icon-message-square-plus wire:loading.remove wire:target="newChat" class="size-5" />
+                        <div wire:loading wire:target="newChat"> 
+                            <x-icon-loader class="animate-spin" />
+                        </div>
                     </button>
                     <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             Clear chat history
                         </span>
-                        <x-icon-trash class="size-5" />
+                        <x-icon-trash wire:loading.remove wire:target="clearMessages" class="size-5" />
+                        <div wire:loading wire:target="clearMessages"> 
+                            <x-icon-loader class="animate-spin" />
+                        </div>
                     </button>
                 </div>
             </div>
