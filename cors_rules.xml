@@ -3,6 +3,7 @@
         <ID>Allow pdfpintar digitalocean storage for pdfpintar.com</ID>
         <AllowedOrigin>https://www.pdfpintar.com</AllowedOrigin>
         <AllowedOrigin>https://pdfpintar.com</AllowedOrigin>
+        <AllowedOrigin>https://pdfpintar.test</AllowedOrigin>
         <AllowedOrigin>https://app.pdfpintar.com</AllowedOrigin>
         <AllowedOrigin>https://dev.pdfpintar.com</AllowedOrigin>
         <AllowedOrigin>http://127.0.0.1:8000</AllowedOrigin>
