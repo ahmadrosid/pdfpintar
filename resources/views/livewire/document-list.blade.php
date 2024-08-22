@@ -39,11 +39,11 @@
     </div>
 
     <x-modal name="delete-document-modal">
-        <div class="p-4">
+        <div class="p-4 dark:bg-gray-800">
             <div class="mb-3">
-                <h2 class="text-xl font-bold">Delete Document</h2>
+                <h2 class="text-xl font-bold dark:text-white">Delete Document</h2>
             </div>
-            <div class="mt-2 text-sm">
+            <div class="mt-2 text-sm dark:text-white">
                 <p>Are you sure you want to delete this document?</p>
                 <p>This action cannot be undone.</p>
             </div>

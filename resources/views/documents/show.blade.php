@@ -8,10 +8,10 @@
                 <span class="left-arrow">&#x2190;</span> {{ $document->file_name }}
             </a>
             <div class="flex items-center gap-4">
-                <a href="{{ route('profile') }}" class="text-gray-800 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-700">
+                <a href="{{ route('profile') }}" class="text-gray-800 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-700">
                     Share
                 </a>
-                <a href="{{ route('documents.index') }}" class="text-gray-800 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-700 pr-3">
+                <a href="{{ route('documents.index') }}" class="text-gray-800 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-700 pr-3">
                     History
                 </a>
             </div>
