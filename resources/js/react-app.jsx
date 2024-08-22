@@ -33,6 +33,7 @@ function PDFView() {
                         height: '92vh',
                     }}>
                     <Viewer
+                        theme={window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light"}
                         fileUrl={container.dataset.url}
                         plugins={[defaultLayoutPluginInstance,jumpPluginInstance]}
                         renderLoader={(percentages) => (

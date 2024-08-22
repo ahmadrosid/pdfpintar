@@ -21,9 +21,8 @@ $login = function () {
 };
 
 ?>
-
-<div>
-    <div class="pb-6 pt-2 text-xl font-bold text-center">
+<div class="dark:bg-gray-700 bg-gray-100">
+    <div class="pb-6 pt-2 text-xl font-bold text-center dark:text-gray-300 text-gray-900">
         <p>Sign in to your account</p>
     </div>
 
@@ -43,7 +42,7 @@ $login = function () {
                 <x-input-label for="password" :value="__('Password')" />
 
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:text-gray-400 dark:hover:text-gray-600" href="{{ route('password.request') }}" wire:navigate>
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
@@ -59,13 +58,13 @@ $login = function () {
 
         <div class="mt-4 flex justify-between">
             <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-gray-600 shadow-sm focus:ring-gray-500 dark:border-gray-600 dark:text-gray-500" name="remember">
+                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}" wire:navigate>
+            <a class="underline text-sm text-gray-600 hover:text-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:text-gray-400 dark:hover:text-gray-300" href="{{ route('register') }}" wire:navigate>
                 Register
             </a>
 

@@ -1,13 +1,13 @@
 <div>
-    <div class="p-4">
-        <button wire:click="$dispatch('open-modal', 'upload-document-modal')" class="bg-gray-800 flex justify-between items-center text-white font-light py-2 px-3 rounded-md">
-            <x-icon-square-plus /> <span class="ml-2 text-sm">Upload PDF</span>
-        </button>
+    <div class="p-4 dark:bg-gray-700">
+        <x-primary-button wire:click="$dispatch('open-modal', 'upload-document-modal')" >
+            <span class="text-sm">Upload PDF</span>
+        </x-primary-button>
     </div>
     <x-modal name="upload-document-modal">
-        <div class="p-4">
+        <div class="p-4 dark:bg-gray-700">
             <div class="mb-3">
-                <h2 class="text-xl font-bold">Upload PDF Document</h2>
+                <h2 class="text-xl font-bold dark:text-white">Upload PDF Document</h2>
             </div>
             <div class="mt-2">
                 <x-filepond::upload wire:model="file" acceptedFileTypes="application/pdf" maxFileSize="120480000" />

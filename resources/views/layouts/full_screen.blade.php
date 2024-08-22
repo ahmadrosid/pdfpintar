@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,10 +16,22 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased">
-    <div class="w-full h-full bg-gray-100">
+<body class="font-sans text-gray-900 antialiased bg-gray-100 dark:bg-gray-800 dark:text-gray-300">
+    <div class="w-full h-full dark:bg-gray-900 dark:text-gray-300">
         {{ $slot }}
     </div>
     @stack('scripts')
+    <script>
+        function updateDarkMode() {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        updateDarkMode();
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateDarkMode);
+    </script>
 </body>
 </html>

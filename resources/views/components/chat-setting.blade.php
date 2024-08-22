@@ -36,7 +36,7 @@
     "
     class="relative">
     
-    <button x-ref="popoverButton" @click="popoverOpen=!popoverOpen" class="flex items-center justify-center w-10 h-10 bg-transparent cursor-pointer hover:text-gray-600">
+    <button x-ref="popoverButton" @click="popoverOpen=!popoverOpen" class="flex items-center justify-center w-10 h-10 bg-transparent cursor-pointer hover:text-gray-600 dark:hover:text-gray-400">
         <x-icon-setting class="size-5" />
     </button>
 
@@ -48,16 +48,16 @@
         @keydown.escape.window="popoverOpen=false"
         :class="{ 'top-0 mt-12' : popoverPosition == 'bottom', 'bottom-0 mb-12' : popoverPosition == 'top' }"
         class="absolute w-[300px] max-w-lg -translate-x-1/2 left-1/2 z-10" x-cloak>
-        <div x-ref="popoverInner" x-show="popoverOpen" class="w-full py-4 px-2 bg-white border rounded-md shadow-sm border-neutral-200/70">
-            <div x-show="popoverArrow && popoverPosition == 'bottom'" class="absolute top-0 inline-block w-5 mt-px overflow-hidden -translate-x-2 -translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-bottom-left transform rotate-45 bg-white border-t border-l rounded-sm"></div></div>
-            <div x-show="popoverArrow  && popoverPosition == 'top'" class="absolute bottom-0 inline-block w-5 mb-px overflow-hidden -translate-x-2 translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-top-left transform -rotate-45 bg-white border-b border-l rounded-sm"></div></div>
+        <div x-ref="popoverInner" x-show="popoverOpen" class="w-full py-4 px-2 bg-white dark:bg-gray-700 border rounded-md shadow-sm border-neutral-200/70 dark:border-neutral-400/70">
+            <div x-show="popoverArrow && popoverPosition == 'bottom'" class="absolute top-0 inline-block w-5 mt-px overflow-hidden -translate-x-2 -translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-bottom-left transform rotate-45 bg-white dark:bg-gray-700 border-t border-l rounded-sm"></div></div>
+            <div x-show="popoverArrow  && popoverPosition == 'top'" class="absolute bottom-0 inline-block w-5 mb-px overflow-hidden -translate-x-2 translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-top-left transform -rotate-45 bg-white dark:bg-gray-700 border-b border-l rounded-sm"></div></div>
             <div class="grid gap-4">
                 <div class="space-y-2 px-2">
                     <h4 class="font-medium leading-none">Settings</h4>
-                    <p class="text-sm text-gray-600">Configure the chat interface.</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Configure the chat interface.</p>
                 </div>
                 <div class="grid gap-2">
-                    <button wire:click="newChat" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
+                    <button wire:click="newChat" class="flex justify-between items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             New chat
                         </span>
@@ -66,7 +66,7 @@
                             <x-icon-loader class="animate-spin" />
                         </div>
                     </button>
-                    <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-gray-100 p-2 rounded-md">
+                    <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-gray-100 dark:hover:bg-gray-600 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             Clear chat history
                         </span>
