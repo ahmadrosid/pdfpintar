@@ -22,7 +22,7 @@
                     pdfpintar
                 </div>
                 <div class="prose prose-sm dark:prose-invert">
-                    <x-markdown>{{ $message['content'] }}</x-markdown>
+                    <x-markdown theme="github-dark">{!! $message['content'] !!}</x-markdown>
                 </div>
             </div>
             @endif
@@ -60,7 +60,7 @@
                             }
                         }">
                         <div x-ref="stream" class="hidden" wire:stream="ai-response"></div>
-                        <div x-ref="markdown" class="prose prose-sm">
+                        <div x-ref="markdown" class="prose prose-sm dark:prose-invert">
                             <div class="thinking-container pt-2">
                                 <div class="dot"></div>
                                 <div class="dot"></div>

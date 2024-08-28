@@ -1,11 +1,20 @@
 import './bootstrap';
 import './react-app';
+import nProgress from 'nprogress';
 
-// document.addEventListener('livewire:load', function() {
-//     window.addEventListener('user-message-added', function() {
-//         const chatMessages = document.querySelector('.chat-messages');
-//         if (chatMessages) {
-//             chatMessages.scrollTop = chatMessages.scrollHeight;
-//         }
-//     });
-// });
+nProgress.configure({ showSpinner: false });
+
+document.addEventListener('livewire:initialized', () => {
+    // Reference: https://livewire.laravel.com/docs/javascript#request-hooks
+    Livewire.hook('request', ({ respond, fail }) => {
+        const timer = setTimeout(() => nProgress.start(), 250)
+        respond(({ status, response }) => {
+            clearTimeout(timer);
+            nProgress.done()
+        })
+        fail(({ status, content, preventDefault }) => {
+            clearTimeout(timer);
+            nProgress.done()
+        })
+    })
+});
