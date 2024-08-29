@@ -18,7 +18,7 @@ class UploadDocument extends Component
     public function uploadDocument()
     {
         $this->validate([
-            'file' => 'required|file|max:12048',
+            'file' => 'required|file|max:24576',
         ]);
 
         $this->isUploading = true;
