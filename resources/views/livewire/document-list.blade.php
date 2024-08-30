@@ -1,7 +1,7 @@
 <div x-data="{ showDeleteModal: false, documentToDelete: null }">
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-neutral-800 border border-transparent dark:border-neutral-700/50 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/50 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-700/50">
                     <div class="px-4 w-[300px]">
                         <x-text-input 
