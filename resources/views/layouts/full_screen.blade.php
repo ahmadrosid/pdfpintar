@@ -7,6 +7,7 @@
     <link rel="icon" href="/favicon.ico">
 
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
+    <meta name="description" content="PDFPINTAR - Ubah Cara Anda Membaca PDF" />
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="PDFPINTAR - Ubah Cara Anda Membaca PDF">

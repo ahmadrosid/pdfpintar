@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <meta name="description" content="PDFPINTAR - Ubah Cara Anda Membaca PDF" />
 
         <!-- Open Graph Meta Tags -->
         <meta property="og:title" content="PDFPINTAR - Ubah Cara Anda Membaca PDF">
