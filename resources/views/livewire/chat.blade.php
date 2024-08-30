@@ -1,4 +1,4 @@
-<div class="flex flex-col border border-neutral-200 bg-white dark:bg-neutral-700 dark:border-neutral-600 h-full max-h-[92vh]">
+<div class="flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[92vh]">
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl dark:text-neutral-300">
@@ -8,9 +8,9 @@
         <div class="chat-messages flex flex-col">
             @foreach ($messages as $message)
             @if ($message['role'] == 'user')
-            <div class="message bg-white dark:bg-neutral-600 p-4 {{ $message['role'] }}">
-                <div class="font-semibold text-orange-400 dark:text-orange-500 text-sm">
-                    You
+            <div class="message bg-white dark:bg-neutral-800 p-4 {{ $message['role'] }}">
+                <div class="font-semibold text-orange-400 dark:text-orange-300 text-sm">
+                    {{Auth::user()->name}}
                 </div>
                 <div class="prose prose-sm dark:prose-invert">
                     <x-markdown>{{ $message['content'] }}</x-markdown>

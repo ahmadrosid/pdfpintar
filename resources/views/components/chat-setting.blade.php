@@ -52,10 +52,10 @@
             <div x-show="popoverArrow && popoverPosition == 'bottom'" class="absolute top-0 inline-block w-5 mt-px overflow-hidden -translate-x-2 -translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-bottom-left transform rotate-45 bg-white dark:bg-neutral-700 border-t border-l rounded-sm"></div></div>
             <div x-show="popoverArrow  && popoverPosition == 'top'" class="absolute bottom-0 inline-block w-5 mb-px overflow-hidden -translate-x-2 translate-y-2.5 left-1/2"><div class="w-2.5 h-2.5 origin-top-left transform -rotate-45 bg-white dark:bg-neutral-700 border-b border-l rounded-sm"></div></div>
             <div class="grid gap-4">
-                <div class="space-y-2 px-2">
+                <!-- <div class="space-y-2 px-2">
                     <h4 class="font-medium leading-none">Settings</h4>
                     <p class="text-sm text-neutral-600 dark:text-neutral-400">Configure the chat interface.</p>
-                </div>
+                </div> -->
                 <div class="grid gap-2">
                     <button wire:click="newChat" class="flex justify-between items-center gap-4 hover:bg-neutral-100 dark:hover:bg-neutral-600 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">

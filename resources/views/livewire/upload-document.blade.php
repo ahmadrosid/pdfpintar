@@ -1,6 +1,6 @@
 <div>
-    <div class="p-4 dark:bg-neutral-700">
-        <x-primary-button wire:click="$dispatch('open-modal', 'upload-document-modal')" >
+    <div class="p-4">
+        <x-primary-button class="dark:border-neutral-700/75" wire:click="$dispatch('open-modal', 'upload-document-modal')" >
             <span class="text-sm">Upload PDF</span>
         </x-primary-button>
     </div>
