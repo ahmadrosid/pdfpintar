@@ -59,7 +59,7 @@
                 <div class="grid gap-2">
                     <button wire:click="newChat" class="flex justify-between items-center gap-4 hover:bg-neutral-100 dark:hover:bg-neutral-600 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            New chat
+                            Chat baru
                         </span>
                         <x-icon-message-square-plus wire:loading.remove wire:target="newChat" class="size-5" />
                         <div wire:loading wire:target="newChat"> 
@@ -68,7 +68,7 @@
                     </button>
                     <button wire:click="clearMessages" class="flex justify-between items-center gap-4 hover:bg-neutral-100 dark:hover:bg-neutral-600 p-2 rounded-md">
                         <span class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Clear chat history
+                            Hapus percakapan
                         </span>
                         <x-icon-trash wire:loading.remove wire:target="clearMessages" class="size-5" />
                         <div wire:loading wire:target="clearMessages"> 
