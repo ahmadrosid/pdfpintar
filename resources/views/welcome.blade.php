@@ -42,7 +42,7 @@
                     </a>
                     @else
                     <a href="{{ route('login') }}">
-                        <x-primary-button>Try for Free</x-primary-button>
+                        <x-primary-button>Coba sekarang gratis</x-primary-button>
                     </a>
                     @endif
                     <livewire:modal-demo />

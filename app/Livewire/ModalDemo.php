@@ -11,13 +11,13 @@ class ModalDemo extends Component
         return <<<'blade'
             <div>
                 <button class="hover:border-primary hover:text-neutral-700 font-medium leading-6 text-neutral-600 border-b-2 dark:hover:border-neutral-700 dark:hover:text-neutral-300 dark:text-neutral-400" wire:click="$dispatch('open-modal', 'upload-document-modal')">
-                    Watch Demo
+                    Lihat Demo
                 </button>
                 <div>
                     <x-modal name="upload-document-modal" :show="false" maxWidth="2xl">
                         <div class="px-4">
                             <div class="py-3 text-left">
-                                <h2 class="text-xl font-bold">Watch Demo</h2>
+                                <h2 class="text-xl font-bold">Lihat Demo</h2>
                             </div>
                             <iframe
                                 width="640"
