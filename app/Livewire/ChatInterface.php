@@ -45,7 +45,7 @@ class ChatInterface extends Component
                 ]
             ],
             'instructions' => 'Your are a helpful assistant. Use the provided document to answer the user\'s question.',
-            'model' => 'gpt-4o',
+            'model' => 'gpt-4o-mini',
         ]);
         return $assistant;
     }
