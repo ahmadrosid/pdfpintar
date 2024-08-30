@@ -1,11 +1,11 @@
 <div>
-    <div class="p-4 dark:bg-gray-700">
+    <div class="p-4 dark:bg-neutral-700">
         <x-primary-button wire:click="$dispatch('open-modal', 'upload-document-modal')" >
             <span class="text-sm">Upload PDF</span>
         </x-primary-button>
     </div>
     <x-modal name="upload-document-modal">
-        <div class="p-4 dark:bg-gray-700">
+        <div class="p-4 dark:bg-neutral-700">
             <div class="mb-3">
                 <h2 class="text-xl font-bold dark:text-white">Upload PDF Document</h2>
             </div>

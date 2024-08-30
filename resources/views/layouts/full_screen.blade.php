@@ -16,8 +16,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased bg-gray-100 dark:bg-gray-800 dark:text-gray-300">
-    <div class="w-full h-full dark:bg-gray-900 dark:text-gray-300">
+<body class="font-sans text-neutral-900 antialiased bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300">
+    <div class="w-full h-full dark:bg-neutral-900 dark:text-neutral-300">
         {{ $slot }}
     </div>
     @stack('scripts')

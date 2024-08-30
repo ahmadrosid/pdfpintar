@@ -1,8 +1,8 @@
 <div x-data="{ showDeleteModal: false, documentToDelete: null }">
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-700 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-600">
+            <div class="bg-white dark:bg-neutral-700 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-600">
                     <div class="px-4 w-[300px]">
                         <x-text-input 
                             wire:model.live="search" 
@@ -10,12 +10,12 @@
                     </div>
                     <livewire:upload-document />
                 </div>
-                <div class="p-6 text-gray-900 dark:text-gray-300">
+                <div class="p-6 text-neutral-900 dark:text-neutral-300">
                     @if($documents->isEmpty())
-                        <p class="text-center text-gray-500 dark:text-gray-400">No documents found.</p>
+                        <p class="text-center text-neutral-500 dark:text-neutral-400">No documents found.</p>
                     @else
                         @foreach($documents as $document)
-                        <div class="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600">
+                        <div class="flex items-center gap-2 p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-600">
                             <a class="flex-1" href="{{ route('documents.show', $document->id) }}">
                                 <div class="flex gap-2">
                                     <x-icon-file />
@@ -39,7 +39,7 @@
     </div>
 
     <x-modal name="delete-document-modal">
-        <div class="p-4 dark:bg-gray-800">
+        <div class="p-4 dark:bg-neutral-800">
             <div class="mb-3">
                 <h2 class="text-xl font-bold dark:text-white">Delete Document</h2>
             </div>

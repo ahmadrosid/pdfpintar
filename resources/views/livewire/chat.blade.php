@@ -1,14 +1,14 @@
-<div class="flex flex-col border border-gray-200 bg-white dark:bg-gray-700 dark:border-gray-600 h-full max-h-[92vh]">
+<div class="flex flex-col border border-neutral-200 bg-white dark:bg-neutral-700 dark:border-neutral-600 h-full max-h-[92vh]">
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
-        <div class="flex items-center justify-center w-full h-full text-xl dark:text-gray-300">
+        <div class="flex items-center justify-center w-full h-full text-xl dark:text-neutral-300">
             Ask any question about the document.
         </div>
         @endif
         <div class="chat-messages flex flex-col">
             @foreach ($messages as $message)
             @if ($message['role'] == 'user')
-            <div class="message bg-white dark:bg-gray-600 p-4 {{ $message['role'] }}">
+            <div class="message bg-white dark:bg-neutral-600 p-4 {{ $message['role'] }}">
                 <div class="font-semibold text-orange-400 dark:text-orange-500 text-sm">
                     You
                 </div>
@@ -17,8 +17,8 @@
                 </div>
             </div>
             @elseif ($message['role'] == 'assistant')
-            <div class="message bg-gray-300/25 dark:bg-gray-500/25 p-4">
-                <div class="font-semibold text-sm dark:text-gray-200">
+            <div class="message bg-neutral-300/25 dark:bg-neutral-500/25 p-4">
+                <div class="font-semibold text-sm dark:text-neutral-200">
                     pdfpintar
                 </div>
                 <div class="prose prose-sm dark:prose-invert">
@@ -30,8 +30,8 @@
 
             <div>
                 @if ($isWriting)
-                <div class="message bg-gray-200 dark:bg-gray-600 p-4">
-                    <div class="font-semibold text-sm dark:text-gray-200">
+                <div class="message bg-neutral-200 dark:bg-neutral-600 p-4">
+                    <div class="font-semibold text-sm dark:text-neutral-200">
                         pdfpintar
                     </div>
                     <div x-data="{
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <form wire:submit.prevent="sendMessage" class="p-4 bg-gray-50 dark:bg-gray-700">
+    <form wire:submit.prevent="sendMessage" class="p-4 bg-neutral-50 dark:bg-neutral-700">
         <div class="flex items-end gap-2">
             <x-chat-setting />
             <textarea x-data="{
@@ -98,7 +98,7 @@
                     }" 
                     @keydown="handleSubmit" 
                     @input="resize" 
-                    type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full max-h-[400px] px-3 py-2 text-sm bg-white dark:bg-gray-600 border rounded-md border-neutral-300 dark:border-neutral-400 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:ring-0 focus:border-neutral-300 dark:focus:border-neutral-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
+                    type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full max-h-[400px] px-3 py-2 text-sm bg-white dark:bg-neutral-600 border rounded-md border-neutral-300 dark:border-neutral-400 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:ring-0 focus:border-neutral-300 dark:focus:border-neutral-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
             <div>
                 <div class="flex gap-2">
                     <!-- <button x-on:click="
@@ -108,7 +108,7 @@
                         ">
                         p:2
                     </button> -->
-                    <button wire:click="sendMessage" class="bg-gray-800 dark:bg-gray-500 hover:bg-gray-700 dark:hover:bg-gray-600 text-white py-2 px-3 rounded text-sm">Send</button>
+                    <button wire:click="sendMessage" class="bg-neutral-800 dark:bg-neutral-500 hover:bg-neutral-700 dark:hover:bg-neutral-600 text-white py-2 px-3 rounded text-sm">Send</button>
                 </div>
             </div>
         </div>
