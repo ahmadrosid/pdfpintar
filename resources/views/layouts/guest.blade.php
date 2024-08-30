@@ -13,6 +13,8 @@
         <meta property="og:image" content="https://res.cloudinary.com/dr15yjl8w/image/upload/v1722770981/public/e6w5shtwz1thgozzsoxb.png">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="website">
+        <meta property="og:locale" content="id_ID">
+        <meta property="og:site_name" content="pdfpintar">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
