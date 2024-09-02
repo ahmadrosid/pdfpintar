@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8559e7958059d4e12e2b85d47c1b9d8e",
+    "content-hash": "1c73f9e2aa3ec00725b6c99093b61488",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5884,6 +5884,82 @@
             "time": "2024-05-17T09:06:10+00:00"
         },
         {
+            "name": "spatie/laravel-honeypot",
+            "version": "4.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-honeypot.git",
+                "reference": "83036d9eedfd5687ab62cd1b7b29170b41bd7cb4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-honeypot/zipball/83036d9eedfd5687ab62cd1b7b29170b41bd7cb4",
+                "reference": "83036d9eedfd5687ab62cd1b7b29170b41bd7cb4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/encryption": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/http": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/validation": "^8.0|^9.0|^10.0|^11.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9",
+                "symfony/http-foundation": "^5.1.2|^6.0|^7.0"
+            },
+            "require-dev": {
+                "livewire/livewire": "^2.10|^3.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
+                "pestphp/pest-plugin-livewire": "^1.0|^2.1",
+                "phpunit/phpunit": "^9.6|^10.5",
+                "spatie/pest-plugin-snapshots": "^1.1|^2.1",
+                "spatie/phpunit-snapshot-assertions": "^4.2|^5.1",
+                "spatie/test-time": "^1.2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Honeypot\\HoneypotServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Honeypot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Preventing spam submitted through forms",
+            "homepage": "https://github.com/spatie/laravel-honeypot",
+            "keywords": [
+                "laravel-honeypot",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-honeypot/tree/4.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2024-04-15T13:09:07+00:00"
+        },
+        {
             "name": "spatie/laravel-markdown",
             "version": "2.5.2",
             "source": {
@@ -6018,6 +6094,90 @@
                 }
             ],
             "time": "2024-08-27T18:56:10+00:00"
+        },
+        {
+            "name": "spatie/laravel-support-bubble",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-support-bubble.git",
+                "reference": "cf1b56e335aa8747e729c8f8595e82fab39b35a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-support-bubble/zipball/cf1b56e335aa8747e729c8f8595e82fab39b35a8",
+                "reference": "cf1b56e335aa8747e729c8f8595e82fab39b35a8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.56|^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "spatie/laravel-honeypot": "^4.0",
+                "spatie/laravel-package-tools": "^1.9"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2|^7.4",
+                "nunomaduro/collision": "^5.9|^6.0|^8.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
+                "pestphp/pest": "^1.15|^2.34",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.3",
+                "phpunit/phpunit": "^9.3|^10.5",
+                "spatie/laravel-ray": "^1.23",
+                "spatie/pest-plugin-snapshots": "^1.1|^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SupportBubble\\SupportBubbleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SupportBubble\\": "src",
+                    "Spatie\\SupportBubble\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Ruben Van Assche",
+                    "email": "ruben@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A non-intrusive support chat bubble that can be displayed on any page",
+            "homepage": "https://github.com/spatie/laravel-support-bubble",
+            "keywords": [
+                "laravel",
+                "laravel-support-bubble",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-support-bubble/issues",
+                "source": "https://github.com/spatie/laravel-support-bubble/tree/1.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-07-16T07:52:47+00:00"
         },
         {
             "name": "spatie/livewire-filepond",

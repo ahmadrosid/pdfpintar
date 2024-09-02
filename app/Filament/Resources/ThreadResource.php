@@ -19,7 +19,7 @@ class ThreadResource extends Resource
 {
     protected static ?string $model = Thread::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
     public static function form(Form $form): Form
     {

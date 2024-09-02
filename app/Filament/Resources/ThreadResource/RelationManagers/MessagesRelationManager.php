@@ -30,7 +30,7 @@ class MessagesRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('role'),
+                Tables\Columns\TextColumn::make('role')->limit(10),
                 Tables\Columns\TextColumn::make('content'),
             ])
             ->filters([
