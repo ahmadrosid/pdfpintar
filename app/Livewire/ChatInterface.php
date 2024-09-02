@@ -8,6 +8,7 @@ use App\Models\Message;
 use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
 use Livewire\Attributes\On;
+use Throwable;
 
 class ChatInterface extends Component
 {
@@ -112,60 +113,65 @@ class ChatInterface extends Component
     #[On('getAssistantResponse')]
     public function getAssistantResponse()
     {
-        $this->createMessage();
+        try {
+            $this->createMessage();
 
-        $run = OpenAI::threads()->runs()->createStreamed($this->openaiThreadId, [
-            'assistant_id' => $this->assistant_id,
-        ]);
-
-        $message_content = '';
-        foreach ($run as $message) {
-            $response = $message->response->toArray();
-            $delta = $response['delta'] ?? [];
-            $content = $delta['content'] ?? [];
-
-            foreach ($content as $item) {
-                if (isset($item['type']) && $item['type'] === 'text') {
-                    $pattern = '/【\d+:\d+†.*?】/';
-                    $text = preg_replace($pattern, '', $item['text']['value']);
-                    $this->stream(
-                        to: 'ai-response',
-                        content: $text,
-                        replace: $message_content === '',
-                    );
-                    $message_content .= $text;
+            $run = OpenAI::threads()->runs()->createStreamed($this->openaiThreadId, [
+                'assistant_id' => $this->assistant_id,
+            ]);
+    
+            $message_content = '';
+            foreach ($run as $message) {
+                $response = $message->response->toArray();
+                $delta = $response['delta'] ?? [];
+                $content = $delta['content'] ?? [];
+    
+                foreach ($content as $item) {
+                    if (isset($item['type']) && $item['type'] === 'text') {
+                        $pattern = '/【\d+:\d+†.*?】/';
+                        $text = preg_replace($pattern, '', $item['text']['value']);
+                        $this->stream(
+                            to: 'ai-response',
+                            content: $text,
+                            replace: $message_content === '',
+                        );
+                        $message_content .= $text;
+                    }
                 }
             }
-        }
-
-        $this->isWriting = false;
-        if ($message_content === '') {
-            return;
-        }
-
-        $lastMessage = end($this->messages);
-
-        Message::insert([
-            [
-                'thread_id' => $this->threadId,
-                'role' => 'user',
-                'content' => $lastMessage['content'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'thread_id' => $this->threadId,
+    
+            $this->isWriting = false;
+            if ($message_content === '') {
+                return;
+            }
+    
+            $lastMessage = end($this->messages);
+    
+            Message::insert([
+                [
+                    'thread_id' => $this->threadId,
+                    'role' => 'user',
+                    'content' => $lastMessage['content'],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'thread_id' => $this->threadId,
+                    'role' => 'assistant',
+                    'content' => $message_content,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            ]);
+    
+            $this->messages[] = [
                 'role' => 'assistant',
                 'content' => $message_content,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        ]);
-
-        $this->messages[] = [
-            'role' => 'assistant',
-            'content' => $message_content,
-        ];
+            ];
+        } catch (Throwable $e) {
+            logger()->error($e->getMessage());
+            throw $e;
+        }
     }
 
     private function createMessage()
