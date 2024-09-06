@@ -31,7 +31,7 @@ class MessagesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('role'),
-                Tables\Columns\TextColumn::make('content')->limit(10),
+                Tables\Columns\TextColumn::make('content')->words(10),
             ])
             ->filters([
                 //
