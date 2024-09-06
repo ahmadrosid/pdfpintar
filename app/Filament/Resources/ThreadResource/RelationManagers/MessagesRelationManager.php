@@ -21,6 +21,8 @@ class MessagesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('id')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\MarkdownEditor::make('content')
+                    ->required(),
             ]);
     }
 
