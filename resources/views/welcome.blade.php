@@ -27,11 +27,11 @@
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="mt-[70px] max-w-4xl mx-auto pb-8 text-center">
                 <h1 class="text-3xl text-balance font-bold text-neutral-900 md:text-4xl xl:text-6xl xl:leading-tight dark:text-neutral-200">
-                    {{__('headline')}}
+                    {{__('Stop Wasting Time Reading PDF Start Asking Questions')}}
                 </h1>
                 <div class="max-w-2xl mx-auto">
                     <h2 class="mt-6 leading-snug text-neutral-500 xl:mt-5 xl:text-xl dark:text-neutral-400">
-                        {{__('sub_headline')}}
+                        {{__('With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn\'t know.')}}
                     </h2>
                 </div>
                 <div class="flex gap-4 py-8 justify-center items-center">

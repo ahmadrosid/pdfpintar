@@ -1,14 +1,13 @@
 {
     "Dashboard": "Beranda",
     "Try now for free": "Coba sekarang gratis",
-    "headline": "Ubah Cara Anda Membaca PDF Gali Informasi Lebih Cepat",
-    "sub_headline": "PDFPINTAR membantu Anda menggali informasi penting dengan mudah. Ajukan pertanyaan, dapatkan jawaban instan.",
-    "upload_document": "Upload PDF",
-    "button_upload_document": "Unggah PDF",
-    "dialog_title_upload_document": "Unggah dokumen pdf kamu",
-    "cancel": "Batal",
-    "upload": "Unggah",
-    "uploading": "Mengunggah",
+    "Stop Wasting Time Reading PDF Start Asking Questions": "Ubah Cara Anda Membaca PDF Gali Informasi Lebih Cepat",
+    "With pdfpintar, your PDFs become a source of interactive learning. Ask questions, gain insights, and discover what you didn't know.": "PDFPINTAR membantu Anda menggali informasi penting dengan mudah. Ajukan pertanyaan, dapatkan jawaban instan.",
+    "Upload PDF": "Unggah PDF",
+    "Upload your PDF file": "Unggah dokumen pdf kamu",
+    "Cancel": "Batal",
+    "Upload": "Unggah",
+    "Uploading": "Mengunggah",
     "Login to your account": "Masuk ke akun Anda",
     "email": "Email",
     "Password": "Kata sandi",
@@ -36,5 +35,6 @@
     "Confirm New Password": "Konfirmasi Kata Sandi Baru",
     "Delete Account": "Hapus Akun",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "Setelah akun Anda dihapus, semua sumber daya dan data akan dihapus secara permanen. Sebelum menghapus akun Anda, harap unduh data atau informasi apa pun yang Anda inginkan tetap.",
-    "Delete": "Hapus"
+    "Delete": "Hapus",
+    "auth.failed": "Email atau password salah."
 }
