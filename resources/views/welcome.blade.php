@@ -25,7 +25,7 @@
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <div class="mt-[70px] max-w-4xl mx-auto pb-8 text-center">
+            <div class="mt-[70px] max-w-5xl mx-auto pb-8 text-center">
                 <h1 class="text-3xl text-balance font-bold text-neutral-900 md:text-4xl xl:text-6xl xl:leading-tight dark:text-neutral-200">
                     {{__('Stop Wasting Time Reading PDF Start Asking Questions')}}
                 </h1>
