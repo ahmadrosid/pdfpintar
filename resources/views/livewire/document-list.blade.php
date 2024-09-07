@@ -6,13 +6,13 @@
                     <div class="px-4 w-[300px]">
                         <x-text-input 
                             wire:model.live="search" 
-                            placeholder="Search documents"  />
+                            placeholder="{{__('Search documents')}}" />
                     </div>
                     <livewire:upload-document />
                 </div>
                 <div class="p-6 text-neutral-900 dark:text-neutral-300">
                     @if($documents->isEmpty())
-                        <p class="text-center text-neutral-500 dark:text-neutral-400">No documents found.</p>
+                        <p class="text-center text-neutral-500 dark:text-neutral-400">{{__('No documents found.')}}</p>
                     @else
                         @foreach($documents as $document)
                         <div class="flex items-center gap-2 p-2 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-600">
@@ -32,6 +32,7 @@
                             </div>
                         </div>
                         @endforeach
+                        <p class="text-neutral-400 dark:text-neutral-500 mt-4 text-sm">{{__('Click to chat with the document')}}</p>
                     @endif
                 </div>
             </div>

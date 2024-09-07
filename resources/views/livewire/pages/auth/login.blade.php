@@ -23,7 +23,7 @@ $login = function () {
 ?>
 <div class="dark:bg-neutral-700">
     <div class="pb-6 pt-2 text-xl font-bold text-center dark:text-neutral-300 text-neutral-900">
-        <p>Login ke akun anda</p>
+        <p>{{__('Login to your account')}}</p>
     </div>
 
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -43,7 +43,7 @@ $login = function () {
 
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-neutral-600 hover:text-neutral-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-600" href="{{ route('password.request') }}" wire:navigate>
-                        {{ __('Lupa password?') }}
+                        {{ __('Forgot password?') }}
                     </a>
                 @endif
             </div>
@@ -65,7 +65,7 @@ $login = function () {
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-neutral-600 hover:text-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300" href="{{ route('register') }}" wire:navigate>
-                Belum punya akun?
+                {{__('Don\'t have an account?')}}
             </a>
 
             <x-primary-button class="ms-3">

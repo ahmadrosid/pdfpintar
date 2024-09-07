@@ -25,24 +25,23 @@
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <div class="mt-[70px] max-w-5xl mx-auto pb-8 text-center">
-                <h1 class="text-3xl font-bold text-neutral-900 md:text-4xl xl:text-6xl xl:leading-tight dark:text-neutral-200">
-                    Ubah Cara Anda Membaca PDF <br />
-                    Gali Informasi Lebih Cepat
+            <div class="mt-[70px] max-w-4xl mx-auto pb-8 text-center">
+                <h1 class="text-3xl text-balance font-bold text-neutral-900 md:text-4xl xl:text-6xl xl:leading-tight dark:text-neutral-200">
+                    {{__('headline')}}
                 </h1>
                 <div class="max-w-2xl mx-auto">
                     <h2 class="mt-6 leading-snug text-neutral-500 xl:mt-5 xl:text-xl dark:text-neutral-400">
-                        PDFPINTAR membantu Anda menggali informasi penting dengan mudah. Ajukan pertanyaan, dapatkan jawaban instan.
+                        {{__('sub_headline')}}
                     </h2>
                 </div>
                 <div class="flex gap-4 py-8 justify-center items-center">
                     @auth
                     <a href="{{ route('dashboard') }}">
-                        <x-primary-button>Dashboard</x-primary-button>
+                        <x-primary-button>{{__('Dashboard')}}</x-primary-button>
                     </a>
                     @else
                     <a href="{{ route('login') }}">
-                        <x-primary-button>Coba sekarang gratis</x-primary-button>
+                        <x-primary-button>{{__('Try now for free')}}</x-primary-button>
                     </a>
                     @endif
                     <livewire:modal-demo />

@@ -83,11 +83,11 @@ $register = function () {
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-neutral-600 hover:text-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 dark:text-neutral-400 dark:hover:text-neutral-300" href="{{ route('login') }}" wire:navigate>
-                {{ __('Sudah terdaftar?') }}
+                {{ __('Already have an account?') }}
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('register') }}
             </x-primary-button>
         </div>
     </form>
