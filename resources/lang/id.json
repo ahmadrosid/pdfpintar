@@ -36,5 +36,6 @@
     "Delete Account": "Hapus Akun",
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "Setelah akun Anda dihapus, semua sumber daya dan data akan dihapus secara permanen. Sebelum menghapus akun Anda, harap unduh data atau informasi apa pun yang Anda inginkan tetap.",
     "Delete": "Hapus",
-    "auth.failed": "Email atau password salah."
+    "auth.failed": "Email atau password salah.",
+    "Ask any question about this PDF document.": "Tanya sesuatu tentang dokumen pdf ini."
 }

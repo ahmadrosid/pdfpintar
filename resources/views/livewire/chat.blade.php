@@ -2,7 +2,7 @@
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl dark:text-neutral-300">
-            Ask any question about the document.
+            {{__('Ask any question about this PDF document.')}}
         </div>
         @endif
         <div class="chat-messages flex flex-col">
