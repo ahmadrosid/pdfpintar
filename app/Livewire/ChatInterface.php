@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Document;
 use App\Models\Thread;
 use App\Models\Message;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
 use Livewire\Attributes\On;
@@ -212,8 +213,27 @@ class ChatInterface extends Component
         $this->dispatch('settingsActionCompleted');
     }
 
+    #[Computed]
+    public function is_indexed()
+    {
+        return $this->document->created_at->diffInMinutes(now()) > 0.5;
+    }
+
     public function render()
     {
+        if (!$this->is_indexed) {
+            return <<<'HTML'
+            <div class="grid place-content-center h-[80vh]" wire:poll.1000ms>
+                <div class="flex gap-2 items-center">
+                    <div class="h-6 w-6 border-2 border-dashed border-neutral-300 dark:border-neutral-600 rounded-full animate-spin"></div>
+                    <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
+                        Please wait for the document to be indexed.
+                    </p>
+                </div>
+            </div>
+            HTML;
+        }
+
         return view('livewire.chat');
     }
 }
