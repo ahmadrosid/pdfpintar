@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [compile-test-ci]
     if:
-      contains('refs/heads/staging', github.ref)
+      contains('refs/heads/main', github.ref)
     steps:
     - name: Trigger Laravel Forge deployment
       run: curl https://forge.laravel.com/servers/831228/sites/2431472/deploy/http?token=${{ secrets.FORGE_TOKEN }}
