@@ -34,7 +34,9 @@
                     <div class="font-semibold text-sm dark:text-neutral-200">
                         pdfpintar
                     </div>
-                    <div x-data="{
+                    <div
+                        class="py-4" 
+                        x-data="{
                             init() {
                                 const observer = new MutationObserver((mutations) => {
                                     mutations.forEach((mutation) => {
