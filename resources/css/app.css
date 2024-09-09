@@ -6,17 +6,30 @@
     display: none;
 }
 
+:root {
+    --dot-color: #333;
+    --background-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dot-color: #ccc;
+        --background-color: #333;
+    }
+}
+
 .thinking-container {
     display: flex;
     align-items: center;
     font-size: 24px;
     font-family: Arial, sans-serif;
+    background-color: var(--background-color);
 }
 
 .dot {
     width: 8px;
     height: 8px;
-    background-color: #333;
+    background-color: var(--dot-color);
     border-radius: 50%;
     margin: 0 2px;
     opacity: 0;
