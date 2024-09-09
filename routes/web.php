@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     })
     ->middleware(['throttle:2,1'])
     ->name('verification.send');
+
+    Route::supportBubble();
 });
 
 require __DIR__.'/auth.php';

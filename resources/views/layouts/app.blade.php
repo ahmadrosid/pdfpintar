@@ -16,6 +16,7 @@
         <meta property="og:type" content="website">
         <meta property="og:locale" content="id_ID">
         <meta property="og:site_name" content="pdfpintar">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
