@@ -27,9 +27,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('viewPulse', function (User $user) {
             return $user->email == 'hey@ahmadrosid.com';
         });
+
         Gate::define('viewHorizon', function (User $user) {
             return $user->email == 'hey@ahmadrosid.com';
         });
+
         LogViewer::auth(function ($request) {
             if (!$request->user()) return false;
             return $request->user()->email == 'hey@ahmadrosid.com';
