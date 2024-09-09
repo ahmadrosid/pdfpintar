@@ -37,5 +37,15 @@
     "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.": "Setelah akun Anda dihapus, semua sumber daya dan data akan dihapus secara permanen. Sebelum menghapus akun Anda, harap unduh data atau informasi apa pun yang Anda inginkan tetap.",
     "Delete": "Hapus",
     "auth.failed": "Email atau password salah.",
-    "Ask any question about this PDF document.": "Tanya sesuatu tentang dokumen pdf ini."
+    "Ask any question about this PDF document.": "Tanya sesuatu tentang dokumen pdf ini.",
+    "Please Verify Your Email": "Harap Verifikasi Email Anda",
+    "Thank you for joining pdfpintar! We're excited to have you on board.":"Terima kasih telah bergabung dengan pdfpintar! Kami senang Anda bergabung.",
+    "To ensure the security of your account and get started, please verify your email address.": "Untuk memastikan keamanan akun Anda dan untuk bisa memulai menggunakan aplikasi ini, harap verifikasi alamat email Anda.",
+    "This link will expire in 24 hours for your security.": "Tautan ini akan kadaluarsa dalam 24 jam untuk keamanan Anda.",
+    "If you didn't create an account with pdfpintar, please ignore this email.": "Jika Anda tidak membuat akun dengan pdfpintar, silakan abaikan email ini.",
+    "If you have any questions, feel free to contact our support team.": "Jika Anda memiliki pertanyaan, silakan hubungi tim support kami.",
+    "Hello!": "Halo!",
+    "Regards,": "Terimakasih,",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Jika Anda mengalami masalah saat mengklik tombol \":actionText\", salin dan tempel URL di bawah\nteruskan ke browser web Anda:",
+    "Click to verify": "Klik untuk verifikasi"
 }
