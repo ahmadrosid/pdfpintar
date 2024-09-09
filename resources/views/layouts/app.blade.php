@@ -29,6 +29,25 @@
 
     <body class="font-sans antialiased bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-300">
         <div class="min-h-screen">
+            @if (isset($banner))
+            <div x-data="{
+                    bannerVisible: false,
+                    bannerVisibleAfter: 300,
+                }"
+                x-show="bannerVisible"
+                x-transition:enter="transition ease-out duration-500"
+                x-transition:enter-start="-translate-y-10"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="-translate-y-10"
+                x-init="
+                    setTimeout(()=>{ bannerVisible = true }, bannerVisibleAfter);
+                "
+                class="fixed top-0 left-0 w-full h-auto py-2 duration-300 ease-out shadow-sm sm:py-0 sm:h-10 z-50" x-cloak>
+                {{$banner}}
+            </div>
+            @endif
             <livewire:layout.navigation />
 
             <!-- Page Heading -->

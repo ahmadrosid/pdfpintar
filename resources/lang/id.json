@@ -47,5 +47,9 @@
     "Hello!": "Halo!",
     "Regards,": "Terimakasih,",
     "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Jika Anda mengalami masalah saat mengklik tombol \":actionText\", salin dan tempel URL di bawah\nteruskan ke browser web Anda:",
-    "Click to verify": "Klik untuk verifikasi"
+    "Click to verify": "Klik untuk verifikasi",
+    "Verify your email address": "Verifikasi alamat email Anda",
+    "Please verify your email address to start using pdfpintar.": "Harap verifikasi alamat email Anda untuk mulai menggunakan pdfpintar.",
+    "Resend email": "Kirim email verifikasi",
+    "Verification link sent!": "Tautan verifikasi dikirim!"
 }

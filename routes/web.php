@@ -2,27 +2,35 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Document;
+use Illuminate\Http\Request;
 
 Route::view('/', 'welcome');
+
+Route::get('/locale/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('documents', 'dashboard')->name('documents.index');
     Route::view('profile', 'profile')->name('profile');
 
-    Route::get('/locale/{locale}', function ($locale) {
-        app()->setLocale($locale);
-        session()->put('locale', $locale);
-        return redirect()->back();
-    });
+    Route::get('/documents/{document}', function (Request $request, Document $document) {
+        if (!$request->user()->hasVerifiedEmail()) {
+            return redirect()->route('dashboard');
+        }
 
-    Route::get('/documents/{document}', function (Document $document) {
-        // Document::where('id', $document->id)->update([
-        //     'created_at' => now(),
-        // ]);
-        // sleep(1);
         return view('documents.show', compact('document'));
     })->name('documents.show');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', __('Verification link sent!'));
+    })
+    ->middleware(['throttle:2,1'])
+    ->name('verification.send');
 });
 
 require __DIR__.'/auth.php';
