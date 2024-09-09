@@ -24,4 +24,9 @@ class Document extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function threads()
+    {
+        return $this->hasMany(Thread::class);
+    }
 }

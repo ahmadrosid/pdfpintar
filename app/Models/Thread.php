@@ -10,6 +10,7 @@ class Thread extends Model
         'openai_thread_id',
         'assistant_id',
         'document_id',
+        'title',
     ];
 
     public function document()
