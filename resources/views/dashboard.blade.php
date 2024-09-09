@@ -1,7 +1,7 @@
 <x-app-layout>
     @if(!Auth::user()->hasVerifiedEmail())
     <x-slot name="banner">
-        <div class="bg-red-600 p-3">
+        <div class="bg-red-500 dark:bg-red-600 p-3">
             <div class="flex items-center justify-between w-full h-full px-3 mx-auto max-w-7xl">
                 <div class="flex flex-col w-full h-full text-base leading-6 text-white duration-150 ease-out sm:flex-row sm:items-center opacity-80 hover:opacity-100">
                     <span class="flex items-center">
