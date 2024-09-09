@@ -23,7 +23,6 @@
     align-items: center;
     font-size: 24px;
     font-family: Arial, sans-serif;
-    background-color: var(--background-color);
 }
 
 .dot {
