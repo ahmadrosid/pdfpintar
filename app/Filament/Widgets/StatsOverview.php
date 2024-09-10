@@ -13,9 +13,10 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Total Users', User::count()), 
-            Stat::make('Total Documents', Document::count()),
+            Stat::make('Verified Users', User::where('email_verified_at', '!=', null)->count()),
             Stat::make('Total Chats', Thread::count()),
+            Stat::make('Total Documents', Document::count()),
+            Stat::make('Total Users', User::count()), 
         ];
     }
 }
