@@ -44,5 +44,5 @@
     </x-slot>
 
     <livewire:document-list />
-    <!-- <x-support-bubble /> -->
+    <x-support-bubble />
 </x-app-layout>
