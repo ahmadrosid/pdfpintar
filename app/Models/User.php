@@ -49,7 +49,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email == 'hey@ahmadrosid.com';
+        return $this->email == config('app.super_admin_email');
     }
 
     public function documents()

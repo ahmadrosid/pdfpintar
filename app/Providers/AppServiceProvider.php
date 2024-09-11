@@ -25,16 +25,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('viewPulse', function (User $user) {
-            return $user->email == 'hey@ahmadrosid.com';
+            return $user->email == config('app.super_admin_email');
         });
 
         Gate::define('viewHorizon', function (User $user) {
-            return $user->email == 'hey@ahmadrosid.com';
+            return $user->email == config('app.super_admin_email');
         });
 
         LogViewer::auth(function ($request) {
             if (!$request->user()) return false;
-            return $request->user()->email == 'hey@ahmadrosid.com';
+            return $request->user()->email == config('app.super_admin_email');
         });
 
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {

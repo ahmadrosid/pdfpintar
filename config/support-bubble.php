@@ -16,7 +16,7 @@ return [
     /*
      * All chat bubble responses will be sent to this email address.
      */
-    'mail_to' => env('SUPPORT_BUBBLE_MAIL_TO', 'hey@ahmadrosid.com'),
+    'mail_to' => env('SUPPORT_BUBBLE_MAIL_TO', config('app.super_admin_email')),
     'mail_from' => null, // by default this is config('mail.from.address')
     'mailer' => null, // by default this is config('mail.default')
 
