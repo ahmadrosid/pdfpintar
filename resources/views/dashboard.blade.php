@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if(!Auth::user()->hasVerifiedEmail())
+    @if(config('app.require_email_verification') && !Auth::user()->hasVerifiedEmail())
     <x-slot name="banner">
         <div class="bg-red-500 dark:bg-red-600 p-3">
             <div class="flex items-center justify-between w-full h-full px-3 mx-auto max-w-7xl">

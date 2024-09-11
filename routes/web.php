@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('profile', 'profile')->name('profile');
 
     Route::get('/documents/{document}', function (Request $request, Document $document) {
-        if (!$request->user()->hasVerifiedEmail()) {
+        if (config('app.require_email_verification') && !$request->user()->hasVerifiedEmail()) {
             return redirect()->route('dashboard');
         }
 

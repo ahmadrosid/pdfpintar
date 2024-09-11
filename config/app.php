@@ -124,4 +124,5 @@ return [
     ],
 
     'super_admin_email' => env('SUPER_ADMIN_EMAIL'),
+    'require_email_verification' => env('REQUIRE_EMAIL_VERIFICATION', false),
 ];
