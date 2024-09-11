@@ -227,7 +227,7 @@ class ChatInterface extends Component
                 <div class="flex gap-2 items-center">
                     <div class="h-6 w-6 border-2 border-dashed border-neutral-300 dark:border-neutral-600 rounded-full animate-spin"></div>
                     <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
-                        Please wait for the document to be indexed.
+                        {{__('Please wait for the document to be indexed.')}}'
                     </p>
                 </div>
             </div>
