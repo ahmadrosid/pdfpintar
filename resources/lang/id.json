@@ -52,5 +52,9 @@
     "Please verify your email address to start using pdfpintar.": "Harap verifikasi alamat email Anda untuk mulai menggunakan pdfpintar.",
     "Resend email": "Kirim email verifikasi",
     "Verification link sent!": "Tautan verifikasi dikirim!",
-    "Please wait for the document to be indexed.": "Harap tunggu sebentar dokumen sedang diindeks."
+    "Please wait for the document to be indexed.": "Harap tunggu sebentar dokumen sedang diindeks.",
+    "Delete Document":"Hapus Dokumen",
+    "Are you sure you want to delete this document?": "Apakah Anda yakin ingin menghapus dokumen ini?",
+    "This action cannot be undone.":"Tindakan ini tidak dapat dikembalikan.",
+    "Chat with pdf":"Chat dengan pdf"
 }

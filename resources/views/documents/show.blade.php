@@ -16,11 +16,13 @@
                 </a>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-2 h-[94vh] p-2">
-            <div class="flex flex-col bg-white h-full overflow-hidden dark:bg-neutral-700">
-                <div id="pdf-viewer" data-url="{{ $pdfUrl }}"></div>
+        <div class="flex flex-col lg:grid lg:grid-cols-2 gap-2 h-auto sm:h-[94vh] p-2">
+            <div class="order-2 lg:order-1 flex-grow lg:flex-grow-0 flex flex-col bg-white h-full overflow-hidden dark:bg-neutral-700">
+                <div id="pdf-viewer" data-url="{{ $pdfUrl }}" class="w-full h-full"></div>
             </div>
-            <livewire:chat-interface :document="$document" />
+            <div class="order-1 lg:order-2 flex-grow lg:flex-grow-0 h-[900px] sm:h-auto">
+                <livewire:chat-interface :document="$document" />
+            </div>
         </div>
     </div>
 </x-full-screen-layout>
