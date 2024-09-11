@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 Route::view('/', 'welcome');
 
@@ -21,8 +22,10 @@ Route::group(['middleware' => 'auth'], function () {
         if (config('app.require_email_verification') && !$request->user()->hasVerifiedEmail()) {
             return redirect()->route('dashboard');
         }
-
-        return view('documents.show', compact('document'));
+        $pdfUrl = Storage::temporaryUrl(
+            $document->file_path, now()->addMinutes(5)
+        );
+        return view('documents.show', compact('document', 'pdfUrl'));
     })->name('documents.show');
 
     Route::post('/email/verification-notification', function (Request $request) {
