@@ -24,14 +24,7 @@
                 <div class="prose prose-sm dark:prose-invert">
                     <x-markdown theme="github-dark">{!! $message['content'] !!}</x-markdown>
                 </div>
-                <div class="flex gap-2 justify-end">
-                    <button x-clipboard data-text-copy="{{ $message['content'] }}" class="opacity-70 hover:opacity-100 transition-opacity duration-300 text-xs flex gap-1 border p-1 rounded dark:border-neutral-600 bg-neutral-700">
-                        <x-icon-copy /> {{__('Copy')}}
-                    </button>
-                    <button wire:click="downloadAsPdf({{ $loop->index }})" class="opacity-70 hover:opacity-100 transition-opacity duration-300 text-xs flex gap-1 border p-1 rounded dark:border-neutral-600 bg-neutral-700">
-                        <x-icon-pdf class="text-neutral-600" /> {{__('Download as PDF')}}
-                    </button>
-                </div>
+                <x-chat-action :index="$loop->index" :message="$message" />
             </div>
             @endif
             @endforeach

@@ -58,5 +58,8 @@
     "This action cannot be undone.":"Tindakan ini tidak dapat dikembalikan.",
     "Chat with pdf":"Chat dengan pdf",
     "Copy": "Copy",
-    "Download as PDF": "Unduh sebagai PDF"
+    "Download": "Unduh",
+    "As PDF": "Sebagai PDF",
+    "As Excel": "Sebagai Excel",
+    "As Microsoft word": "Microsotf word"
 }

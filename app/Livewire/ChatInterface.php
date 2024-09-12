@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Lib\ExcelProcessor;
 use App\Lib\PdfProcessor;
+use App\Lib\WordProcessor;
 use App\Models\Document;
 use App\Models\Thread;
 use App\Models\Message;
@@ -232,6 +234,26 @@ class ChatInterface extends Component
         }
     }
 
+    public function downloadAsExcel($index)
+    {
+        if (isset($this->messages[$index])) {
+            $fileName = now()->format('Y-m-d-H-i-s') . '.xlsx';
+            $filePath = ExcelProcessor::generateExcel($this->messages[$index]['content'], $fileName);
+            
+            return response()->download($filePath, $fileName)->deleteFileAfterSend(true);
+        }
+    }
+
+    public function downloadAsWord($index)
+    {
+        if (isset($this->messages[$index])) {
+            $fileName = now()->format('Y-m-d-H-i-s') . '.docx';
+            $filePath = WordProcessor::generateWord($this->messages[$index]['content'], $fileName);
+            
+            return response()->download($filePath, $fileName)->deleteFileAfterSend(true);
+        }
+    }
+
     public function render()
     {
         if (!$this->is_indexed) {
@@ -240,7 +262,7 @@ class ChatInterface extends Component
                 <div class="flex gap-2 items-center">
                     <div class="h-6 w-6 border-[3px] border-dashed border-neutral-400 dark:border-neutral-300 rounded-full animate-spin"></div>
                     <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
-                        {{__('Please wait for the document to be indexed.')}}'
+                        {{__('Please wait for the document to be indexed.')}}
                     </p>
                 </div>
             </div>
