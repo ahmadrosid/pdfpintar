@@ -81,4 +81,4 @@ If you want to contribute to this project, I really appreciate it. Here are some
 
 ## LICENSE
 
-MIT
+AGPL-3.0 license
