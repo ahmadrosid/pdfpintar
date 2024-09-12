@@ -5,8 +5,6 @@ namespace App\Livewire;
 use App\Lib\PdfProcessor;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class MarkdownConverter extends Component
 {

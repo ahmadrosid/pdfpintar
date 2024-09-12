@@ -12,8 +12,6 @@ use OpenAI\Laravel\Facades\OpenAI;
 use Livewire\Attributes\On;
 use Throwable;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class ChatInterface extends Component
 {
