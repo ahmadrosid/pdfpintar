@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Lib\PdfProcessor;
 use App\Models\Document;
 use App\Models\Thread;
 use App\Models\Message;
@@ -227,18 +228,7 @@ class ChatInterface extends Component
         if (isset($this->messages[$index])) {
             $html = Str::markdown($this->messages[$index]['content']);
             $fileName = now()->format('Y-m-d-H-i-s') . '.pdf';
-            
-            // Use the storage_path helper to get the absolute path to the storage directory
-            $storagePath = storage_path('app/public/pdf-temp');
-            
-            // Ensure the directory exists
-            if (!File::isDirectory($storagePath)) {
-                File::makeDirectory($storagePath, 0755, true, true);
-            }
-            
-            $filePath = $storagePath . '/' . $fileName;
-            
-            Pdf::loadHTML($html)->setPaper('a4')->save($filePath);
+            $filePath = PdfProcessor::generatePdf($html, $fileName);
             
             return response()->download($filePath, $fileName)->deleteFileAfterSend(true);
         }
