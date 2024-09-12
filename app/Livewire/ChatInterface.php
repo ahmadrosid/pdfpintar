@@ -221,6 +221,7 @@ class ChatInterface extends Component
     {
         return $this->document->created_at->diffInMinutes(now()) > 0.5;
     }
+
     public function downloadAsPdf($index)
     {
         if (isset($this->messages[$index])) {

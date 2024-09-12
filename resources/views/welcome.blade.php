@@ -1,27 +1,7 @@
 <x-full-screen-layout>
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-square bg-center bg-white dark:bg-neutral-800 selection:bg-neutral-500 selection:text-white">
         <div class="top-0 inset-x-0 absolute bg-gradient-to-b from-white to-white/0 dark:from-neutral-800 dark:to-neutral-800">
-            <div class="flex justify-between container mx-auto p-4">
-                <div>
-                    <p class="font-extrabold tracking-wide text-black dark:text-neutral-300">
-                        PDFPINTAR
-                    </p>
-                </div>
-                <div>
-                    @auth
-                    <a href="{{ route('documents.index') }}" class="font-medium text-sm text-neutral-600 hover:text-neutral-900 hover:underline focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-600">
-                        Documents
-                    </a>
-                    @else
-                    <a href="{{ route('login') }}" class="font-medium text-sm py-2 px-3 text-neutral-600 hover:text-primary focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-600">
-                        Log in
-                    </a>
-                    <a href="{{ route('register') }}" class="font-medium text-sm ml-4 py-2 px-3 rounded-md text-neutral-600 hover:text-primary focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-600">
-                        Register
-                    </a>
-                    @endauth
-                </div>
-            </div>
+            <x-public-navigation />
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">

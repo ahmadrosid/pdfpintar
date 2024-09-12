@@ -13,6 +13,9 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+
+Route::view('tools/pdf-generator', 'pdf-generator')->name('tools.pdf-generator');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('documents', 'dashboard')->name('documents.index');
