@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^3.0",
         "filament/filament": "^3.2",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",

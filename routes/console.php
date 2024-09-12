@@ -11,3 +11,4 @@ Artisan::command('inspire', function () {
 
 Schedule::command('backup:clean')->daily()->at('07:00');
 Schedule::command('backup:run --only-db')->daily()->at('07:30');
+Schedule::command('cleanup:temp-pdfs --days=1')->daily()->at('07:30');

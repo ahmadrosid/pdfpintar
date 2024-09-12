@@ -18,3 +18,9 @@ document.addEventListener('livewire:initialized', () => {
         })
     })
 });
+
+Alpine.directive('clipboard', (el) => {
+    el.addEventListener('click', () => {
+        navigator.clipboard.writeText(el.dataset.textCopy)
+    })
+})

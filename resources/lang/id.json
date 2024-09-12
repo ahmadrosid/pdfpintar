@@ -56,5 +56,7 @@
     "Delete Document":"Hapus Dokumen",
     "Are you sure you want to delete this document?": "Apakah Anda yakin ingin menghapus dokumen ini?",
     "This action cannot be undone.":"Tindakan ini tidak dapat dikembalikan.",
-    "Chat with pdf":"Chat dengan pdf"
+    "Chat with pdf":"Chat dengan pdf",
+    "Copy": "Copy",
+    "Download as PDF": "Unduh sebagai PDF"
 }

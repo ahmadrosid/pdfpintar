@@ -10,6 +10,9 @@ use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
 use Livewire\Attributes\On;
 use Throwable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ChatInterface extends Component
 {
@@ -217,6 +220,27 @@ class ChatInterface extends Component
     public function is_indexed()
     {
         return $this->document->created_at->diffInMinutes(now()) > 0.5;
+    }
+    public function downloadAsPdf($index)
+    {
+        if (isset($this->messages[$index])) {
+            $html = Str::markdown($this->messages[$index]['content']);
+            $fileName = now()->format('Y-m-d-H-i-s') . '.pdf';
+            
+            // Use the storage_path helper to get the absolute path to the storage directory
+            $storagePath = storage_path('app/public/pdf-temp');
+            
+            // Ensure the directory exists
+            if (!File::isDirectory($storagePath)) {
+                File::makeDirectory($storagePath, 0755, true, true);
+            }
+            
+            $filePath = $storagePath . '/' . $fileName;
+            
+            Pdf::loadHTML($html)->setPaper('a4')->save($filePath);
+            
+            return response()->download($filePath, $fileName)->deleteFileAfterSend(true);
+        }
     }
 
     public function render()
