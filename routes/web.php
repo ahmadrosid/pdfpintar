@@ -14,6 +14,8 @@ Route::get('/locale/{locale}', function ($locale) {
 });
 
 
+Route::view('tools/', 'tools.index')->name('tools.index');
+Route::view('tools/merge-pdf', 'tools.merge-pdf')->name('tools.merge-pdf');
 Route::view('tools/pdf-generator', 'pdf-generator')->name('tools.pdf-generator');
 
 Route::group(['middleware' => 'auth'], function () {

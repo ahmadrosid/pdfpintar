@@ -9,7 +9,7 @@
             @foreach ($messages as $message)
             @if ($message['role'] == 'user')
             <div class="message bg-white dark:bg-neutral-800 p-4 {{ $message['role'] }}">
-                <div class="font-semibold text-orange-400 dark:text-orange-300 text-sm">
+                <div class="font-semibold text-teal-400 dark:text-teal-300 text-sm">
                     {{Auth::user()->name}}
                 </div>
                 <div class="prose prose-sm dark:prose-invert">

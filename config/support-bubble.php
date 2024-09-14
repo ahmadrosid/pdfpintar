@@ -40,9 +40,9 @@ return [
      */
     'classes' => [
         'container' => 'text-base items-end z-30 flex-col m-4 gap-3',
-        'bubble' => 'hidden sm:block | bg-indigo-400 rounded-full shadow-lg w-14 h-14 text-white p-4',
+        'bubble' => 'hidden sm:block | bg-teal-400 rounded-full shadow-lg w-14 h-14 text-white p-4',
         'input' => 'bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 w-full max-w-full p-2 rounded-sm shadow-input text-neutral-800 text-base',
-        'button' => 'inline-flex place-center px-4 py-3 h-10 border-0 bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-600 overflow-hidden rounded-sm text-white leading-none no-underline',
+        'button' => 'inline-flex place-center px-4 py-3 h-10 border-0 bg-teal-500 hover:bg-teal-600 active:bg-teal-600 overflow-hidden rounded-sm text-white leading-none no-underline',
     ],
 
     /*

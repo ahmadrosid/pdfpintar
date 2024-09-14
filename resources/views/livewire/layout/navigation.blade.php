@@ -27,6 +27,9 @@ $logout = function (Logout $logout) {
                     <x-nav-link :href="route('documents.index')" :active="request()->routeIs('documents.index')" wire:navigate>
                         <span class="dark:text-white">{{ __('Documents') }}</span>
                     </x-nav-link>
+                    <x-nav-link :href="route('tools.index')" :active="request()->routeIs('tools.index')" wire:navigate>
+                        <span class="dark:text-white">{{ __('Tools') }}</span>
+                    </x-nav-link>
                 </div>
             </div>
 
