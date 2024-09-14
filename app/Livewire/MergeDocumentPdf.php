@@ -13,7 +13,34 @@ class MergeDocumentPdf extends Component
 {
     use WithFileUploads;
 
-    public $pdfs = [];
+    // public $pdfs = [];
+    public $pdfs = [
+        [
+            "file" => null,
+            "image" => "http://127.0.0.1:8000/storage/thumbnails/20240914092718.jpg",
+            "filename" => "2024-09-12-08-07-24.pdf",
+            "filepath" => "/Users/ahmadrosid/github.com/ahmadrosid/Products/pdfpintar/storage/app/livewire-tmp/k2GSo3vFhPaqzVZy8Hpttxs8WSUhsb-metaMjAyNC0wOS0xMi0wOC0wNy0yNC5wZGY=-.pdf"
+        ],
+        [
+            "file" => null,
+            "image" => "http://127.0.0.1:8000/storage/thumbnails/20240914092721.jpg",
+            "filename" => "EasyLaunchAI - INVOICE.pdf",
+            "filepath" => "/Users/ahmadrosid/github.com/ahmadrosid/Products/pdfpintar/storage/app/livewire-tmp/FYqZcAfatRVYdCkCe48fy6Gvg5q0B1-metaRWFzeUxhdW5jaEFJIC0gSU5WT0lDRS5wZGY=-.pdf"
+        ],
+        [
+            "file" => null,
+            "image" => "http://127.0.0.1:8000/storage/thumbnails/20240914092724.jpg",
+            "filename" => "Ahmad Rosid Resume.pdf",
+            "filepath" => "/Users/ahmadrosid/github.com/ahmadrosid/Products/pdfpintar/storage/app/livewire-tmp/ih4lfFF5EgCZ9XVsU7uiuVqRHqsQT7-metaQWhtYWQgUm9zaWQgUmVzdW1lLnBkZg==-.pdf"
+        ],
+        [
+            "file" => null,
+            "image" => "http://127.0.0.1:8000/storage/thumbnails/20240914092728.jpg",
+            "filename" => "Kartu Keluarga.pdf",
+            "filepath" => "/Users/ahmadrosid/github.com/ahmadrosid/Products/pdfpintar/storage/app/livewire-tmp/pFQ99hheVgNsOw8Ai8UzkyWdfkVJft-metaS2FydHUgS2VsdWFyZ2EucGRm-.pdf"
+        ]
+    ];
+
 
     #[Validate('required|mimes:pdf|max:20240')] // 20MB Max
     public $newPdf;
@@ -39,6 +66,7 @@ class MergeDocumentPdf extends Component
     
     public function removePdf($index)
     {
+        dd($this->pdfs);
         unset($this->pdfs[$index]);
         $this->pdfs = array_values($this->pdfs);
     }

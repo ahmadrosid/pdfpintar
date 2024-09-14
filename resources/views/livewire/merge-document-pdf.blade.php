@@ -27,56 +27,67 @@
                 type="file"
                 class="hidden"
                 accept=".pdf"
-                wire:model="newPdf"
-                x-on:livewire-upload-start="updateProgress($event.detail.filename, 0)"
-                x-on:livewire-upload-finish="updateProgress($event.detail.filename, 100)"
-                x-on:livewire-upload-error="updateProgress($event.detail.filename, 0)"
-                x-on:livewire-upload-progress="updateProgress($event.detail.filename, $event.detail.progress)">
+                wire:model="newPdf">
             <div class="mt-2">
                 <div class="w-full bg-neutral-200 rounded-full h-2 dark:bg-neutral-700">
                     <div
                         class="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        :style="{ width: `${progress[$event.detail.filename] || 0}%` }"></div>
+                        :style="{ width: `0%` }"></div>
                 </div>
             </div>
         </div>
         @error('newPdf') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-
-        <div class="w-full flex justify-between items-center mb-4">
-            <div>
-                {{__('Total Document:')}} {{count($pdfs)}}
-            </div>
-            <button wire:click="toggleSorting" class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
-                {{__('Toggle sorting')}}
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6">
-                    <path d="M3 7h18M6 12h12M10 17h4" stroke-width="1.5" stroke-linecap="round"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            @foreach($pdfs as $index => $pdf)
-            <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden border border-neutral-200">
-                <div class="p-4">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium text-neutral-900 dark:text-neutral-200 truncate" title="{{ $pdf['filename'] }}">
-                            {{ Str::limit($pdf['filename'], 20) }}
-                        </span>
-                        <button wire:click="removePdf({{ $index }})" class="text-red-500 hover:text-red-700">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="bg-neutral-100 dark:bg-neutral-700 rounded-sm p-2 flex items-center justify-center aspect-[3/4] overflow-hidden">
-                        <img src="{{ $pdf['image'] }}" alt="PDF Thumbnail" class="max-w-full max-h-full object-contain">
-                    </div>
+        <div x-data="{ sorting: false, handle: (item) => { console.log(item) } }">
+            <div class="w-full flex justify-between items-center mb-4">
+                <div>
+                    {{__('Total Document:')}} {{count($pdfs)}}
                 </div>
+                <button x-on:click="sorting = !sorting" class="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
+                    <span
+                        x-text="`${sorting ? '{{__('Done sorting')}}' : '{{__('Toggle sorting')}}'}`">
+                        {{__('Toggle sorting')}}
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-6 h-6">
+                        <path d="M3 7h18M6 12h12M10 17h4" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                </button>
             </div>
-            @endforeach
+            <ul x-sort="handle"
+                class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                x-bind:style="`${sorting ? 'display: flex; flex-direction: column;' : ''}`">
+                @foreach($pdfs as $index => $pdf)
+                <li x-sort:item
+                    class="cursor-grab"
+                    x-bind:style="`${sorting ? 'max-height: 150px;' : ''}`">
+                    <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden border border-neutral-200 dark:border-neutral-600/75">
+                        <div class="p-4"
+                            x-bind:class="`${sorting ? 'flex justify-between gap-2 w-full': ''}`">
+                            <div class="flex items-center justify-between mb-2 gap-2">
+                                <span class="text-sm font-medium text-neutral-900 dark:text-neutral-200 truncate" title="{{ $pdf['filename'] }}">
+                                    {{ Str::limit($pdf['filename'], 20) }}
+                                </span>
+                                <button
+                                    wire:click="removePdf({{ $index }})"
+                                    class="text-neutral-500 hover:text-red-500"
+                                    x-bind:class="`${sorting ? 'hidden': ''}`">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-5">
+                                        <path d="M21 5.98c-3.33-.33-6.68-.5-10.02-.5-1.98 0-3.96.1-5.94.3L3 5.98M8.5 4.97l.22-1.31C8.88 2.71 9 2 10.69 2h2.62c1.69 0 1.82.75 1.97 1.67l.22 1.3M18.85 9.14l-.65 10.07C18.09 20.78 18 22 15.21 22H8.79C6 22 5.91 20.78 5.8 19.21L5.15 9.14M10.33 16.5h3.33M9.5 12.5h5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-sm p-2 flex items-center justify-center overflow-hidden"
+                                x-bind:class="`${sorting ? 'size-12': ''}`">
+                                <img src="{{ $pdf['image'] }}" alt="PDF Thumbnail" class="max-w-full max-h-full object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 
-    <div class="h-56 bg-white w-full sm:w-64 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200">
+    <div class="h-56 bg-white w-full sm:w-64 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-600/75">
         <h3 class="text-lg font-semibold mb-4 text-neutral-900 dark:text-neutral-200">
             {{__('Merge Progress')}}
         </h3>

@@ -1,6 +1,8 @@
 import './bootstrap';
 import './react-app';
 import nProgress from 'nprogress';
+import sort from '@alpinejs/sort'
+ 
 
 nProgress.configure({ showSpinner: false });
 
@@ -24,3 +26,5 @@ Alpine.directive('clipboard', (el) => {
         navigator.clipboard.writeText(el.dataset.textCopy)
     })
 })
+
+Alpine.plugin(sort)
