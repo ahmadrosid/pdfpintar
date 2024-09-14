@@ -6,6 +6,11 @@
     display: none;
 }
 
+.sortable-ghost {
+    opacity: .5 !important;
+}
+
+
 :root {
     --dot-color: #333;
     --background-color: #fff;

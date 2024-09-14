@@ -68,7 +68,7 @@
     "Merge PDFs": "Gabungkan PDF",
     "Click to upload PDF": "Klik untuk mengunggah PDF",
     "or drag and drop": "atau Drag dan Drop",
-    "Merge PDF":"Gambungkan PDF",
+    "Merge PDF":"Gabungkan PDF",
     "Split PDF": "Pisahkan PDF",
     "PDF to JPG":"PDF ke JPG",
     "Toggle sorting": "Ubah urutan",
@@ -78,5 +78,6 @@
     "Download All": "Unduh semua",
     "Please wait merging in progress...": "Sedang melakukan proses penggabungan...",
     "You need at least two PDFs to merge.": "Anda membutuhkan setidaknya dua PDF untuk digabungkan.",
-    "Done sorting":"Selesai mengurutkan"
+    "Done sorting":"Selesai mengurutkan",
+    "Failed to merge PDFs": "Gagal menggabungkan PDF"
 }

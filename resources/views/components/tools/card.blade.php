@@ -1,6 +1,6 @@
 @props(['title', 'description', 'imageUrl', 'href', 'premium' => false])
 
-<a href="{{ $href }}" 
+<a wire:navigate href="{{ $href }}" 
    class="relative flex flex-col gap-2 rounded-lg border-2 border-transparent bg-neutral-200/75 p-4 text-center outline-none transition-all hover:border-neutral-500 dark:hover:border-neutral-600  dark:bg-neutral-700 dark:shadow-black/25 lg:max-w-xs">
     <div class="mx-auto mt-2">
         <img src="{{ $imageUrl }}" alt="{{ $title }}">

@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\MergeDocumentPdf;
+use App\Livewire\ToolIndex;
 use Illuminate\Support\Facades\Route;
 use App\Models\Document;
 use Illuminate\Http\Request;
@@ -13,9 +15,8 @@ Route::get('/locale/{locale}', function ($locale) {
     return redirect()->back();
 });
 
-
-Route::view('tools/', 'tools.index')->name('tools.index');
-Route::view('tools/merge-pdf', 'tools.merge-pdf')->name('tools.merge-pdf');
+Route::get('tools', ToolIndex::class)->name('tools.index');
+Route::get('tools/merge-pdf', MergeDocumentPdf::class)->name('tools.merge-pdf');
 Route::view('tools/pdf-generator', 'pdf-generator')->name('tools.pdf-generator');
 
 Route::group(['middleware' => 'auth'], function () {
