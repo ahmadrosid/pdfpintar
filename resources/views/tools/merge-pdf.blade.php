@@ -6,9 +6,14 @@
         </div>
 
         <div class="container max-w-7xl w-full mx-auto p-6 lg:p-8 my-16">
-            <h1 class="text-2xl font-bold !leading-tight sm:text-3xl lg:text-4xl text-balance mb-4">
-                {{__('Merge PDF')}}
-            </h1>
+            <div class="flex justify-between">
+                <h1 class="text-2xl font-bold !leading-tight sm:text-3xl lg:text-4xl text-balance mb-4">
+                    {{__('Merge PDF')}}
+                </h1>
+                <a href="{{route('tools.index')}}" class="hover:underline">
+                    {{__('Back')}}
+                </a>
+            </div>
             <livewire:merge-document-pdf />
         </div>
     </div>

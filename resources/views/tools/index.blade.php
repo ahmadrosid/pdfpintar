@@ -14,7 +14,7 @@ $services = [
         'href' => route('tools.index'),
     ],
     [
-        'title' => 'PDF to JPG',
+        'title' => __('PDF to JPG'),
         'description' => 'Convert each page of PDF into a JPG image.',
         'imageUrl' => '/icons/pdf-to-jpg.svg',
         'href' => route('tools.index'),
