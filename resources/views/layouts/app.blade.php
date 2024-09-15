@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} -  Chat with your documents</title>
+        <title>{{ config('app.name', 'Laravel') . ' - ' . ($title ?? __('Chat with your PDF documents')) }}</title>
         <meta name="description" content="PDFPINTAR - Ubah Cara Anda Membaca PDF" />
 
         <!-- Open Graph Meta Tags -->

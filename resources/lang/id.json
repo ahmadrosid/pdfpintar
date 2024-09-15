@@ -70,6 +70,7 @@
     "or drag and drop": "atau Drag dan Drop",
     "Merge PDF":"Gabungkan PDF",
     "Split PDF": "Pisahkan PDF",
+    "Separate one page or a whole set for easy conversion into independent PDF files.": "Pisahkan satu atau beberapa halaman untuk dikonversi menjadi file PDF terpisah.",
     "PDF to JPG":"PDF ke JPG",
     "Toggle sorting": "Ubah urutan",
     "Total Document:": "Total dokumen:",
@@ -79,5 +80,18 @@
     "Please wait merging in progress...": "Sedang melakukan proses penggabungan...",
     "You need at least two PDFs to merge.": "Anda membutuhkan setidaknya dua PDF untuk digabungkan.",
     "Done sorting":"Selesai mengurutkan",
-    "Failed to merge PDFs": "Gagal menggabungkan PDF"
+    "Failed to merge PDFs": "Gagal menggabungkan PDF",
+    "Split Procces": "Proses Pemisahan",
+    "Merge to One": "Gabungkan jadi Satu",
+    "Convert each page of PDF into a JPG image.": "Konversi setiap halaman dokumen file PDF menjadi gambar JPG.",
+    "Image to PDF":"Gambar ke PDF",
+    "Convert JPG or PNG images to PDF in seconds. Easily adjust orientation and margins.":"Ubah gambar JPG atau PNG ke PDF atur orientasi dan margin dengan mudah.",
+    "Rotate PDF": "Putar PDF",
+    "Rotate your PDFs the way you need them. You can even rotate multiple PDFs at once.": "Putar PDF Anda sesuai kebutuhan, bahkan beberapa file sekaligus.",
+    "Compress PDF": "Kompres PDF",
+    "Reduce file size while optimizing for maximal PDF quality.": "Kurangi ukuran file sambil mengoptimalkan kualitas PDF semaksimal mungkin.",
+    "Word to PDF": "Word ke PDF",
+    "Make DOC and DOCX files easy to read by converting them to PDF.": "Buat file DOC dan DOCX mudah dibaca dengan mengubahnya ke PDF.",
+    "Powerpoint to PDF":"Powerpoint key PDF",
+    "Make PPT and PPTX slideshows to view by converting them to PDF.":"Buat slideshow PPT dan PPTX mudah dilihat dengan mengubahnya ke PDF."
 }

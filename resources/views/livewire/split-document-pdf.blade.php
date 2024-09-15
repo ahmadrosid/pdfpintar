@@ -8,7 +8,7 @@
         </a>
         <a href="{{route('tools.index')}}" class="hover:underline" wire:navigate>
             <h1 class="text-2xl font-bold !leading-tight sm:text-3xl lg:text-4xl text-balance">
-                {{__('Merge PDF')}}
+                {{__('Split PDF')}}
             </h1>
         </a>
     </div>
@@ -100,19 +100,23 @@
 
         <div class="min-h-56 w-full sm:w-[350px] px-4">
             <h3 class="text-xl font-semibold mb-4 text-neutral-900 dark:text-neutral-200">
-                {{__('Merge Progress')}}
+                {{__('Split Procces')}}
             </h3>
             <div>
                 <button
                     wire:click="processMergePdfs"
-                    class="w-full bg-neutral-600 text-white py-3 px-4 rounded-lg hover:bg-neutral-700 transition-colors duration-300 mb-4 text-sm"
+                    class="w-full bg-neutral-600 text-white py-3 px-4 rounded-lg hover:bg-neutral-700 transition-colors duration-300 mb-4 text-sm flex items-center justify-center gap-3"
                     wire:loading.attr="disabled"
                     wire:target="processMergePdfs">
-                    {{__('Merge PDFs')}}
+                    {{__('Merge to One')}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM8.5 12h6"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.5 15l3-3-3-3"></path>
+                    </svg>
                 </button>
                 <button
                     wire:click="downloadMergedPdf"
-                    class="w-full bg-teal-600 text-white py-3 px-4 rounded-lg hover:bg-teal-700 transition-colors duration-300 mb-4 text-sm flex items-center justify-center gap-2"
+                    class="w-full bg-teal-600 text-white py-3 px-4 rounded-lg hover:bg-teal-700 transition-colors duration-300 mt-2 text-sm flex items-center justify-center gap-2"
                     wire:loading.attr="disabled"
                     wire:target="downloadMergedPdf">
                     <x-icon-download />

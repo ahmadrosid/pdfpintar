@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/favicon.ico">
 
-    <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') . ' - ' . ($title ?? __('Chat with your PDF documents')) }}</title>
     <meta name="description" content="PDFPINTAR - Ubah Cara Anda Membaca PDF" />
 
     <!-- Open Graph Meta Tags -->

@@ -8,10 +8,6 @@
                 {{__('Transform your PDF experience with our cost-free toolkit. From merging to compression, access a full spectrum of easy-to-use features.')}}
             </p>
         </div>
-        <div class="grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-12">
-            @foreach ($services as $index => $card)
-            <x-tools.card :href="$card['href']" :title="$card['title']" :description="$card['description']" :imageUrl="$card['imageUrl']"></x-tools.card>
-            @endforeach
-        </div>
+        <x-card-tools />
     </div>
 </div>

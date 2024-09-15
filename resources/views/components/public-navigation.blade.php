@@ -14,10 +14,10 @@
         </a>
         @else
         <a href="{{ route('login') }}" class="font-medium text-sm py-2 px-3 text-neutral-600 hover:text-primary focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-600">
-            Log in
+            {{__('Log in')}}
         </a>
         <a href="{{ route('register') }}" class="font-medium text-sm ml-4 py-2 px-3 rounded-md text-neutral-600 hover:text-primary focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-600">
-            Register
+            {{__('Register')}}
         </a>
         @endauth
     </div>

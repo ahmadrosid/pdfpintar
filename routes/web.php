@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\MergeDocumentPdf;
+use App\Livewire\SplitDocumentPdf;
 use App\Livewire\ToolIndex;
 use Illuminate\Support\Facades\Route;
 use App\Models\Document;
@@ -17,6 +18,7 @@ Route::get('/locale/{locale}', function ($locale) {
 
 Route::get('tools', ToolIndex::class)->name('tools.index');
 Route::get('tools/merge-pdf', MergeDocumentPdf::class)->name('tools.merge-pdf');
+Route::get('tools/split-pdf', SplitDocumentPdf::class)->name('tools.split-pdf');
 Route::view('tools/pdf-generator', 'pdf-generator')->name('tools.pdf-generator');
 
 Route::group(['middleware' => 'auth'], function () {
