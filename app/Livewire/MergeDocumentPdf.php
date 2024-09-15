@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
-use setasign\Fpdi\Fpdi;
 use Spatie\PdfToImage\Pdf;
 use Illuminate\Support\Facades\Process;
 
@@ -76,22 +75,6 @@ class MergeDocumentPdf extends Component
         }
 
         try {
-            $pdf = new Fpdi();
-
-            foreach ($this->pdfs as $pdfFile) {
-                $pageCount = $pdf->setSourceFile($pdfFile['filepath']);
-                for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-                    $template = $pdf->importPage($pageNo);
-                    $size = $pdf->getTemplateSize($template);
-                    $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
-                    $pdf->useTemplate($template);
-                }
-            }
-
-            $tempFile = tempnam(sys_get_temp_dir(), 'merged_pdf_');
-            $pdf->Output($tempFile, 'F');
-        } catch (\Throwable $e) {
-            logger()->error($e);
             $tempFile = tempnam(sys_get_temp_dir(), 'merged_pdf_');
             $files = implode(' ', array_map(function ($pdfFile) {
                 return escapeshellarg($pdfFile['filepath']);
@@ -104,13 +87,15 @@ class MergeDocumentPdf extends Component
                 logger()->error($result->output());
                 return;
             }
+            $this->mergedPdfs[] = [
+                'filepath' => $tempFile,
+                'filename' => 'merged_' . now()->format('Y-m-d_H-i-s') . '.pdf',
+                'date' => now(),
+            ];
+        } catch (\Throwable $e) {
+            logger()->error($e);
+            $this->addError('merge', __('Failed to merge PDFs'));
         }
-
-        $this->mergedPdfs[] = [
-            'filepath' => $tempFile,
-            'filename' => 'merged_' . now()->format('Y-m-d_H-i-s') . '.pdf',
-            'date' => now(),
-        ];
     }
 
     public function updateOrder($item, $position)
