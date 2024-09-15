@@ -74,6 +74,8 @@ class MergeDocumentPdf extends Component
             return;
         }
 
+        $fileName = 'merged_' . now()->format('Y-m-d_H-i-s') . '.pdf';
+
         try {
             $tempFile = tempnam(sys_get_temp_dir(), 'merged_pdf_');
             $files = implode(' ', array_map(function ($pdfFile) {
@@ -87,9 +89,10 @@ class MergeDocumentPdf extends Component
                 logger()->error($result->output());
                 return;
             }
+
             $this->mergedPdfs[] = [
                 'filepath' => $tempFile,
-                'filename' => 'merged_' . now()->format('Y-m-d_H-i-s') . '.pdf',
+                'filename' => $fileName,
                 'date' => now(),
             ];
         } catch (\Throwable $e) {
