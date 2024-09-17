@@ -78,7 +78,7 @@ $services = [
         <p class="text-sm text-foreground/60">{{ $card['description'] }}</p>
 
         @if($card['premium'])
-            <span class="absolute right-4 top-4 rounded-lg border border-red px-2 pb-1 pt-0.5 text-xs font-semibold leading-3 text-red">
+            <span class="absolute right-4 top-4 rounded-lg border border-red-600 dark:border-red-400 px-2 py-1 text-xs font-semibold leading-3 text-red-600 dark:text-red-400">  
                 Upgrade
             </span>
         @endif
