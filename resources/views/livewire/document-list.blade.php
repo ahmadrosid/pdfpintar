@@ -16,8 +16,8 @@
                     @else
                     <div class="space-y-2">
                         @foreach($documents as $document)
-                        <div class="bg-neutral-100/75 dark:bg-neutral-700/50 rounded-lg border cursor-pointer border-neutral-200/75 dark:border-neutral-600/75">
-                            <div class="p-4 flex flex-1 flex-col sm:flex-row sm:items-center gap-3">
+                        <flux:card>
+                        <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3">
                                 <div class="flex-grow min-w-0">
                                     <a href="{{ route('documents.show', $document->id) }}" class="block">
                                         <div class="flex items-center gap-3">
@@ -30,7 +30,7 @@
                                     </p>
                                 </div>
                                 <div class="flex items-center gap-2 mt-2 sm:mt-0">
-                                    <a href="{{ route('documents.show', $document->id) }}" class="text-sm bg-teal-200/75 text-teal-700 px-3 py-1 rounded-full hover:bg-teal-200 transition-colors duration-300">
+                                    <a href="{{ route('documents.show', $document->id) }}" class="text-sm bg-teal-100/20 text-teal-700 dark:text-white px-3 py-1 rounded-full hover:bg-teal-100/10 transition-colors duration-300">
                                         {{__('Chat with pdf')}}
                                     </a>
                                     <button
@@ -40,7 +40,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </flux:card>
                         @endforeach
                     </div>
                     <p class="text-neutral-400 dark:text-neutral-500 mt-4 text-sm">{{__('Click to chat with the document')}}</p>

@@ -5,9 +5,9 @@
         </p>
     </a>
     <div>
-        <a href="{{ route('tools.index') }}" class="font-medium text-sm text-neutral-600 hover:text-neutral-900 hover:underline focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-600 pr-4">
+        {{-- <a href="{{ route('tools.index') }}" class="font-medium text-sm text-neutral-600 hover:text-neutral-900 hover:underline focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-600 pr-4">
             Tools
-        </a>
+        </a> --}}
         @auth
         <a href="{{ route('documents.index') }}" class="font-medium text-sm text-neutral-600 hover:text-neutral-900 hover:underline focus:outline focus:outline-2 focus:rounded-sm focus:outline-none dark:text-neutral-300 dark:hover:text-neutral-600">
             Documents

@@ -39,19 +39,5 @@
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto p-6 lg:p-8">
-        <div class="my-30">
-            <div class="mx-auto max-w-5xl space-y-4 text-center mb-12">
-                <h1 class="text-4xl font-bold !leading-tight sm:text-5xl lg:text-6xl text-balance">
-                    {{__('Free tools to manage your pdf files.')}}
-                </h1>
-                <p class="text-lg text-neutral-800 dark:text-white lg:text-xl text-balance">
-                    {{__('Transform your PDF experience with our cost-free toolkit. From merging to compression, access a full spectrum of easy-to-use features.')}}
-                </p>
-            </div>
-            <x-card-tools />
-        </div>
-    </div>
-
     <x-public-footer />
 </x-full-screen-layout>

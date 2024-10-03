@@ -103,15 +103,8 @@
                     @input="resize" 
                     type="text" wire:model="userInput" placeholder="Type your message here..." rows="1" class="resize-none flex w-full max-h-[400px] px-3 py-2 text-sm bg-white dark:bg-neutral-600 border rounded-md border-neutral-300 dark:border-neutral-400 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 focus:ring-0 focus:border-neutral-300 dark:focus:border-neutral-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-hidden"></textarea>
             <div>
-                <div class="flex gap-2">
-                    <!-- <button x-on:click="
-                            window.dispatchEvent(new CustomEvent('jumpToPage', {
-                                detail: { pageIndex: 2 }
-                            }));
-                        ">
-                        p:2
-                    </button> -->
-                    <button wire:click="sendMessage" class="bg-neutral-800 dark:bg-neutral-500 hover:bg-neutral-700 dark:hover:bg-neutral-600 text-white py-2 px-3 rounded text-sm">Send</button>
+                <div class="flex">
+                    <flux:button wire:click="sendMessage">Send</flux:button>
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@
         "laravel/pulse": "^1.2",
         "laravel/tinker": "^2.9",
         "league/flysystem-aws-s3-v3": "^3.28",
+        "livewire/flux": "^1.0",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "maatwebsite/excel": "^3.1",
