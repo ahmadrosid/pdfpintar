@@ -1,5 +1,5 @@
 <div class="flex gap-2 justify-end">
-    <button x-clipboard data-text-copy="{{ $message['content'] }}" class="opacity-70 hover:opacity-100 transition-opacity duration-300 text-xs flex gap-1 border p-1 rounded border-neutral-300 dark:border-neutral-600 bg-neutral-300 dark:bg-neutral-700">
+    <button x-data x-on:click="$clipboard($wire.messages[{{$index}}].content)" class="opacity-70 hover:opacity-100 transition-opacity duration-300 text-xs flex gap-1 border p-1 rounded border-neutral-300 dark:border-neutral-600 bg-neutral-300 dark:bg-neutral-700">
         <x-icon-copy /> {{__('Copy')}}
     </button>
     <div x-data="{ open: false }" @click.outside="open=false" class="relative">

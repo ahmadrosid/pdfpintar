@@ -21,10 +21,8 @@ document.addEventListener('livewire:initialized', () => {
     })
 });
 
-Alpine.directive('clipboard', (el) => {
-    el.addEventListener('click', () => {
-        navigator.clipboard.writeText(el.dataset.textCopy)
-    })
+Alpine.magic('clipboard', () => {
+    return subject => navigator.clipboard.writeText(subject);
 })
 
 Alpine.plugin(sort)
