@@ -1,7 +1,7 @@
 <footer class="bg-white dark:bg-neutral-900">
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div class="flex space-x-6 md:order-2 text-sm">
-            <a href="/terms-of-serivce" class="text-gray-600 hover:opacity-70">Terms of Service</a>
+            <a href="/terms-of-service" class="text-gray-600 hover:opacity-70">Terms of Service</a>
             <a href="/privacy-policy" class="text-gray-600 hover:opacity-70">Privacy Policy</a>
         </div>
         <div class="flex justify-center space-x-6 md:order-2">
