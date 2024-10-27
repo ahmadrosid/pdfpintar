@@ -10,40 +10,33 @@
                     </div>
                     <livewire:upload-document />
                 </div>
-                <div class="p-6 text-neutral-900 dark:text-neutral-300">
+                <div class="text-neutral-900 dark:text-neutral-300">
                     @if($documents->isEmpty())
                     <p class="text-center text-neutral-500 dark:text-neutral-400">{{__('No documents found.')}}</p>
                     @else
-                    <div class="space-y-2">
-                        @foreach($documents as $document)
-                        <flux:card>
-                        <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3">
-                                <div class="flex-grow min-w-0">
-                                    <a href="{{ route('documents.show', $document->id) }}" class="block">
-                                        <div class="flex items-center gap-3">
-                                            <x-icon-file class="flex-shrink-0 w-5 h-5 text-blue-500" />
-                                            <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">{{ $document->file_name }}</span>
-                                        </div>
-                                    </a>
-                                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-                                        {{ $document->created_at->diffForHumans() }}
-                                    </p>
+                    @foreach($documents as $document)
+                    <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-6 py-2 border-b hover:bg-black/5 group">
+                        <div class="flex-grow min-w-0">
+                            <a href="{{ route('documents.show', $document->id) }}" class="block group-hover:underline">
+                                <div class="flex items-center gap-3">
+                                    <x-icon-file class="flex-shrink-0 w-5 h-5 text-blue-500" />
+                                    <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">{{ $document->file_name }}</span>
                                 </div>
-                                <div class="flex items-center gap-2 mt-2 sm:mt-0">
-                                    <a href="{{ route('documents.show', $document->id) }}" class="text-sm bg-teal-100/20 text-teal-700 dark:text-white px-3 py-1 rounded-full hover:bg-teal-100/10 transition-colors duration-300">
-                                        {{__('Chat with pdf')}}
-                                    </a>
-                                    <button
-                                        class="text-neutral-400 hover:text-rose-500 transition-colors duration-300"
-                                        @click="$dispatch('open-modal', 'delete-document-modal'); documentToDelete = {{ $document->id }}">
-                                        <x-icon-trash class="w-5 h-5" />
-                                    </button>
-                                </div>
-                            </div>
-                        </flux:card>
-                        @endforeach
+                            </a>
+                            <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                                {{ $document->created_at->diffForHumans() }}
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                            <button
+                                class="text-neutral-400 hover:text-rose-500 transition-colors duration-300"
+                                @click="$dispatch('open-modal', 'delete-document-modal'); documentToDelete = {{ $document->id }}">
+                                <x-icon-trash class="w-5 h-5" />
+                            </button>
+                        </div>
                     </div>
-                    <p class="text-neutral-400 dark:text-neutral-500 mt-4 text-sm">{{__('Click to chat with the document')}}</p>
+                    @endforeach
+                    <p class="text-neutral-400 px-6 pb-4 dark:text-neutral-500 mt-4 text-sm">{{__('Click to chat with the document')}}</p>
                     @endif
                 </div>
             </div>

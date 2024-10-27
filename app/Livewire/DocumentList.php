@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 
 class DocumentList extends Component
@@ -34,7 +35,7 @@ class DocumentList extends Component
     public function deleteDocument($id)
     {
         $document = Document::findOrFail($id);
-        if ($document->user_id == auth()->id()) {
+        if ($document->user_id == Auth::user()->id) {
             $document->delete();
         }
         $this->loadDocuments();
