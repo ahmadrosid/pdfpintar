@@ -15,7 +15,7 @@
                     <p class="text-center text-neutral-500 dark:text-neutral-400">{{__('No documents found.')}}</p>
                     @else
                     @foreach($documents as $document)
-                    <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-6 py-2 border-b hover:bg-black/5 group">
+                    <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-6 py-2 border-b dark:border-white/10 hover:bg-black/5 group">
                         <div class="flex-grow min-w-0">
                             <a href="{{ route('documents.show', $document->id) }}" class="block group-hover:underline">
                                 <div class="flex items-center gap-3">
