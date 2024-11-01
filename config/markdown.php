@@ -71,7 +71,7 @@ return [
      * More info: https://commonmark.thephpleague.com/2.4/extensions/overview/
      */
     'extensions' => [
-        new \League\CommonMark\Extension\Table\TableExtension(),
+        \League\CommonMark\Extension\Table\TableExtension::class,
     ],
 
     /*
