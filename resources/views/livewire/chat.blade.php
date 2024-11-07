@@ -12,7 +12,7 @@
                 <div class="font-semibold text-teal-400 dark:text-teal-300 text-sm">
                     {{Auth::user()->name}}
                 </div>
-                <div class="prose prose-sm dark:prose-invert">
+                <div class="prose prose-sm dark:prose-invert max-w-none">
                     <x-markdown>{{ $message['content'] }}</x-markdown>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="font-semibold text-sm dark:text-neutral-200">
                     pdfpintar
                 </div>
-                <div class="prose prose-sm dark:prose-invert">
+                <div class="prose prose-sm dark:prose-invert max-w-none">
                     <x-markdown theme="github-dark">{!! $message['content'] !!}</x-markdown>
                 </div>
                 <x-chat-action :index="$loop->index" :message="$message" />
