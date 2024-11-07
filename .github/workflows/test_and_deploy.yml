@@ -38,4 +38,4 @@ jobs:
       contains('refs/heads/main', github.ref)
     steps:
     - name: Trigger Laravel Forge deployment
-      run: curl https://forge.laravel.com/servers/831228/sites/2431472/deploy/http?token=${{ secrets.FORGE_TOKEN }}
+      run: curl https://forge.laravel.com/servers/858134/sites/2523245/deploy/http?token==${{ secrets.FORGE_TOKEN }}
