@@ -67,16 +67,16 @@
         </div>
         @stack('scripts')
         <script>
-        function updateDarkMode() {
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
+            function updateDarkMode() {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
             }
-        }
 
-        updateDarkMode();
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateDarkMode);
+            updateDarkMode();
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateDarkMode);
         </script>
     </body>
 </html>
