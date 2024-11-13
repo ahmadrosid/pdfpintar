@@ -18,3 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 repopack-output.txt
+
+pdfpintar-firebase-adminsdk.json

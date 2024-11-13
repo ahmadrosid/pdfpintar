@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebaseController;
 use App\Livewire\MergeDocumentPdf;
 use App\Livewire\SplitDocumentPdf;
 use App\Livewire\ToolIndex;
@@ -45,5 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::supportBubble();
 });
+
+Route::post('/login/google/callback', FirebaseController::class)->name('login.google.callback');
+
 
 require __DIR__.'/auth.php';
