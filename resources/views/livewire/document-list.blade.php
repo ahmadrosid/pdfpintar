@@ -12,7 +12,7 @@
                 </div>
                 <div class="text-neutral-900 dark:text-neutral-300">
                     @if($documents->isEmpty())
-                    <p class="text-center text-neutral-500 dark:text-neutral-400">{{__('No documents found.')}}</p>
+                    <p class="text-center text-neutral-500 dark:text-neutral-400 p-6">{{__('No documents found.')}}</p>
                     @else
                     @foreach($documents as $document)
                     <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-6 py-2 border-b dark:border-white/10 hover:bg-black/5 group">
