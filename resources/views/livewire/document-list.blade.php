@@ -8,7 +8,7 @@
                             wire:model.live="search"
                             placeholder="{{__('Search documents')}}" />
                     </div>
-                    <livewire:upload-document />
+                    <livewire:document-upload />
                 </div>
                 <div class="text-neutral-900 dark:text-neutral-300">
                     @if($documents->isEmpty())
@@ -54,7 +54,7 @@
             </div>
             <div class="flex justify-end mt-4 gap-4">
                 <x-secondary-button @click="$dispatch('close-modal', 'delete-document-modal');">{{__('Cancel')}}</x-secondary-button>
-                <x-danger-button @click="$wire.deleteDocument(documentToDelete).then(() => { $dispatch('close-modal', 'delete-document-modal'); documentToDelete = null; })">
+                <x-danger-button wire:click="deleteDocument(documentToDelete)" @click="$dispatch('close-modal', 'delete-document-modal'); documentToDelete = null;">
                     {{__('Delete')}}
                 </x-danger-button>
             </div>

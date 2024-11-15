@@ -220,7 +220,67 @@ class ChatInterface extends Component
     #[Computed]
     public function is_indexed()
     {
-        return $this->document->created_at->diffInMinutes(now()) > 0.5;
+        // Check if file_id exists and document has been processed by OpenAI
+        if (!$this->document->file_id) {
+            return false;
+        }
+
+        // If we already have an assistant_id, the document is indexed
+        if ($this->assistant_id) {
+            return true;
+        }
+
+        // Check if enough time has passed for indexing (30 seconds)
+        $hasPassedIndexingTime = $this->document->created_at->diffInSeconds(now()) > 30;
+        
+        if ($hasPassedIndexingTime) {
+            try {
+                // Try to create assistant to verify indexing is complete
+                $assistant = $this->createAssistant();
+                $this->assistant_id = $assistant->id;
+                return true;
+            } catch (\Throwable $e) {
+                logger()->error('Document indexing check failed: ' . $e->getMessage());
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    #[Computed]
+    public function indexing_progress()
+    {
+        if ($this->is_indexed) {
+            return 100;
+        }
+
+        // Calculate a percentage based on time passed (30 seconds total)
+        $secondsPassed = $this->document->created_at->diffInSeconds(now());
+        return min(95, round(($secondsPassed / 30) * 100)); // Max 95% until confirmed indexed
+    }
+
+    public function render()
+    {
+        if (!$this->is_indexed) {
+            return <<<HTML
+            <div class="grid place-content-center h-[80vh]" wire:poll.2500ms>
+                <div class="flex flex-col items-center gap-4">
+                    <div class="flex gap-2 items-center">
+                        <div class="h-5 w-5 border-[3px] border-dashed border-neutral-400 dark:border-neutral-300 rounded-full animate-spin"></div>
+                        <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
+                            {{__('Indexing document')}} ({{ $this->indexing_progress }}%)
+                        </p>
+                    </div>
+                    <p class="text-xs text-neutral-400 dark:text-neutral-500">
+                        {{__('This may take up to 30 seconds')}}
+                    </p>
+                </div>
+            </div>
+            HTML;
+        }
+
+        return view('livewire.chat');
     }
 
     public function downloadAsPdf($index)
@@ -252,23 +312,5 @@ class ChatInterface extends Component
             
             return response()->download($filePath, $fileName)->deleteFileAfterSend(true);
         }
-    }
-
-    public function render()
-    {
-        if (!$this->is_indexed) {
-            return <<<'HTML'
-            <div class="grid place-content-center h-[80vh]" wire:poll.1000ms>
-                <div class="flex gap-2 items-center">
-                    <div class="h-6 w-6 border-[3px] border-dashed border-neutral-400 dark:border-neutral-300 rounded-full animate-spin"></div>
-                    <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
-                        {{__('Please wait for the document to be indexed.')}}
-                    </p>
-                </div>
-            </div>
-            HTML;
-        }
-
-        return view('livewire.chat');
     }
 }

@@ -20,6 +20,18 @@ class Document extends Model
         'user_id',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::deleting(function ($document) {
+            $document->threads->each(function ($thread) {
+                $thread->messages()->delete();
+                $thread->delete();
+            });
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
