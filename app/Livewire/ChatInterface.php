@@ -24,6 +24,7 @@ class ChatInterface extends Component
     public $threadId;
     public $openaiThreadId;
     public $assistant_id;
+    public $showShareModal = false;
 
     public function mount()
     {
@@ -258,6 +259,36 @@ class ChatInterface extends Component
         // Calculate a percentage based on time passed (30 seconds total)
         $secondsPassed = $this->document->created_at->diffInSeconds(now());
         return min(95, round(($secondsPassed / 30) * 100)); // Max 95% until confirmed indexed
+    }
+
+    public function toggleShare()
+    {
+        if (!$this->document->sharing_token) {
+            $this->document->update([
+                'sharing_token' => Str::random(32),
+                'is_public' => true,
+            ]);
+        } else {
+            $this->document->update([
+                'is_public' => !$this->document->is_public
+            ]);
+        }
+        
+        $this->document->refresh();
+    }
+
+    public function copyShareLink()
+    {
+        return route('documents.public', $this->document->sharing_token);
+    }
+
+    #[Computed]
+    public function shareUrl()
+    {
+        if ($this->document->is_public && $this->document->sharing_token) {
+            return route('documents.public', $this->document->sharing_token);
+        }
+        return null;
     }
 
     public function render()
