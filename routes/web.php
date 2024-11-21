@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('documents', 'dashboard')->name('documents.index');
     Route::view('profile', 'profile')->name('profile');
     Route::get('shared-documents', SharedDocuments::class)->name('documents.shared');
+    Route::post('documents/{document}/copy', [App\Http\Controllers\DocumentController::class, 'copy'])->name('documents.copy');
 
     Route::get('/documents/{document}', function (Request $request, Document $document) {
         if (config('app.require_email_verification') && !$request->user()->hasVerifiedEmail()) {

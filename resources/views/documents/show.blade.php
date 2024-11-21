@@ -23,9 +23,6 @@
                         {{ __('Copy Link') }}
                     </button>
                 @endif
-                <a href="#" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700">
-                    {{__('History')}}
-                </a>
                 <a href="{{ route('documents.index') }}" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700 pr-3">
                     {{ __('Back') }}
                 </a>

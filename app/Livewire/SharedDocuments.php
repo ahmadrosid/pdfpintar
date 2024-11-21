@@ -46,6 +46,6 @@ class SharedDocuments extends Component
 
         return view('livewire.shared-documents', [
             'documents' => $sharedDocuments
-        ]);
+        ])->layout('layouts.app');
     }
 }
