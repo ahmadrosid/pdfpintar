@@ -28,15 +28,6 @@ class SharedDocuments extends Component
         }
     }
 
-    public function copyShareLink($documentId)
-    {
-        $document = Document::where('user_id', auth()->id())
-            ->where('is_public', true)
-            ->findOrFail($documentId);
-
-        return route('documents.public', $document->sharing_token);
-    }
-
     public function render()
     {
         $sharedDocuments = Document::where('user_id', auth()->id())

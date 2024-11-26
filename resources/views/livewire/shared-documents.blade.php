@@ -38,15 +38,29 @@
                                         class="text-neutral-400 hover:text-indigo-500 transition-colors duration-300"
                                         title="{{ $document->is_public ? __('Make Private') : __('Make Public') }}"
                                     >
-                                        <x-icon-share />
+                                        @if($document->is_public)
+                                            <x-icon-unlock />
+                                        @else
+                                            <x-icon-lock />
+                                        @endif
                                     </button>
                                     @if($document->is_public)
                                         <button 
-                                            wire:click="copyShareLink({{ $document->id }})"
+                                            x-data="{ copied: false }"
+                                            @click="
+                                                navigator.clipboard.writeText('{{ route('documents.public', $document->sharing_token) }}');
+                                                copied = true;
+                                                setTimeout(() => copied = false, 2000)
+                                            "
                                             class="text-neutral-400 hover:text-blue-500 transition-colors duration-300"
                                             title="{{ __('Copy Share Link') }}"
                                         >
-                                            <x-icon-copy />
+                                            <span x-show="copied" x-cloak>
+                                                <x-icon-check class="size-4"/>
+                                            </span>
+                                            <span x-show="!copied">
+                                                <x-icon-copy />
+                                            </span>
                                         </button>
                                         <a 
                                             href="{{ route('documents.public', $document->sharing_token) }}"
