@@ -16,7 +16,7 @@ class UserGrowthChart extends ChartWidget
 
     protected int | string | array $columnSpan = 'full';
 
-    protected static ?string $maxHeight = '300px';
+    protected static ?string $maxHeight = '24rem';
 
     protected static ?array $options = [
         'plugins' => [
