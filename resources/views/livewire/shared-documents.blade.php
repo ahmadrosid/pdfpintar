@@ -62,14 +62,14 @@
                                                 <x-icon-copy />
                                             </span>
                                         </button>
-                                        <button 
-                                            wire:click="deleteSharedDocument('{{ $document->sharing_token }}')"
-                                            class="text-neutral-400 hover:text-red-500 transition-colors duration-300"
-                                            title="{{ __('Delete Shared Document') }}"
-                                        >
-                                            <x-icon-trash />
-                                        </button>
                                     @endif
+                                    <button 
+                                        wire:click="deleteSharedDocument('{{ $document->sharing_token }}')"
+                                        class="text-neutral-400 hover:text-red-500 transition-colors duration-300"
+                                        title="{{ __('Delete Shared Document') }}"
+                                    >
+                                        <x-icon-trash />
+                                    </button>
                                 </div>
                             </div>
                         @endforeach

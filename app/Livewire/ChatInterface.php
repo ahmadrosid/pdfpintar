@@ -28,6 +28,9 @@ class ChatInterface extends Component
 
     public function mount()
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
         $this->loadMessages();
     }
 
@@ -192,12 +195,14 @@ class ChatInterface extends Component
 
     public function clearMessages()
     {
+        $this->authorize('view', $this->document);
         Message::where('thread_id', $this->threadId)->delete();
         $this->messages = [];
         $this->dispatch('settingsActionCompleted');
     }
 
     public function newChat() {
+        $this->authorize('view', $this->document);
         $this->threadId = null;
         $this->messages = [];
         $this->assistant_id = null;
@@ -263,6 +268,8 @@ class ChatInterface extends Component
 
     public function toggleShare()
     {
+        $this->authorize('manageSharing', $this->document);
+
         if (!$this->document->sharing_token) {
             $this->document->update([
                 'sharing_token' => Str::random(32),
@@ -279,6 +286,9 @@ class ChatInterface extends Component
 
     public function copyShareLink()
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
         return route('documents.public', $this->document->sharing_token);
     }
 
@@ -316,6 +326,10 @@ class ChatInterface extends Component
 
     public function downloadAsPdf($index)
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
+        
         if (isset($this->messages[$index])) {
             $html = Str::markdown($this->messages[$index]['content']);
             $fileName = now()->format('Y-m-d-H-i-s') . '.pdf';
@@ -327,6 +341,10 @@ class ChatInterface extends Component
 
     public function downloadAsExcel($index)
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
+        
         if (isset($this->messages[$index])) {
             $fileName = now()->format('Y-m-d-H-i-s') . '.xlsx';
             $filePath = ExcelProcessor::generateExcel($this->messages[$index]['content'], $fileName);
@@ -337,6 +355,10 @@ class ChatInterface extends Component
 
     public function downloadAsWord($index)
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
+        
         if (isset($this->messages[$index])) {
             $fileName = now()->format('Y-m-d-H-i-s') . '.docx';
             $filePath = WordProcessor::generateWord($this->messages[$index]['content'], $fileName);
