@@ -8,6 +8,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
         "filament/filament": "^3.2",
+        "flowframe/laravel-trend": "^0.3.0",
         "kreait/laravel-firebase": "^5.9",
         "laravel/breeze": "^2.0",
         "laravel/framework": "^11.0",

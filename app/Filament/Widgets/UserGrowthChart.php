@@ -4,6 +4,8 @@ namespace App\Filament\Widgets;
 
 use App\Models\User;
 use Filament\Widgets\ChartWidget;
+use Flowframe\Trend\Trend;
+use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
 
 class UserGrowthChart extends ChartWidget
@@ -16,30 +18,26 @@ class UserGrowthChart extends ChartWidget
 
     protected function getData(): array
     {
-        $periods = [
-            '1 month' => Carbon::now()->subMonth(),
-            '3 months' => Carbon::now()->subMonths(3),
-            '6 months' => Carbon::now()->subMonths(6),
-            '1 year' => Carbon::now()->subYear(),
-        ];
-
-        $datasets = [];
-        foreach ($periods as $label => $startDate) {
-            $userCount = User::where('created_at', '>=', $startDate)->count();
-            $datasets[] = $userCount;
-        }
+        $data = Trend::model(User::class)
+            ->between(
+                start: now()->startOfYear(),
+                end: now()->endOfMonth(),
+            )
+            ->perMonth()
+            ->count();
 
         return [
             'datasets' => [
                 [
                     'label' => 'New Users',
-                    'data' => $datasets,
-                    'fill' => true,
-                    'backgroundColor' => 'rgba(59, 130, 246, 0.5)',
+                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                    'fill' => 'start',
+                    'backgroundColor' => 'rgba(59, 130, 246, 0.15)',
                     'borderColor' => 'rgb(59, 130, 246)',
+                    'tension' => 0.4,
                 ],
             ],
-            'labels' => array_keys($periods),
+            'labels' => $data->map(fn (TrendValue $value) => $value->date),
         ];
     }
 
@@ -59,8 +57,15 @@ class UserGrowthChart extends ChartWidget
             'scales' => [
                 'y' => [
                     'beginAtZero' => true,
-                    'ticks' => [
-                        'stepSize' => 1,
+                    'grid' => [
+                        'display' => true,
+                        'drawBorder' => true,
+                    ],
+                ],
+                'x' => [
+                    'grid' => [
+                        'display' => false,
+                        'drawBorder' => false,
                     ],
                 ],
             ],
