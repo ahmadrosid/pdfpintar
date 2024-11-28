@@ -16,6 +16,33 @@ class UserGrowthChart extends ChartWidget
 
     protected int | string | array $columnSpan = 'full';
 
+    protected static ?string $maxHeight = '300px';
+
+    protected static ?array $options = [
+        'plugins' => [
+            'legend' => [
+                'display' => true,
+                'position' => 'top',
+            ],
+        ],
+        'responsive' => true,
+        'maintainAspectRatio' => true,
+        'scales' => [
+            'y' => [
+                'beginAtZero' => true,
+                'grid' => [
+                    'display' => true,
+                    'color' => 'rgba(107, 114, 128, 0.1)',
+                ],
+            ],
+            'x' => [
+                'grid' => [
+                    'display' => false,
+                ],
+            ],
+        ],
+    ];
+
     protected function getData(): array
     {
         $data = Trend::model(User::class)
@@ -31,44 +58,23 @@ class UserGrowthChart extends ChartWidget
                 [
                     'label' => 'New Users',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
-                    'fill' => 'start',
-                    'backgroundColor' => 'rgba(59, 130, 246, 0.15)',
+                    'fill' => true,
+                    'backgroundColor' => 'rgba(59, 130, 246, 0.1)',
                     'borderColor' => 'rgb(59, 130, 246)',
-                    'tension' => 0.4,
+                    'borderWidth' => 2,
+                    'tension' => 0.3,
+                    'pointRadius' => 4,
+                    'pointBackgroundColor' => 'rgb(59, 130, 246)',
+                    'pointBorderColor' => '#fff',
+                    'pointBorderWidth' => 2,
                 ],
             ],
-            'labels' => $data->map(fn (TrendValue $value) => $value->date),
+            'labels' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('M Y')),
         ];
     }
 
     protected function getType(): string
     {
         return 'line';
-    }
-
-    protected function getOptions(): array
-    {
-        return [
-            'plugins' => [
-                'legend' => [
-                    'display' => true,
-                ],
-            ],
-            'scales' => [
-                'y' => [
-                    'beginAtZero' => true,
-                    'grid' => [
-                        'display' => true,
-                        'drawBorder' => true,
-                    ],
-                ],
-                'x' => [
-                    'grid' => [
-                        'display' => false,
-                        'drawBorder' => false,
-                    ],
-                ],
-            ],
-        ];
     }
 }
