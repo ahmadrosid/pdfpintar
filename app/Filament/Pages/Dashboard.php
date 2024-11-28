@@ -32,7 +32,7 @@ class Dashboard extends BaseDashboard
         $data = CustomTrend::model(User::class)
             ->dateColumn('created_at')
             ->between(
-                start: now()->subMonths(3)->startOfMonth(),
+                start: now()->subDays(75),
                 end: now()->endOfMonth(),
             )
             ->perWeek()
