@@ -7,8 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class MessagesRelationManager extends RelationManager
 {
@@ -23,7 +21,7 @@ class MessagesRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\MarkdownEditor::make('content')
                     ->required(),
-            ]);
+            ])->columns(1);
     }
 
     public function table(Table $table): Table
@@ -33,7 +31,7 @@ class MessagesRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('role'),
-                Tables\Columns\TextColumn::make('content')->words(10),
+                Tables\Columns\TextColumn::make('content')->words(15),
             ])
             ->filters([
                 //
@@ -42,8 +40,8 @@ class MessagesRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
