@@ -21,31 +21,25 @@ class StatsOverview extends BaseWidget
     {
         return [
             // First Row - User Stats
-            Stat::make('Total Users', User::count())
-                ->description('Total registered users')
-                ->descriptionIcon('heroicon-m-users')
-                ->color('success'),
             Stat::make('Verified Users', User::where('email_verified_at', '!=', null)->count())
                 ->description('Email verified users')
-                ->descriptionIcon('heroicon-m-check-badge')
                 ->color('success'),
             Stat::make('Total Chats', Thread::count())
                 ->description('Chat threads')
-                ->descriptionIcon('heroicon-m-chat-bubble-left-right')
                 ->color('warning'),
+            Stat::make('Total Users', User::count())
+                ->description('Total registered users')
+                ->color('success'),
 
             // Second Row - Document Stats
             Stat::make('Total Documents', Document::count())
                 ->description('All uploaded documents')
-                ->descriptionIcon('heroicon-m-document')
                 ->color('info'),
             Stat::make('Shared Documents', Document::where('is_public', true)->count())
                 ->description('Publicly shared documents')
-                ->descriptionIcon('heroicon-m-share')
                 ->color('info'),
             Stat::make('Private Documents', Document::where('is_public', false)->count())
                 ->description('Private documents')
-                ->descriptionIcon('heroicon-m-lock-closed')
                 ->color('info'),
         ];
     }
