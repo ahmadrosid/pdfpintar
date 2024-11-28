@@ -30,11 +30,12 @@ class Dashboard extends BaseDashboard
     protected function getViewData(): array
     {
         $data = Trend::model(User::class)
+            ->dateColumn('created_at')
             ->between(
                 start: now()->subMonths(3)->startOfMonth(),
                 end: now()->endOfMonth(),
             )
-            ->perWeek()
+            ->perMonth()
             ->count();
 
         return [
