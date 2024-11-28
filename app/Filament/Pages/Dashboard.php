@@ -31,10 +31,10 @@ class Dashboard extends BaseDashboard
     {
         $data = Trend::model(User::class)
             ->between(
-                start: now()->startOfYear(),
+                start: now()->subMonths(6)->startOfMonth(),
                 end: now()->endOfMonth(),
             )
-            ->perMonth()
+            ->perWeek()
             ->count();
 
         return [
@@ -54,7 +54,7 @@ class Dashboard extends BaseDashboard
                         'pointBorderWidth' => 2,
                     ],
                 ],
-                'labels' => $data->map(fn (TrendValue $value) => Carbon::parse($value->date)->format('M Y'))->toArray(),
+                'labels' => $data->map(fn (TrendValue $value) => $value->date)->toArray(),
             ],
             'chartOptions' => [
                 'plugins' => [
