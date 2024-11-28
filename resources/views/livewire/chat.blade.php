@@ -1,4 +1,38 @@
 <div class="flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[92vh]">
+    <div class="flex justify-between items-center p-2 border-b border-neutral-200 dark:border-neutral-700">
+        <div class="flex items-center gap-2">
+            <button wire:click="newChat" class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
+                {{ __('New Chat') }}
+            </button>
+            <button wire:click="clearMessages" class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
+                {{ __('Clear Chat') }}
+            </button>
+        </div>
+        <div class="flex items-center gap-2">
+            <button 
+                wire:click="toggleShare" 
+                class="text-sm {{ $this->shareUrl ? 'text-green-600 dark:text-green-400' : 'text-neutral-600 dark:text-neutral-400' }} hover:text-neutral-900 dark:hover:text-neutral-200"
+            >
+                @if($this->shareUrl)
+                    {{ $document->is_public ? __('Disable Sharing') : __('Enable Sharing') }}
+                @else
+                    {{ __('Share Chat') }}
+                @endif
+            </button>
+            @if($this->shareUrl && $document->is_public)
+                <button 
+                    x-data
+                    x-on:click="
+                        navigator.clipboard.writeText('{{ $this->shareUrl }}');
+                        $dispatch('notify', {message: '{{ __('Share link copied!') }}'})
+                    "
+                    class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200"
+                >
+                    {{ __('Copy Link') }}
+                </button>
+            @endif
+        </div>
+    </div>
     <div class="flex-1 overflow-y-auto">
         @if(count($messages) == 0)
         <div class="flex items-center justify-center w-full h-full text-xl dark:text-neutral-300">

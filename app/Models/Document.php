@@ -18,6 +18,12 @@ class Document extends Model
         'file_name',
         'file_size',
         'user_id',
+        'sharing_token',
+        'is_public',
+    ];
+
+    protected $casts = [
+        'is_public' => 'boolean',
     ];
 
     protected static function boot()

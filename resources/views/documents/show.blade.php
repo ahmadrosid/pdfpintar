@@ -8,9 +8,21 @@
                 <span class="left-arrow">&#x2190;</span> {{ $document->file_name }}
             </a>
             <div class="flex items-center gap-4">
-                <a href="#" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700">
-                    {{__('History')}}
-                </a>
+                <form action="{{ route('documents.share', $document) }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700">
+                        @if($document->is_public)
+                            {{ __('Make Private') }}
+                        @else
+                            {{ __('Share') }}
+                        @endif
+                    </button>
+                </form>
+                @if($document->is_public)
+                    <button onclick="copyShareLink()" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700">
+                        {{ __('Copy Link') }}
+                    </button>
+                @endif
                 <a href="{{ route('documents.index') }}" class="text-neutral-800 hover:text-neutral-500 dark:text-neutral-300 dark:hover:text-neutral-700 pr-3">
                     {{ __('Back') }}
                 </a>
@@ -25,4 +37,14 @@
             </div>
         </div>
     </div>
+    @if($document->is_public)
+    <script>
+        function copyShareLink() {
+            const shareUrl = '{{ route('documents.public', $document->sharing_token) }}';
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('Share link copied to clipboard!');
+            });
+        }
+    </script>
+    @endif
 </x-full-screen-layout>
