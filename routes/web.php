@@ -1,15 +1,12 @@
 <?php
 
-use App\Http\Controllers\FirebaseController;
-use App\Livewire\MergeDocumentPdf;
-use App\Livewire\SharedDocuments;
-use App\Livewire\SplitDocumentPdf;
-use App\Livewire\ToolIndex;
-use Illuminate\Support\Facades\Route;
 use App\Models\Document;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Livewire\SharedDocuments;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\FirebaseController;
 
 Route::view('/', 'welcome');
 
@@ -18,11 +15,6 @@ Route::get('/locale/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return redirect()->back();
 });
-
-Route::get('tools', ToolIndex::class)->name('tools.index');
-Route::get('tools/merge-pdf', MergeDocumentPdf::class)->name('tools.merge-pdf');
-Route::get('tools/split-pdf', SplitDocumentPdf::class)->name('tools.split-pdf');
-Route::view('tools/pdf-generator', 'pdf-generator')->name('tools.pdf-generator');
 
 Route::get('/share/{token}', function (Request $request, $token) {
     $document = Document::where('sharing_token', $token)
