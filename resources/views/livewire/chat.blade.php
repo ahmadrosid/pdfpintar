@@ -1,12 +1,6 @@
 <div class="flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[92vh]">
     <div class="flex justify-between items-center p-2 border-b border-neutral-200 dark:border-neutral-700">
         <div class="flex items-center gap-2">
-            <button wire:click="newChat" class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
-                {{ __('New Chat') }}
-            </button>
-            <button wire:click="clearMessages" class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200">
-                {{ __('Clear Chat') }}
-            </button>
         </div>
         <div class="flex items-center gap-2">
             <button 
