@@ -5,7 +5,7 @@
         <div class="flex items-center gap-2">
             <button 
                 wire:click="toggleShare" 
-                class="text-sm {{ $this->shareUrl ? 'text-green-600 dark:text-green-400' : 'text-neutral-600 dark:text-neutral-400' }} hover:text-neutral-900 dark:hover:text-neutral-200"
+                class="text-sm {{ $this->shareUrl ? 'text-rose-600 dark:text-rose-400' : 'text-neutral-600 dark:text-neutral-400' }} hover:text-neutral-900 dark:hover:text-neutral-200"
             >
                 @if($this->shareUrl)
                     {{ $document->is_public ? __('Disable Sharing') : __('Enable Sharing') }}
