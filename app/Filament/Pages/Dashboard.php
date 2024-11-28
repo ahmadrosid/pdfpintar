@@ -4,7 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\StatsOverview;
 use App\Models\User;
-use App\Support\CustomTrend;
+use Flowframe\Trend\Trend;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
@@ -29,10 +29,10 @@ class Dashboard extends BaseDashboard
 
     protected function getViewData(): array
     {
-        $data = CustomTrend::model(User::class)
+        $data = Trend::model(User::class)
             ->dateColumn('created_at')
             ->between(
-                start: now()->subDays(75),
+                start: now()->subMonths(3)->startOfMonth(),
                 end: now()->endOfMonth(),
             )
             ->perWeek()
