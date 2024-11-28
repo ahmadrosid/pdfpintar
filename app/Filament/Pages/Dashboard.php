@@ -35,7 +35,7 @@ class Dashboard extends BaseDashboard
                 start: now()->subMonths(3)->startOfMonth(),
                 end: now()->endOfMonth(),
             )
-            ->perMonth()
+            ->perWeek()
             ->count();
 
         return [
@@ -55,7 +55,15 @@ class Dashboard extends BaseDashboard
                         'pointBorderWidth' => 2,
                     ],
                 ],
-                'labels' => $data->map(fn (TrendValue $value) => $value->date)->toArray(),
+                'labels' => $data->map(function (TrendValue $value) {
+                    // If the date is already in Y-W format
+                    if (preg_match('/^\d{4}-\d{1,2}$/', $value->date)) {
+                        list($year, $week) = explode('-', $value->date);
+                        return 'Week ' . $week . ', ' . Carbon::now()->setISODate($year, $week)->format('M');
+                    }
+                    // Otherwise parse it normally
+                    return Carbon::parse($value->date)->format('M');
+                })->toArray(),
             ],
             'chartOptions' => [
                 'plugins' => [
