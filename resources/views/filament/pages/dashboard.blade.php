@@ -3,7 +3,7 @@
 
     <x-filament-widgets::widgets />
 
-    <div class="mt-6 rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
+    <div class="rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900 dark:text-white">User Growth</h2>
             <div class="h-80 mt-4">

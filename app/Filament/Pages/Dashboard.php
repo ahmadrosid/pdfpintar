@@ -4,8 +4,8 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\StatsOverview;
 use App\Models\User;
+use App\Support\CustomTrend;
 use Filament\Pages\Dashboard as BaseDashboard;
-use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use Illuminate\Support\Carbon;
 
@@ -29,7 +29,7 @@ class Dashboard extends BaseDashboard
 
     protected function getViewData(): array
     {
-        $data = Trend::model(User::class)
+        $data = CustomTrend::model(User::class)
             ->dateColumn('created_at')
             ->between(
                 start: now()->subMonths(3)->startOfMonth(),
@@ -44,32 +44,22 @@ class Dashboard extends BaseDashboard
                     [
                         'label' => 'New Users',
                         'data' => $data->map(fn (TrendValue $value) => $value->aggregate)->toArray(),
-                        'fill' => true,
-                        'backgroundColor' => 'rgba(59, 130, 246, 0.1)',
-                        'borderColor' => 'rgb(59, 130, 246)',
+                        'fill' => false, // Changed to false to remove fill
+                        'borderColor' => '#ff8c37', // Changed to orange color
                         'borderWidth' => 2,
-                        'tension' => 0.3,
-                        'pointRadius' => 4,
-                        'pointBackgroundColor' => 'rgb(59, 130, 246)',
-                        'pointBorderColor' => '#fff',
-                        'pointBorderWidth' => 2,
+                        'tension' => 0.4, // Increased tension for smoother curves
+                        'pointRadius' => 3,
+                        'pointBackgroundColor' => '#ff8c37',
+                        'pointBorderColor' => '#ff8c37',
+                        'pointBorderWidth' => 0, // Removed point border
                     ],
                 ],
-                'labels' => $data->map(function (TrendValue $value) {
-                    // If the date is already in Y-W format
-                    if (preg_match('/^\d{4}-\d{1,2}$/', $value->date)) {
-                        list($year, $week) = explode('-', $value->date);
-                        return 'Week ' . $week . ', ' . Carbon::now()->setISODate($year, $week)->format('M');
-                    }
-                    // Otherwise parse it normally
-                    return Carbon::parse($value->date)->format('M');
-                })->toArray(),
+                'labels' => $data->map(fn (TrendValue $value) => $value->date)->toArray(),
             ],
             'chartOptions' => [
                 'plugins' => [
                     'legend' => [
-                        'display' => true,
-                        'position' => 'top',
+                        'display' => false, // Hide legend
                     ],
                 ],
                 'responsive' => true,
@@ -78,15 +68,24 @@ class Dashboard extends BaseDashboard
                     'y' => [
                         'beginAtZero' => true,
                         'grid' => [
-                            'display' => true,
-                            'color' => 'rgba(107, 114, 128, 0.1)',
+                            'color' => 'rgba(255, 255, 255, 0.1)', // Lighter grid lines
+                            'drawBorder' => false,
+                        ],
+                        'ticks' => [
+                            'color' => 'rgba(255, 255, 255, 0.5)', // Light colored ticks
                         ],
                     ],
                     'x' => [
                         'grid' => [
                             'display' => false,
                         ],
+                        'ticks' => [
+                            'color' => 'rgba(255, 255, 255, 0.5)', // Light colored ticks
+                        ],
                     ],
+                ],
+                'layout' => [
+                    'padding' => 20
                 ],
             ],
         ];
