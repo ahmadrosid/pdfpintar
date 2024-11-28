@@ -31,7 +31,7 @@ class Dashboard extends BaseDashboard
     {
         $data = Trend::model(User::class)
             ->between(
-                start: now()->subMonths(6)->startOfMonth(),
+                start: now()->subMonths(3)->startOfMonth(),
                 end: now()->endOfMonth(),
             )
             ->perWeek()
