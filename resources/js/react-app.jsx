@@ -9,7 +9,13 @@ import jumpToPagePlugin from "./jump-to-page-plugin";
 const container = document.getElementById("pdf-viewer");
 
 function PDFView() {
-    const defaultLayoutPluginInstance = defaultLayoutPlugin();
+    const defaultLayoutPluginInstance = defaultLayoutPlugin({
+        toolbarPlugin: {
+            downloadButton: {
+                hidden: true,
+            },
+        },
+    });
     const jumpPluginInstance = jumpToPagePlugin();
 
     React.useEffect(() => {

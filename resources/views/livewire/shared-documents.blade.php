@@ -62,14 +62,13 @@
                                                 <x-icon-copy />
                                             </span>
                                         </button>
-                                        <a 
-                                            href="{{ route('documents.public', $document->sharing_token) }}"
-                                            target="_blank"
-                                            class="text-neutral-400 hover:text-green-500 transition-colors duration-300"
-                                            title="{{ __('View Public Page') }}"
+                                        <button 
+                                            wire:click="deleteSharedDocument('{{ $document->sharing_token }}')"
+                                            class="text-neutral-400 hover:text-red-500 transition-colors duration-300"
+                                            title="{{ __('Delete Shared Document') }}"
                                         >
-                                            <x-icon-eye />
-                                        </a>
+                                            <x-icon-trash />
+                                        </button>
                                     @endif
                                 </div>
                             </div>

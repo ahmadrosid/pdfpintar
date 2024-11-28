@@ -13,8 +13,8 @@ class SharedDocuments extends Component
 
     public function toggleShare($documentId)
     {
-        $document = Document::where('user_id', auth()->id())
-            ->findOrFail($documentId);
+        $document = Document::findOrFail($documentId);
+        $this->authorize('manageSharing', $document);
 
         if (!$document->sharing_token) {
             $document->update([
@@ -26,6 +26,21 @@ class SharedDocuments extends Component
                 'is_public' => !$document->is_public
             ]);
         }
+    }
+
+    public function deleteSharedDocument($sharingToken)
+    {
+        $document = Document::where('sharing_token', $sharingToken)
+            ->firstOrFail();
+        
+        $this->authorize('manageSharing', $document);
+
+        $document->update([
+            'sharing_token' => null,
+            'is_public' => false,
+        ]);
+
+        session()->flash('message', 'Document sharing has been removed.');
     }
 
     public function render()
