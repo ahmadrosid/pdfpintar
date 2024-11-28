@@ -19,6 +19,9 @@ Route::get('/locale/{locale}', function ($locale) {
 Route::get('/share/{token}', function (Request $request, $token) {
     $document = Document::where('sharing_token', $token)
         ->where('is_public', true)
+        ->with(['threads.messages' => function($query) {
+            $query->orderBy('id', 'asc');
+        }])
         ->firstOrFail();
     
     $pdfUrl = Storage::temporaryUrl(

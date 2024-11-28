@@ -15,14 +15,15 @@ class PublicChatInterface extends Component
     public function mount(Document $document)
     {
         $this->document = $document;
-        $this->threads = $document->threads;
+        // Get all threads for the shared document
+        $this->threads = $document->threads()->orderBy('created_at', 'desc')->get();
         $this->currentThread = $this->threads->first();
     }
 
     public function render()
     {
         return view('livewire.public-chat-interface', [
-            'messages' => $this->currentThread?->messages ?? collect(),
+            'messages' => $this->currentThread?->messages()->orderBy('id', 'asc')->get() ?? collect(),
         ]);
     }
 

@@ -6,35 +6,33 @@
     </div>
 
     <div class="flex-1 overflow-y-auto">
-        @if(!$currentThread || count($messages) == 0)
+        @if($messages->isEmpty())
             <div class="flex items-center justify-center w-full h-full text-xl dark:text-neutral-300">
                 {{__('No messages in this chat.')}}
             </div>
         @endif
         <div class="chat-messages flex flex-col">
-            @if($currentThread)
-                @foreach($messages as $message)
-                    @if($message->role == 'user')
-                        <div class="message bg-white dark:bg-neutral-800 p-4">
-                            <div class="font-semibold text-teal-400 dark:text-teal-300 text-sm">
-                                {{ __('User') }}
-                            </div>
-                            <div class="prose prose-sm dark:prose-invert max-w-none">
-                                <x-markdown>{{ $message->content }}</x-markdown>
-                            </div>
+            @foreach($messages as $message)
+                @if($message->role == 'user')
+                    <div class="message bg-white dark:bg-neutral-800 p-4">
+                        <div class="font-semibold text-teal-400 dark:text-teal-300 text-sm">
+                            {{ __('User') }}
                         </div>
-                    @elseif($message->role == 'assistant')
-                        <div class="message bg-neutral-300/25 dark:bg-neutral-500/25 p-4">
-                            <div class="font-semibold text-sm dark:text-neutral-200">
-                                pdfpintar
-                            </div>
-                            <div class="prose prose-sm dark:prose-invert max-w-none">
-                                <x-markdown theme="github-dark">{!! $message->content !!}</x-markdown>
-                            </div>
+                        <div class="prose prose-sm dark:prose-invert max-w-none">
+                            <x-markdown>{{ $message->content }}</x-markdown>
                         </div>
-                    @endif
-                @endforeach
-            @endif
+                    </div>
+                @elseif($message->role == 'assistant')
+                    <div class="message bg-neutral-300/25 dark:bg-neutral-500/25 p-4">
+                        <div class="font-semibold text-sm dark:text-neutral-200">
+                            pdfpintar
+                        </div>
+                        <div class="prose prose-sm dark:prose-invert max-w-none">
+                            <x-markdown theme="github-dark">{!! $message->content !!}</x-markdown>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
     
