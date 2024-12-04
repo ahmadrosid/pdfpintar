@@ -39,7 +39,7 @@ class ThreadResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('document.file_name'),
+                TextColumn::make('document.file_name')->wrap(true),
                 TextColumn::make('assistant_id'),
                 TextColumn::make('openai_thread_id'),
             ])
