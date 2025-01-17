@@ -30,7 +30,7 @@
 
         <div class="py-12">
             <div class="max-w-5xl mx-auto p-6 lg:p-8">
-                <div class="prose max-w-none">
+                <div class="prose max-w-none dark:prose-invert">
                     {!! $content ?? '' !!}
                 </div>
             </div>

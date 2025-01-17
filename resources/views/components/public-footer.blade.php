@@ -1,8 +1,8 @@
 <footer class="bg-white dark:bg-neutral-900">
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
         <div class="flex space-x-6 md:order-2 text-sm">
-            <a href="/terms-of-service" class="text-gray-600 hover:opacity-70">Terms of Service</a>
-            <a href="/privacy-policy" class="text-gray-600 hover:opacity-70">Privacy Policy</a>
+            <a href="/terms-of-service" class="text-gray-600 hover:opacity-70 dark:text-white">Terms of Service</a>
+            <a href="/privacy-policy" class="text-gray-600 hover:opacity-70 dark:text-white">Privacy Policy</a>
         </div>
         <div class="flex justify-center space-x-6 md:order-2">
             <span class="inline-flex justify-center w-full gap-3 lg:ml-auto md:justify-start md:w-auto">
@@ -22,9 +22,9 @@
         </div>
         <div class="mt-8 md:mt-0 md:order-1">
             <p class="text-base text-center text-neutral-400 dark:text-neutral-600">
-                <span class="mx-auto mt-2 text-sm text-neutral-500 dark:text-neutral-600">
-                    Copyright © 2023
-                    <a href="https://ahmadrosid.com" class="mx-2 text-blue-500 hover:underline dark:text-blue-500 dark:hover:text-blue-500" rel="noopener noreferrer">
+                <span class="mx-auto mt-2 text-sm text-neutral-500 dark:text-white">
+                    Copyright © 2023 by -
+                    <a href="https://ahmadrosid.com" class="text-blue-500 hover:underline dark:text-blue-500 dark:hover:text-blue-500" rel="noopener noreferrer">
                         @ahmadrosid
                     </a>
                 </span>
