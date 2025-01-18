@@ -7,6 +7,7 @@ use App\Livewire\SharedDocuments;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\FirebaseController;
+use App\Http\Controllers\DocumentController;
 
 Route::view('/', 'welcome');
 
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('profile', 'profile')->name('profile');
     Route::get('shared-documents', SharedDocuments::class)->name('documents.shared');
     Route::post('documents/{document}/copy', [App\Http\Controllers\DocumentController::class, 'copy'])->name('documents.copy');
+    Route::post('/upload-documents', [DocumentController::class, 'upload'])->name('documents.upload');
 
     Route::get('/documents/{document}', function (Request $request, Document $document) {
         if (config('app.require_email_verification') && !$request->user()->hasVerifiedEmail()) {

@@ -25,7 +25,7 @@
         <script defer data-domain="pdfpintar.com" src="https://vince.ngooding.com/js/script.js"></script>
         <!-- Scripts -->
         @filepondScripts
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/mingle.svelte.js'])
     </head>
 
     <body class="font-sans antialiased bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-300">
