@@ -37,6 +37,7 @@
             class="mb-2 py-1 px-1 resize-none dark:scrollbar scrollbar-thumb-neutral-700 scrollbar-track-neutral-500 text-sm bg-transparent border-0 focus-visible:ring-0 focus:outline-none"/>
         <div class="flex justify-end">
             <button
+                onclick={sendMessage}
                 class="bg-neutral-900 text-white {text.length===0 ? 'opacity-30' : 'opacity-90'} hover:opacity-90 rounded-full p-1.5 shadow"
             >
                 <ArrowUpIcon class="size-4"/>

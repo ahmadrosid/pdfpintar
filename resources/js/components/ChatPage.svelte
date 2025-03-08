@@ -1,11 +1,62 @@
 <script>
     import ChatInput from "$lib/components/ChatInput.svelte";
     import Markdown from "$lib/components/Markdown.svelte";
+    import { events } from "fetch-event-stream";
 
     let { wire, dataset } = $props();
     let text = $state('');
+    let messages = $state(dataset.messages);
+    let threadId = $state(dataset.threadId);
 
-    function sendMessage() {}
+    async function sendMessage() {
+        try {
+            messages.push({
+                role: "user",
+                content: text,
+            });
+            let abort = new AbortController();
+            let res = await fetch("/chat/stream", {
+                method: "POST",
+                signal: abort.signal,
+                headers: {
+                    "content-type": "application/json",
+                    "X-CSRF-TOKEN": dataset.csrf,
+                },
+                body: JSON.stringify({
+                    stream: true,
+                    documentId: dataset.document.id,
+                    text: text,
+                    threadId: threadId,
+                }),
+            });
+
+            if (!res.ok) {
+                throw res;
+            }
+
+            text = "";
+            messages.push({
+                role: "assistant",
+                content: "",
+            });
+
+            let stream = events(res, abort.signal);
+            for await (const raw of stream) {
+                const event = JSON.parse(raw.data);
+                if (event.type === "token") {
+                    console.log(event);
+                }
+                switch (event.type) {
+                    case "token":
+                        let message = messages[messages.length - 1];
+                        message.content += event.data;
+                        break;
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 </script>
 
 <div class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow">
@@ -17,7 +68,7 @@
         {#each dataset.messages as message}
             <div class="bg-white p-4 {message.role === 'assistant' ? 'dark:bg-neutral-800' : 'dark:bg-neutral-700'}">
                 <p class="pb-4 text-sm font-medium {message.role === 'assistant' ? 'text-teal-500 dark:text-teal-400' : 'text-orange-500 dark:text-orange-400'}">
-                    {message.role === 'assistant' ? 'pdfpintar' : 'You'}
+                    {message.role === 'user' ? 'pdfpintar' : 'You'}
                 </p>
 
                 <div class="prose dark:prose-invert max-w-none">
