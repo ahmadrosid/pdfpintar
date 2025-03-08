@@ -31,13 +31,13 @@ class ChatPage extends Component
             $this->authorize('view', $this->document);
         }
 
-        $existingThread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
-        if (!$existingThread) {
+        $thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
+        if (!$thread) {
             return;
         }
 
-        $this->threadId = $existingThread->id;
-        $this->messages = Message::where('thread_id', $existingThread->id)->orderBy('id', 'asc')->get();
+        $this->threadId = $thread->id;
+        $this->messages = Message::where('thread_id', $thread->id)->orderBy('id', 'asc')->get();
     }
 
     public function render(): string

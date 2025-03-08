@@ -13,7 +13,6 @@ export default defineConfig({
                 'resources/js/auth.js',
                 'resources/js/mingle.svelte.js',
                 ...glob.sync("resources/js/components/**/*.svelte"),
-
             ],
             refresh: true,
         }),
