@@ -16,7 +16,7 @@
     }
 </script>
 
-<div class="bg-white p-4 {message.role === 'assistant' ? 'dark:bg-neutral-800' : 'dark:bg-neutral-700'}">
+<div class="bg-white p-4 group {message.role === 'assistant' ? 'dark:bg-neutral-800' : 'dark:bg-neutral-700'}">
     <p class="pb-4 text-sm font-medium {message.role === 'assistant' ? 'text-teal-500 dark:text-teal-400' : 'text-orange-500 dark:text-orange-400'}">
         {message.role === 'user' ? 'pdfpintar' : 'You'}
     </p>
@@ -25,12 +25,12 @@
         <Markdown md={message.content}/>
     </div>
 
-    <div class="pt-2 flex justify-end">
-        <button>
+    <div class="pt-2 justify-end flex">
+        <button class="opacity-70 hover:opacity-100 p-1 invisible group-hover:visible">
             {#if copied}
-                <CopyCheckIcon class="size-4" />
+                <CopyCheckIcon class="size-3" />
             {:else}
-                <CopyIcon onclick={() => copyMessage(message.content)} class="size-4" />
+                <CopyIcon onclick={() => copyMessage(message.content)} class="size-3" />
             {/if}
         </button>
     </div>
