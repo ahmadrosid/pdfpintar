@@ -18,10 +18,11 @@ class ChatPage extends Component
     {
         $this->authorize('view', $this->document);
         $thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
-        Message::where('thread_id', $thread->id)->delete();
-        Thread::where('document_id', $this->document->id)->delete();
-        $this->messages = [];
-        logger()->info('Cleared messages for thread id = ' . $thread->id);
+        if ($thread) {
+            Message::where('thread_id', $thread->id)->delete();
+            Thread::where('document_id', $this->document->id)->delete();
+            $this->messages = [];
+        }
     }
 
     public function mount()

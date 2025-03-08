@@ -6,7 +6,7 @@
 
     let { wire, dataset } = $props();
     let text = $state('');
-    let messages = $state(dataset.messages ?? []);
+    let messages = $state(dataset.messages);
     let threadId = $state(dataset.threadId);
 
     async function sendMessage() {
@@ -69,8 +69,8 @@
 
     async function clearMessages() {
         await wire.clearMessages();
-        messages = [];
-        threadId = "";
+        // in svelte reseting messages doesn't work, so we reload the page
+        window.location.reload();
     }
 </script>
 
