@@ -16,12 +16,16 @@ class ChatPage extends Component
 
     public function mount()
     {
+        if (!$this->document->is_public) {
+            $this->authorize('view', $this->document);
+        }
+
         $existingThread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
         if (!$existingThread) {
             return;
         }
-        $this->threadId = $existingThread->id;
 
+        $this->threadId = $existingThread->id;
         $this->messages = Message::where('thread_id', $existingThread->id)->orderBy('id', 'asc')->get();
     }
 
