@@ -16,9 +16,9 @@
     }
 </script>
 
-<div class="p-4 group {message.role === 'assistant' ? 'bg-neutral-50 dark:bg-neutral-800' : 'bg-neutral-100 dark:bg-neutral-700'}">
+<div class="p-4 group {message.role === 'assistant' ? 'bg-neutral-100 dark:bg-neutral-800' : 'bg-white dark:bg-neutral-700'}">
     <p class="pb-4 text-sm font-medium {message.role === 'assistant' ? 'text-teal-500 dark:text-teal-400' : 'text-orange-500 dark:text-orange-400'}">
-        {message.role === 'user' ? 'pdfpintar' : 'You'}
+        {message.role === 'assistant' ? 'pdfpintar' : 'You'}
     </p>
 
     <div class="prose prose-sm dark:prose-invert max-w-none">

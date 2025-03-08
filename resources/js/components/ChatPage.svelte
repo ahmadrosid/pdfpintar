@@ -57,9 +57,13 @@
             console.log(e);
         }
     }
+
+    function scrollToBottom(node) {
+        node.scrollTop = node.scrollHeight;
+    }
 </script>
 
-<div class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
+<div use:scrollToBottom class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
     <div class="p-2 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark: bg-neutral-800">
         {dataset.document.file_name}
     </div>

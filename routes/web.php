@@ -69,11 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('documents.share');
 
     Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', __('Verification link sent!'));
-    })
-    ->middleware(['throttle:2,1'])
-    ->name('verification.send');
+            $request->user()->sendEmailVerificationNotification();
+            return back()->with('message', __('Verification link sent!'));
+        })
+        ->middleware(['throttle:2,1'])
+        ->name('verification.send');
 
     Route::supportBubble();
 });
