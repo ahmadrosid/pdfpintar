@@ -24,5 +24,4 @@ export default defineConfig({
           $lib: path.resolve("./resources/js/lib"),
         },
     },
-
 });

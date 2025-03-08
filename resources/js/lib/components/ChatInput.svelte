@@ -34,7 +34,7 @@
                             ? "Thinking..."
                             : "Type your message here..."}
             onkeydown={handleKeyDown}
-            class="mb-2 py-1 px-1 resize-none dark:scrollbar scrollbar-thumb-neutral-700 scrollbar-track-neutral-500 text-sm bg-transparent border-0 focus-visible:ring-0 focus:outline-none"/>
+            class="mb-2 py-1 px-1 resize-none text-sm bg-transparent border-0 focus-visible:ring-0 focus:outline-none"/>
         <div class="flex justify-end">
             <button
                 onclick={sendMessage}
