@@ -17,8 +17,8 @@
                     @foreach($documents as $document)
                     <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-3 py-2 border-b dark:border-white/10 hover:bg-black/5 group">
                         <div class="flex-grow min-w-0 flex gap-1 relative isolate">
-                            <div class="flex items-center gap-3 p-2">
-                                <x-icon-file class="flex-shrink-0 w-5 h-5 text-blue-500" />
+                            <div class="flex items-center gap-2 p-2">
+                                <x-icon-file class="flex-shrink-0 w-5 h-5 opacity-50" />
                                 <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">
                                     <a href="{{ route('documents.show', $document->id) }}" class="group-hover:underline">
                                         <span class="absolute inset-0 "></span>
