@@ -14,6 +14,27 @@ class ChatController extends Controller
 
     private function createAssistant(Document $document)
     {
+        logger()->info('createAssistant', [
+            'name' => $document->file_name,
+            'tools' => [
+                [
+                    'type' => 'file_search',
+                ],
+            ],
+            'tool_resources' => [
+                'file_search' => [
+                    'vector_stores' => [
+                        [
+                            'file_ids' => [
+                                $document->file_id,
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'instructions' => 'Your are a helpful assistant. Use the provided document to answer the user\'s question.',
+            'model' => 'gpt-4o-mini',
+        ]);
         $assistant = OpenAI::assistants()->create([
             'name' => $document->file_name,
             'tools' => [
@@ -51,21 +72,8 @@ class ChatController extends Controller
             return response('You are not authorized to view this document', 401);
         }
 
-        $thread = Thread::find($validated['threadId']);
-        if (!$thread) {
-            $openaiThread = OpenAI::threads()->create([]);
-            $assistant_id = $this->createAssistant($document)->id;
-            $thread = Thread::create([
-                'openai_thread_id' => $openaiThread->id,
-                'assistant_id' => $assistant_id,
-                'document_id' => $document->id,
-            ]);
-        }
-
-        $text = $validated['text'];
-
         return response()->stream(function () use (
-            $thread, $text
+            $validated, $document
         ) {
             // Prevent output buffering
             if (ob_get_level()) {
@@ -73,6 +81,21 @@ class ChatController extends Controller
             }
 
             try {
+                $text = $validated['text'];
+
+                if (!isset($validated['threadId'])) {
+                    $openaiThread = OpenAI::threads()->create([]);
+                    $assistant_id = $this->createAssistant($document)->id;
+                    $thread = Thread::create([
+                        'openai_thread_id' => $openaiThread->id,
+                        'assistant_id' => $assistant_id,
+                        'document_id' => $document->id,
+                    ]);
+                    ChatEvent::update_thread_id($thread->id)->emit();
+                } else {
+                    $thread = Thread::find($validated['threadId']);
+                }
+
                 $dbMessages = Message::where('thread_id', $thread->id)->orderBy('id', 'asc')->get();
                 $messages = [];
                 foreach ($dbMessages as $message) {
@@ -86,6 +109,9 @@ class ChatController extends Controller
                     'role' => 'user',
                     'content' => $text,
                 ];
+
+                logger()->info("messages", $messages);
+                logger()->info("thread", $thread->toArray());
 
                 $run = OpenAI::threads()->runs()->createStreamed($thread->openai_thread_id, [
                     'assistant_id' => $thread->assistant_id,

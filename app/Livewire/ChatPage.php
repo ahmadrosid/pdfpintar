@@ -14,6 +14,16 @@ class ChatPage extends Component
     protected $messages = [];
     protected $threadId;
 
+    public function clearMessages()
+    {
+        $this->authorize('view', $this->document);
+        $thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
+        Message::where('thread_id', $thread->id)->delete();
+        Thread::where('document_id', $this->document->id)->delete();
+        $this->messages = [];
+        logger()->info('Cleared messages for thread id = ' . $thread->id);
+    }
+
     public function mount()
     {
         if (!$this->document->is_public) {

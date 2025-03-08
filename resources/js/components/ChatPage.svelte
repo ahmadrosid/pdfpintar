@@ -1,11 +1,12 @@
 <script>
     import ChatInput from "$lib/components/ChatInput.svelte";
     import MessageItem from "$lib/components/MessageItem.svelte";
+    import Trash2Icon from "lucide-svelte/icons/trash-2";
     import { events } from "fetch-event-stream";
 
     let { wire, dataset } = $props();
     let text = $state('');
-    let messages = $state(dataset.messages);
+    let messages = $state(dataset.messages ?? []);
     let threadId = $state(dataset.threadId);
 
     async function sendMessage() {
@@ -14,6 +15,14 @@
                 role: "user",
                 content: text,
             });
+
+            let payload = {
+                documentId: dataset.document.id,
+                text: text,
+                threadId: threadId,
+            };
+
+            text = "";
             let abort = new AbortController();
             let res = await fetch("/chat/stream", {
                 method: "POST",
@@ -22,34 +31,30 @@
                     "content-type": "application/json",
                     "X-CSRF-TOKEN": dataset.csrf,
                 },
-                body: JSON.stringify({
-                    stream: true,
-                    documentId: dataset.document.id,
-                    text: text,
-                    threadId: threadId,
-                }),
+                body: JSON.stringify(payload),
             });
 
             if (!res.ok) {
                 throw res;
             }
 
-            text = "";
-            messages.push({
-                role: "assistant",
-                content: "",
-            });
-
             let stream = events(res, abort.signal);
             for await (const raw of stream) {
                 const event = JSON.parse(raw.data);
-                if (event.type === "token") {
-                    console.log(event);
-                }
                 switch (event.type) {
+                    case "thread_id":
+                        threadId = event.data;
+                        break;
                     case "token":
                         let message = messages[messages.length - 1];
-                        message.content += event.data;
+                        if (message.role === "assistant") {
+                            message.content += event.data;
+                        } else {
+                            messages.push({
+                                role: "assistant",
+                                content: event.data,
+                            });
+                        }
                         break;
                 }
             }
@@ -61,11 +66,21 @@
     function scrollToBottom(node) {
         node.scrollTop = node.scrollHeight;
     }
+
+    async function clearMessages() {
+        await wire.clearMessages();
+        messages = [];
+        threadId = "";
+    }
 </script>
 
 <div use:scrollToBottom class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
-    <div class="p-2 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark: bg-neutral-800">
-        {dataset.document.file_name}
+    <div class="p-2 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
+        <p class="px-1">{dataset.document.file_name}</p>
+        <button onclick={clearMessages} class="flex gap-2 items-center p-1 opacity-50 hover:opacity-100">
+            <Trash2Icon class="size-3"/>
+            <span class="text-sm">Clear</span>
+        </button>
     </div>
 
     <div class="mb-2 flex-1">

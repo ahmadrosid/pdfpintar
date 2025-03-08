@@ -37,6 +37,11 @@ class ChatEvent
         return new self('notice', $token);
     }
 
+    public static function update_thread_id(string $id): self
+    {
+        return new self('thread_id', $id);
+    }
+
     public static function token(string $token): self
     {
         return new self('token', $token);
