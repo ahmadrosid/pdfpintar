@@ -125,7 +125,7 @@
 
     <div class="mb-2 flex-1">
         {#each dataset.messages as message}
-            <MessageItem {message}/>
+            <MessageItem {message} labels={dataset.labels}/>
         {/each}
         {#if waitingAssistantResponse}
             <div class="flex p-4 items-center">

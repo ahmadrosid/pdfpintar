@@ -46,7 +46,10 @@ class ChatPage extends Component
             'messages' => $this->messages,
             'thread' => $this->thread,
             'labels' => [
-                'delete' => __('Delete')
+                'delete' => __('Delete'),
+                'download_as_pdf' => __("Download As PDF"),
+                'download_as_excel' => __("Download As Excel"),
+                'download_as_word' => __("Download As Word"),
             ]
         ], [
             'class' => 'relative flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[93vh]'
