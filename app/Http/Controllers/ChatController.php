@@ -8,6 +8,7 @@ use App\Models\Thread;
 use App\Models\Message;
 use App\Http\ChatEvent;
 use OpenAI\Laravel\Facades\OpenAI;
+use App\Support\TitleGenerator;
 
 class ChatController extends Controller
 {
@@ -76,6 +77,7 @@ class ChatController extends Controller
                         'openai_thread_id' => $openaiThread->id,
                         'assistant_id' => $assistant_id,
                         'document_id' => $document->id,
+                        'title' => 'Untitled',
                     ]);
                     ChatEvent::update_thread(json_encode($thread))->emit();
                 } else {
@@ -106,7 +108,7 @@ class ChatController extends Controller
                     }
                 }
 
-                Message::insert([
+                $messages = [
                     [
                         'thread_id' => $thread->id,
                         'role' => 'user',
@@ -121,7 +123,15 @@ class ChatController extends Controller
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]
-                ]);
+                ];
+                Message::insert($messages);
+
+                logger()->info('thread title = '. $thread->title);
+                if ($thread->title == 'Untitled') {
+                    $thread->title = TitleGenerator::generate($messages);
+                    $thread->save();
+                    ChatEvent::update_thread(json_encode($thread))->emit();
+                }
             } catch (\Throwable $e) {
                 report($e);
                 ChatEvent::notice('error', 'Unexpected error')->emit();

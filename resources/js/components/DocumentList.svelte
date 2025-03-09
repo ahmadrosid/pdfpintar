@@ -30,8 +30,6 @@
     const handleSearch = debounce(async (event) => {
         let search = event.target.value;
         await wire.searchDocument(search);
-        console.log('debounced', search);
-        console.log('documents', dataset.documents);
     }, 300);
 
 </script>
