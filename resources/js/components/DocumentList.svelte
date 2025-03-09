@@ -35,7 +35,7 @@
                         <div class="flex items-center gap-2 p-2">
                             <FileIcon class="flex-shrink-0 w-5 h-5 opacity-50" />
                             <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">
-                                <a href="#" class="group-hover:underline">
+                                <a href={'/documents/' + document.id} class="group-hover:underline">
                                     <span class="absolute inset-0"></span>
                                     { document.file_name }
                                 </a>
@@ -63,14 +63,14 @@
 <AlertDialog.Root bind:open={isDeleteDialogOpen}>
     <AlertDialog.Content>
         <AlertDialog.Header>
-            <AlertDialog.Title>Do you really want to delete this document?</AlertDialog.Title>
+            <AlertDialog.Title>{dataset.labels.delete_document}</AlertDialog.Title>
             <AlertDialog.Description>
-                By clicking this button, you will permanently delete the document <strong>{documentToDelete.file_name}</strong>.
+                {dataset.labels.delete_document_description} <strong>{documentToDelete.file_name}</strong>
             </AlertDialog.Description>
         </AlertDialog.Header>
         <AlertDialog.Footer>
-            <AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
-            <AlertDialog.Action onclick={deleteDocument}>Delete</AlertDialog.Action>
+            <AlertDialog.Cancel>{dataset.labels.cancel}</AlertDialog.Cancel>
+            <AlertDialog.Action onclick={deleteDocument}>{dataset.labels.delete}</AlertDialog.Action>
         </AlertDialog.Footer>
     </AlertDialog.Content>
 </AlertDialog.Root>
