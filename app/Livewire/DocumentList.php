@@ -35,8 +35,9 @@ class DocumentList extends Component
             });
     }
 
-    public function updatedSearch()
+    public function searchDocument($search)
     {
+        $this->search = $search;
         $this->loadDocuments();
     }
 
@@ -49,13 +50,6 @@ class DocumentList extends Component
         $this->loadDocuments();
     }
 
-    #[On('close-modal')]
-    public function reloadDocuments($event)
-    {
-        if ($event == 'document-list-modal') {
-            $this->loadDocuments();
-        }
-    }
     public function render(): string
     {
         return Svelte::render('DocumentList.svelte', [

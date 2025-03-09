@@ -7,7 +7,7 @@
 
     let {wire, dataset} = $props();
     let search = $state('');
-    let documents = $state(dataset.documents);
+    let documents = $derived(dataset.documents);
     let documentToDelete = $state(null);
     let isDeleteDialogOpen = $state(false);
 
@@ -15,13 +15,32 @@
         await wire.deleteDocument(documentToDelete.id);
         documentToDelete = null;
     }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    const handleSearch = debounce(async (event) => {
+        let search = event.target.value;
+        await wire.searchDocument(search);
+        console.log('debounced', search);
+        console.log('documents', dataset.documents);
+    }, 300);
+
 </script>
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/50 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-700/50 p-4">
             <div class="w-[300px]">
-                <Input placeholder="{dataset.labels.search_document}" />
+                <Input placeholder="{dataset.labels.search_document}" oninput={handleSearch} />
             </div>
             <DocumentUpload labels={dataset.labels} />
         </div>
@@ -32,10 +51,10 @@
             {#each documents as document}
                 <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-3 py-2 border-b dark:border-white/10 hover:bg-black/5 group">
                     <div class="flex-grow min-w-0 flex gap-1 relative isolate">
-                        <div class="flex items-center gap-2 p-2">
+                        <div class="flex items-center gap-2 p-1">
                             <FileIcon class="flex-shrink-0 w-5 h-5 opacity-50" />
                             <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">
-                                <a href={'/documents/' + document.id} class="group-hover:underline">
+                                <a href={'/documents/' + document.id} class="group-hover:underline text-sm">
                                     <span class="absolute inset-0"></span>
                                     { document.file_name }
                                 </a>
