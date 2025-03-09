@@ -24,7 +24,14 @@ class DocumentList extends Component
                 $query->where('file_name', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($document) {
+                return [
+                    'id' => $document->id,
+                    'file_name' => $document->file_name,
+                    'created_at' => $document->created_at->diffForHumans(),
+                ];
+            });
     }
 
     public function updatedSearch()
@@ -41,7 +48,7 @@ class DocumentList extends Component
         $this->loadDocuments();
     }
 
-    #[On('close-modal')] 
+    #[On('close-modal')]
     public function reloadDocuments($event)
     {
         if ($event == 'document-list-modal') {
@@ -49,8 +56,24 @@ class DocumentList extends Component
         }
     }
 
-    public function render()
+    public function render(): string
     {
-        return view('livewire.document-list');
+        $documents = e(json_encode($this->documents));
+        $labels = e(json_encode([
+            'search_document' => __('Search documents'),
+            'click_to_chat' => __('Click to chat with the document'),
+            'no_documents' => __('No documents found.'),
+        ]));
+        $csrf = csrf_token();
+        return <<<HTML
+        <div class="py-12">
+            <div
+                data-svelte="DocumentList.svelte"
+                data-documents="$documents"
+                data-labels="$labels"
+                data-csrf="$csrf"
+            ></div>
+        </div>
+        HTML;
     }
 }

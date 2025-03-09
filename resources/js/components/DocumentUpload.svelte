@@ -92,7 +92,6 @@
 
 <Dialog.Root bind:open>
     <Dialog.Portal>
-        <Dialog.Overlay />
         <Dialog.Content>
             <Dialog.Header>
                 <Dialog.Title>Upload Document</Dialog.Title>
@@ -101,7 +100,7 @@
                 </Dialog.Description>
             </Dialog.Header>
 
-            <div 
+            <div
                 role="button"
                 tabindex="0"
                 class="relative mt-4 grid place-items-center rounded-lg border-2 border-dashed p-8 transition-all"
@@ -138,8 +137,8 @@
                             </svg>
                             <span class="text-sm">{file.name}</span>
                         </div>
-                        <Button 
-                            variant="ghost" 
+                        <Button
+                            variant="ghost"
                             class="h-8 w-8 p-0 text-destructive hover:text-destructive/90"
                             onclick={() => file = null}
                             aria-label={`Remove ${file.name}`}
@@ -159,8 +158,8 @@
                         <span>{uploadProgress}%</span>
                     </div>
                     <div class="mt-2 h-2 w-full rounded-full bg-secondary">
-                        <div 
-                            class="h-full rounded-full bg-primary transition-all duration-300" 
+                        <div
+                            class="h-full rounded-full bg-primary transition-all duration-300"
                             style={`width: ${uploadProgress}%`}
                         ></div>
                     </div>
