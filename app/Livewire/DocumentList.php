@@ -63,6 +63,7 @@ class DocumentList extends Component
             'search_document' => __('Search documents'),
             'click_to_chat' => __('Click to chat with the document'),
             'no_documents' => __('No documents found.'),
+            'upload_pdf' => __('Upload PDF'),
         ]));
         $csrf = csrf_token();
         return <<<HTML

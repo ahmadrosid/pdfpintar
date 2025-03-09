@@ -23,7 +23,7 @@
             <div class="w-[300px]">
                 <Input placeholder="{dataset.labels.search_document}" />
             </div>
-            <DocumentUpload />
+            <DocumentUpload labels={dataset.labels} />
         </div>
         <div class="text-neutral-900 dark:text-neutral-300">
             {#if documents.length === 0}

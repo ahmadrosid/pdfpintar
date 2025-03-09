@@ -2,7 +2,9 @@
     import { Button } from "$lib/components/ui/button";
     import * as Dialog from "$lib/components/ui/dialog";
     import { getCsrfToken } from "$lib/csrf";
+    import FilePlusIcon from "lucide-svelte/icons/file-up";
 
+    let {labels} = $props();
     let open = $state(false);
     let dragOver = $state(false);
     let file = $state(null);
@@ -87,7 +89,8 @@
 </script>
 
 <Button onclick={() => open = !open}>
-    Upload Document
+    {labels.upload_pdf}
+    <FilePlusIcon class="size-4 ml-1" />
 </Button>
 
 <Dialog.Root bind:open>
