@@ -25,7 +25,7 @@ class Svelte
 
         // Add CSRF token by default if not provided
         if (!isset($encodedAttributes['data-csrf'])) {
-            $encodedAttributes['data-csrf'] = e(csrf_token());
+            $encodedAttributes['data-csrf'] = csrf_token();
         }
 
         // Build the HTML attributes string
