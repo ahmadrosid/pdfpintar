@@ -11,7 +11,7 @@
     let thread = $state(dataset.thread);
     let pageRefNode = $state(null);
     let isLoading = $state(false);
-    let waitingAssistantResponse = $state(true);
+    let waitingAssistantResponse = $state(false);
 
     async function sendMessage() {
         try {
@@ -89,9 +89,27 @@
     }
 
     function typingEffect(node) {
-        // add typing effect on "..." part
-        // it will remove the last 3 dots and then it will animate like "." - ".." - "..." etc.
+        const text = node.textContent;
+        const baseText = text.replace(/\.+$/, ''); // Remove trailing dots
+        let count = 0;
+        let timer;
+
+        function animate() {
+            count = (count + 1) % 4; // Cycle through 0, 1, 2, 3
+            const dots = '.'.repeat(count);
+            node.textContent = baseText + dots;
+            timer = setTimeout(animate, 300); // Change dots every 300ms
+        }
+
+        animate(); // Start the animation
+
+        return {
+            destroy() {
+                clearTimeout(timer); // Clean up when component is destroyed
+            }
+        };
     }
+
 </script>
 
 <div use:scrollToBottom
@@ -110,8 +128,8 @@
             <MessageItem {message}/>
         {/each}
         {#if waitingAssistantResponse}
-            <div class="flex p-4 -mt-10 items-center">
-                <p use:typingEffect class="animate-pulse text-orange-500 text-sm">Thinking...</p>
+            <div class="flex p-4 items-center">
+                <p use:typingEffect class="animate-pulse font-medium text-orange-500 text-sm">Thinking...</p>
             </div>
         {/if}
     </div>
