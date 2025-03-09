@@ -69,7 +69,7 @@
 
     async function clearMessages() {
         await wire.clearMessages();
-        // in svelte reseting messages doesn't work, so we reload the page
+        // in svelte resetting messages doesn't work, so we reload the page
         window.location.reload();
     }
 </script>
