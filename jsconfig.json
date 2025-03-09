@@ -1,7 +1,30 @@
 {
-    "compilerOptions": {
-     "paths": {
-        "$lib/*": ["./resources/js/lib/*"]
-     }
-    }
-   }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$lib/*": ["./resources/js/lib/*"],
+      "$components/*": ["./resources/js/components/*"]
+    },
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": false,
+    "checkJs": false,
+    "skipLibCheck": true
+  },
+  "include": [
+    "resources/js/**/*.js",
+    "resources/js/**/*.svelte"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "dist",
+    "public/build"
+  ]
+}
