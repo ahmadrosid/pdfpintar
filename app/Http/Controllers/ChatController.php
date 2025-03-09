@@ -106,13 +106,11 @@ class ChatController extends Controller
                     }
                 }
 
-                $lastMessage = end($messages);
-
                 Message::insert([
                     [
                         'thread_id' => $thread->id,
                         'role' => 'user',
-                        'content' => $lastMessage['content'],
+                        'content' => $text,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ],
