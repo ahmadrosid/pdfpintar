@@ -27,6 +27,7 @@
             timeout = setTimeout(later, wait);
         };
     }
+
     const handleSearch = debounce(async (event) => {
         let search = event.target.value;
         await wire.searchDocument(search);
@@ -61,30 +62,32 @@
                 <div
                     class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-3 py-2 border-b dark:border-white/10 hover:bg-black/5 group"
                 >
-                    <div class="flex-grow min-w-0 flex gap-1 relative isolate">
-                        <div class="flex items-center gap-2 p-1">
-                            <FileIcon
-                                class="flex-shrink-0 w-5 h-5 opacity-50"
-                            />
-                            <span
-                                class="font-medium text-neutral-900 dark:text-neutral-100 truncate"
-                            >
-                                <a
-                                    href={"/documents/" + document.id}
-                                    class="group-hover:underline text-sm"
+                    <div class="flex-grow min-w-0 relative isolate">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 p-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <FileIcon
+                                    class="flex-shrink-0 w-5 h-5 opacity-50"
+                                />
+                                <span
+                                    class="font-medium text-neutral-900 dark:text-neutral-100 truncate max-w-[calc(100%-1.5rem)]"
                                 >
-                                    <span class="absolute inset-0"></span>
-                                    {document.file_name}
-                                </a>
-                            </span>
+                                    <a
+                                        href={"/documents/" + document.id}
+                                        class="group-hover:underline text-sm"
+                                    >
+                                        <span class="absolute inset-0 z-10"></span>
+                                        <span>{document.file_name}</span>
+                                    </a>
+                                </span>
+                            </div>
                             <span
-                                class="mt-1 text-sm text-neutral-500 dark:text-neutral-400"
+                                class="text-sm text-neutral-500 dark:text-neutral-400 ml-7 sm:ml-0"
                             >
                                 {document.created_at}
                             </span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                    <div class="flex items-center gap-2 ml-auto z-20 relative">
                         <button
                             onclick={() => {
                                 isDeleteDialogOpen = true;
@@ -113,8 +116,12 @@
                 >{dataset.labels.delete_document}</AlertDialog.Title
             >
             <AlertDialog.Description>
-                {dataset.labels.delete_document_description}
-                <strong>{documentToDelete.file_name}</strong>
+                <p>
+                    {dataset.labels.delete_document_description}
+                </p>
+                <p class="max-w-full font-bold [word-break:break-all] [overflow-wrap:break-word]">
+                    {documentToDelete.file_name}
+                </p>                
             </AlertDialog.Description>
         </AlertDialog.Header>
         <AlertDialog.Footer>
