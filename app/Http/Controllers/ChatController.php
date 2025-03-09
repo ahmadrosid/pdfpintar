@@ -84,7 +84,14 @@ class ChatController extends Controller
                 $text = $validated['text'];
 
                 if (!isset($validated['threadId'])) {
-                    $openaiThread = OpenAI::threads()->create([]);
+                    $openaiThread = OpenAI::threads()->create([
+                        'messages' => [
+                            [
+                                'role' => 'user',
+                                'content' => $text,
+                            ]
+                        ]
+                    ]);
                     $assistant_id = $this->createAssistant($document)->id;
                     $thread = Thread::create([
                         'openai_thread_id' => $openaiThread->id,
@@ -94,24 +101,11 @@ class ChatController extends Controller
                     ChatEvent::update_thread_id($thread->id)->emit();
                 } else {
                     $thread = Thread::find($validated['threadId']);
+                    OpenAI::threads()->messages()->create($thread->openai_thread_id, [
+                        'role' => 'user',
+                        'content' => $text,
+                    ]);
                 }
-
-                $dbMessages = Message::where('thread_id', $thread->id)->orderBy('id', 'asc')->get();
-                $messages = [];
-                foreach ($dbMessages as $message) {
-                    $messages[] = [
-                        'role' => $message->role,
-                        'content' => $message->content,
-                    ];
-                }
-
-                $messages[] = [
-                    'role' => 'user',
-                    'content' => $text,
-                ];
-
-                logger()->info("messages", $messages);
-                logger()->info("thread", $thread->toArray());
 
                 $run = OpenAI::threads()->runs()->createStreamed($thread->openai_thread_id, [
                     'assistant_id' => $thread->assistant_id,
