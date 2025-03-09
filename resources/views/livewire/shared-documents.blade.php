@@ -20,7 +20,7 @@
                             <div class="flex flex-1 flex-col sm:flex-row sm:items-center gap-3 px-6 py-2 border-b dark:border-white/10 hover:bg-black/5 group">
                                 <div class="flex-grow min-w-0 relative isolate">
                                     <div class="flex items-center gap-3 text-sm">
-                                        <x-icon-file class="flex-shrink-0 w-5 h-5" />
+                                        <x-icon-file class="flex-shrink-0 size-5" />
                                         <a href="{{ route('documents.show', $document->id) }}" class="block group-hover:underline">
                                             <span class="absolute inset-0 z-10"></span>
                                             <span class="font-medium text-neutral-900 dark:text-neutral-100 truncate">{{ $document->file_name }}</span>
@@ -33,7 +33,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                                <div class="flex items-center gap-2">
                                     <button 
                                         wire:click="toggleShare({{ $document->id }})"
                                         class="text-neutral-400 hover:text-indigo-500 transition-colors duration-300 p-1"
