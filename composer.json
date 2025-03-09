@@ -28,7 +28,6 @@
         "spatie/laravel-backup": "^9.0",
         "spatie/laravel-markdown": "^2.5",
         "spatie/laravel-support-bubble": "^1.7",
-        "spatie/livewire-filepond": "^1.1",
         "spatie/pdf-to-image": "^3.0"
     },
     "require-dev": {

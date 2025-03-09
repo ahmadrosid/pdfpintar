@@ -38,7 +38,7 @@
     <div class="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700/50 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="flex justify-between items-center border-b border-neutral-200 dark:border-neutral-700/50 p-4">
             <div class="w-[300px]">
-                <Input class="border-0 focus-visible:ring-1 dark:focus-visible:ring-neutral-500 focus-visible:ring-offset-0 dark:bg-neutral-700/70" placeholder="{dataset.labels.search_document}" oninput={handleSearch} />
+                <Input class="dark:border-0 focus:outline-none focus-visible:ring-0 dark:focus-visible:ring-1 dark:focus-visible:ring-neutral-500 focus-visible:ring-offset-0 dark:bg-neutral-700/70" placeholder="{dataset.labels.search_document}" oninput={handleSearch} />
             </div>
             <DocumentUpload labels={dataset.labels} />
         </div>
