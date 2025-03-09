@@ -12,17 +12,14 @@ class ChatPage extends Component
     public Document $document;
 
     protected $messages = [];
-    protected $threadId;
+    public $thread = null;
 
     public function clearMessages()
     {
         $this->authorize('view', $this->document);
-        $thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
-        if ($thread) {
-            Message::where('thread_id', $thread->id)->delete();
-            Thread::where('document_id', $this->document->id)->delete();
-            $this->messages = [];
-        }
+        Message::where('thread_id', $this->thread->id)->delete();
+        Thread::where('document_id', $this->document->id)->delete();
+        $this->messages = [];
     }
 
     public function mount()
@@ -31,19 +28,19 @@ class ChatPage extends Component
             $this->authorize('view', $this->document);
         }
 
-        $thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
-        if (!$thread) {
+        $this->thread = Thread::where('document_id', $this->document->id)->orderBy('created_at', 'desc')->first();
+        if (!$this->thread) {
             return;
         }
 
-        $this->threadId = $thread->id;
-        $this->messages = Message::where('thread_id', $thread->id)->orderBy('id', 'asc')->get();
+        $this->messages = Message::where('thread_id', $this->thread->id)->orderBy('id', 'asc')->get();
     }
 
     public function render(): string
     {
         $document = e(json_encode($this->document));
         $messages = e(json_encode($this->messages));
+        $thread = e(json_encode($this->thread));
         $csrf = csrf_token();
         return <<<HTML
         <div class="relative flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[93vh]">
@@ -52,7 +49,7 @@ class ChatPage extends Component
                 data-document="$document"
                 data-messages="$messages"
                 data-csrf="$csrf"
-                data-thread-id="$this->threadId"
+                data-thread="$thread"
             ></div>
         </div>
         HTML;

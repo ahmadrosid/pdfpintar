@@ -7,7 +7,7 @@
     let { wire, dataset } = $props();
     let text = $state('');
     let messages = $state(dataset.messages);
-    let threadId = $state(dataset.threadId);
+    let thread = $state(dataset.thread);
     let pageRefNode = $state(null);
     let isLoading = $state(false);
 
@@ -18,12 +18,14 @@
                 content: text,
             });
 
-            pageRefNode.scrollTop = pageRefNode.scrollHeight + 500;
+            setTimeout(() => {
+                pageRefNode.scrollTop = pageRefNode.scrollHeight;
+            }, 100);
 
             let payload = {
                 documentId: dataset.document.id,
                 text: text,
-                threadId: threadId,
+                threadId: thread?.id,
             };
 
             text = "";
@@ -47,8 +49,8 @@
             for await (const raw of stream) {
                 const event = JSON.parse(raw.data);
                 switch (event.type) {
-                    case "thread_id":
-                        threadId = event.data;
+                    case "thread":
+                        thread = event.data;
                         break;
                     case "token":
                         let message = messages[messages.length - 1];
@@ -85,7 +87,7 @@
 
 <div use:scrollToBottom class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
     <div class="p-2 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
-        <p class="px-1">{dataset.document.file_name}</p>
+        <p class="px-1">{dataset.thread?.title}</p>
         <button onclick={clearMessages} class="flex gap-2 items-center p-1 opacity-50 hover:opacity-100">
             <Trash2Icon class="size-3"/>
             <span class="text-sm">Clear</span>
