@@ -8,6 +8,8 @@
     let text = $state('');
     let messages = $state(dataset.messages);
     let threadId = $state(dataset.threadId);
+    let pageRefNode = $state(null);
+    let isLoading = $state(false);
 
     async function sendMessage() {
         try {
@@ -16,6 +18,8 @@
                 content: text,
             });
 
+            pageRefNode.scrollTop = pageRefNode.scrollHeight + 500;
+
             let payload = {
                 documentId: dataset.document.id,
                 text: text,
@@ -23,6 +27,7 @@
             };
 
             text = "";
+            isLoading = true;
             let abort = new AbortController();
             let res = await fetch("/chat/stream", {
                 method: "POST",
@@ -55,16 +60,20 @@
                                 content: event.data,
                             });
                         }
+                        pageRefNode.scrollTop = pageRefNode.scrollHeight + 500;
                         break;
                 }
             }
         } catch (e) {
             console.log(e);
+        } finally {
+            isLoading = false;
         }
     }
 
     function scrollToBottom(node) {
         node.scrollTop = node.scrollHeight;
+        pageRefNode = node;
     }
 
     async function clearMessages() {
@@ -89,5 +98,5 @@
         {/each}
     </div>
 
-    <ChatInput bind:text {sendMessage} isLoading={false}/>
+    <ChatInput bind:text {sendMessage} {isLoading}/>
 </div>

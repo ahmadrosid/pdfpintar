@@ -1,6 +1,7 @@
 <script>
     import { Textarea } from "$lib/components/ui/textarea/index.js";
     import ArrowUpIcon from "lucide-svelte/icons/arrow-up";
+    import Loader2Icon from "lucide-svelte/icons/loader-2";
     let { text = $bindable(), sendMessage, isLoading } = $props();
     let ref = null;
 
@@ -37,9 +38,13 @@
         <div class="flex justify-end">
             <button
                 onclick={sendMessage}
-                class="bg-neutral-900 text-white {text.length===0 ? 'opacity-30' : 'opacity-90'} hover:opacity-90 rounded-full p-1.5 shadow"
+                class="bg-neutral-900 text-white {text.length===0 && !isLoading ? 'opacity-30' : 'opacity-90'} hover:opacity-90 rounded-full p-1.5 shadow"
             >
-                <ArrowUpIcon class="size-4"/>
+                {#if isLoading}
+                    <Loader2Icon class="size-4 animate-spin"/>
+                {:else}
+                    <ArrowUpIcon class="size-4"/>
+                {/if}
             </button>
         </div>
     </div>

@@ -60,14 +60,14 @@ class ChatController extends Controller
             }
 
             try {
-                $text = $validated['text'];
+                $userMessage = $validated['text'];
 
                 if (!isset($validated['threadId'])) {
                     $openaiThread = OpenAI::threads()->create([
                         'messages' => [
                             [
                                 'role' => 'user',
-                                'content' => $text,
+                                'content' => $userMessage,
                             ]
                         ]
                     ]);
@@ -82,7 +82,7 @@ class ChatController extends Controller
                     $thread = Thread::find($validated['threadId']);
                     OpenAI::threads()->messages()->create($thread->openai_thread_id, [
                         'role' => 'user',
-                        'content' => $text,
+                        'content' => $userMessage,
                     ]);
                 }
 
@@ -110,7 +110,7 @@ class ChatController extends Controller
                     [
                         'thread_id' => $thread->id,
                         'role' => 'user',
-                        'content' => $text,
+                        'content' => $userMessage,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ],
