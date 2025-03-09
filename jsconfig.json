@@ -19,7 +19,9 @@
   },
   "include": [
     "resources/js/**/*.js",
-    "resources/js/**/*.svelte"
+    "resources/js/**/*.svelte",
+    "resources/js/**/*.jsx",
+    "resources/js/**/*.tsx",
   ],
   "exclude": [
     "node_modules",
