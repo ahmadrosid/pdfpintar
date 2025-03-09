@@ -32,5 +32,5 @@
         {/if}
     </button>
 
-    <pre class="m-0 max-w-[600px] dark:text-white text-base" bind:this={pre}>{@render children?.()}</pre>
+    <pre class="m-0 max-w-[600px] dark:text-white" bind:this={pre}>{@render children?.()}</pre>
 </div>
