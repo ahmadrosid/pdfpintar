@@ -21,10 +21,11 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+        @if(config('app.env') == 'production')
         <script defer data-domain="pdfpintar.com" src="https://vince.ngooding.com/js/script.js"></script>
+        @endif
+
         <!-- Scripts -->
-        @filepondScripts
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/mingle.svelte.js'])
     </head>
 

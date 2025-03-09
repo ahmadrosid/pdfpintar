@@ -24,11 +24,11 @@ Route::get('/share/{token}', function (Request $request, $token) {
             $query->orderBy('id', 'asc');
         }])
         ->firstOrFail();
-    
+
     $pdfUrl = Storage::temporaryUrl(
         $document->file_path, now()->addMinutes(5)
     );
-    
+
     return view('documents.public', compact('document', 'pdfUrl'));
 })->name('documents.public');
 
@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('documents', 'dashboard')->name('documents.index');
     Route::view('profile', 'profile')->name('profile');
+    Route::post('chat/stream', [App\Http\Controllers\ChatController::class, 'stream'])->name('chat.stream');
     Route::get('shared-documents', SharedDocuments::class)->name('documents.shared');
     Route::post('documents/{document}/copy', [App\Http\Controllers\DocumentController::class, 'copy'])->name('documents.copy');
     Route::post('/upload-documents', [DocumentController::class, 'upload'])->name('documents.upload');
@@ -68,11 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('documents.share');
 
     Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', __('Verification link sent!'));
-    })
-    ->middleware(['throttle:2,1'])
-    ->name('verification.send');
+            $request->user()->sendEmailVerificationNotification();
+            return back()->with('message', __('Verification link sent!'));
+        })
+        ->middleware(['throttle:2,1'])
+        ->name('verification.send');
 
     Route::supportBubble();
 });

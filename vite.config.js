@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import path from "path";
+import { glob } from "glob";
 
 export default defineConfig({
     plugins: [
@@ -11,6 +12,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/auth.js',
                 'resources/js/mingle.svelte.js',
+                ...glob.sync("resources/js/components/**/*.svelte"),
             ],
             refresh: true,
         }),
@@ -21,5 +23,4 @@ export default defineConfig({
           $lib: path.resolve("./resources/js/lib"),
         },
     },
-    
 });

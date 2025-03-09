@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
+use App\Support\Svelte;
 
 class DocumentList extends Component
 {
@@ -24,11 +25,19 @@ class DocumentList extends Component
                 $query->where('file_name', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($document) {
+                return [
+                    'id' => $document->id,
+                    'file_name' => $document->file_name,
+                    'created_at' => $document->created_at->diffForHumans(),
+                ];
+            });
     }
 
-    public function updatedSearch()
+    public function searchDocument($search)
     {
+        $this->search = $search;
         $this->loadDocuments();
     }
 
@@ -41,16 +50,28 @@ class DocumentList extends Component
         $this->loadDocuments();
     }
 
-    #[On('close-modal')] 
-    public function reloadDocuments($event)
+    public function render(): string
     {
-        if ($event == 'document-list-modal') {
-            $this->loadDocuments();
-        }
-    }
-
-    public function render()
-    {
-        return view('livewire.document-list');
+        return Svelte::render('DocumentList.svelte', [
+            'documents' => $this->documents,
+            'labels' => [
+                'search_document' => __('Search documents'),
+                'click_to_chat' => __('Click to chat with the document'),
+                'no_documents' => __('No documents found.'),
+                'upload_pdf' => __('Upload PDF'),
+                'delete_document' => __('Delete Document'),
+                'delete_document_description' => __('Are you sure you want to delete this document?'),
+                'upload_document' => __('Upload Document'),
+                'upload_document_description' => __('Upload your PDF document here'),
+                'click_to_upload' => __('Click to upload'),
+                'or_drag_and_drop' => __('or drag and drop'),
+                'cancel' => __('Cancel'),
+                'delete' => __('Delete'),
+                'uploading' => __('Uploading'),
+                'upload' => __('Upload'),
+            ]
+        ], [
+            'class' => 'py-12'
+        ]);
     }
 }

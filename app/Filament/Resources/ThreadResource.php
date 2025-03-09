@@ -39,9 +39,13 @@ class ThreadResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
+                TextColumn::make('title'),
+                TextColumn::make('messages_count')
+                    ->label('Messages')
+                    ->counts('messages'),
                 TextColumn::make('document.file_name')->wrap(true),
-                TextColumn::make('assistant_id'),
-                TextColumn::make('openai_thread_id'),
+                TextColumn::make('document.user.name')->label('Owner'),
+                TextColumn::make('created_at')->date()
             ])
             ->filters([
                 //
