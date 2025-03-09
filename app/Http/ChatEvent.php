@@ -11,7 +11,6 @@ class ChatEvent
 
     public function emit(): void
     {
-        // todo: investigate if type can be echoed as event:
         if ($this->type === 'error') {
             echo "event: error\n";
         }

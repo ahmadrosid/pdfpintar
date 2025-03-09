@@ -1,7 +1,6 @@
 <script>
     import { Textarea } from "$lib/components/ui/textarea/index.js";
     import ArrowUpIcon from "lucide-svelte/icons/arrow-up";
-    import { fade } from 'svelte/transition';
     let { text = $bindable(), sendMessage, isLoading } = $props();
     let ref = null;
 
