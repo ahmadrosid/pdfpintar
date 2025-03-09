@@ -2,14 +2,16 @@
     import ChatInput from "$lib/components/ChatInput.svelte";
     import MessageItem from "$lib/components/MessageItem.svelte";
     import Trash2Icon from "lucide-svelte/icons/trash-2";
-    import { events } from "fetch-event-stream";
+    import LoadingIcon from "lucide-svelte/icons/circle-dashed";
+    import {events} from "fetch-event-stream";
 
-    let { wire, dataset } = $props();
+    let {wire, dataset} = $props();
     let text = $state('');
     let messages = $state(dataset.messages);
     let thread = $state(dataset.thread);
     let pageRefNode = $state(null);
     let isLoading = $state(false);
+    let waitingAssistantResponse = $state(true);
 
     async function sendMessage() {
         try {
@@ -30,6 +32,7 @@
 
             text = "";
             isLoading = true;
+            waitingAssistantResponse = true;
             let abort = new AbortController();
             let res = await fetch("/chat/stream", {
                 method: "POST",
@@ -53,6 +56,7 @@
                         thread = JSON.parse(event.data);
                         break;
                     case "token":
+                        waitingAssistantResponse = false;
                         let message = messages[messages.length - 1];
                         if (message.role === "assistant") {
                             message.content += event.data;
@@ -83,10 +87,17 @@
         // in svelte resetting messages doesn't work, so we reload the page
         window.location.reload();
     }
+
+    function typingEffect(node) {
+        // add typing effect on "..." part
+        // it will remove the last 3 dots and then it will animate like "." - ".." - "..." etc.
+    }
 </script>
 
-<div use:scrollToBottom class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
-    <div class="p-1 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
+<div use:scrollToBottom
+     class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
+    <div
+        class="p-1.5 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
         <p class="px-1 text-sm font-medium">{thread?.title}</p>
         <button onclick={clearMessages} class="flex gap-2 items-center p-1 opacity-50 hover:opacity-100">
             <Trash2Icon class="size-3"/>
@@ -98,6 +109,11 @@
         {#each dataset.messages as message}
             <MessageItem {message}/>
         {/each}
+        {#if waitingAssistantResponse}
+            <div class="flex p-4 -mt-10 items-center">
+                <p use:typingEffect class="animate-pulse text-orange-500 text-sm">Thinking...</p>
+            </div>
+        {/if}
     </div>
 
     <ChatInput bind:text {sendMessage} {isLoading}/>
