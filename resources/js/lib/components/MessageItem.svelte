@@ -34,7 +34,8 @@
                 <CopyIcon class="size-3" /> Copy
             {/if}
         </button>
-        <Popover.Root>
+        <!-- TODO: Implement download -->
+        <!-- <Popover.Root>
             <Popover.Trigger>
                 <p class="flex gap-2 items-center text-xs opacity-70 hover:opacity-100 invisible group-hover:visible">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-neutral-600 dark:text-neutral-300 size-3">
@@ -52,7 +53,6 @@
                     <button class="py-1.5 px-3 text-sm hover:opacity-70 dark:hover:bg-neutral-800 rounded-md flex">{labels.download_as_word}</button>
                 </div>
             </Popover.Content>
-          </Popover.Root>
-          
+          </Popover.Root> -->
     </div>
 </div>
