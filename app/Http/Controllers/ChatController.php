@@ -14,27 +14,6 @@ class ChatController extends Controller
 
     private function createAssistant(Document $document)
     {
-        logger()->info('createAssistant', [
-            'name' => $document->file_name,
-            'tools' => [
-                [
-                    'type' => 'file_search',
-                ],
-            ],
-            'tool_resources' => [
-                'file_search' => [
-                    'vector_stores' => [
-                        [
-                            'file_ids' => [
-                                $document->file_id,
-                            ]
-                        ]
-                    ]
-                ]
-            ],
-            'instructions' => 'Your are a helpful assistant. Use the provided document to answer the user\'s question.',
-            'model' => 'gpt-4o-mini',
-        ]);
         $assistant = OpenAI::assistants()->create([
             'name' => $document->file_name,
             'tools' => [
