@@ -60,3 +60,13 @@
         "calt" 1;
     }
 }
+
+
+.prose p {
+    white-space: break-spaces;
+}
+
+.prose pre {
+    @apply bg-transparent text-black;
+    white-space: break-spaces;
+}

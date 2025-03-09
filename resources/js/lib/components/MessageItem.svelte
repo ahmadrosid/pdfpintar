@@ -29,9 +29,9 @@
     <div class="pt-2 justify-end flex gap-3 items-center">
         <button onclick={() => copyMessage(message.content)} class="opacity-70 hover:opacity-100 p-1 invisible group-hover:visible text-xs flex gap-2 items-center">
             {#if copied}
-                <CopyCheckIcon class="size-3" /> Copied
+                Copied <CopyCheckIcon class="size-3" />
             {:else}
-                <CopyIcon class="size-3" /> Copy
+                Copy <CopyIcon class="size-3" />
             {/if}
         </button>
         <!-- TODO: Implement download -->

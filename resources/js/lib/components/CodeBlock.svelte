@@ -16,11 +16,11 @@
 </script>
 
 <div
-    class="py-6 my-3 px-3 font-mono border border-slate-200 bg-slate-50 text-black rounded-xl overflow-hidden relative group/code"
+    class="py-6 my-3 px-3 font-mono border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700/70 text-black rounded-xl overflow-hidden relative group/code"
 >
     <button
         onclick={copyToClipboard}
-        class="absolute text-slate-500 top-3 right-4 flex items-center gap-2 py-1 px-2 border border-transparent hover:border-dashed hover:border-slate-400 hover:rounded-md"
+        class="absolute text-neutral-500 dark:text-neutral-300 top-3 right-4 flex items-center gap-2 py-1 px-2 border border-transparent hover:border-dashed hover:border-neutral-400 hover:rounded-md"
     >
         <span class="invisible group-hover/code:visible text-sm">
             {showCopied ? "Copied" : "Copy"}
@@ -32,5 +32,5 @@
         {/if}
     </button>
 
-    <pre class="m-0 max-w-[600px]" bind:this={pre}>{@render children?.()}</pre>
+    <pre class="m-0 max-w-[600px] dark:text-white text-base" bind:this={pre}>{@render children?.()}</pre>
 </div>
