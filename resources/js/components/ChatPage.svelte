@@ -86,11 +86,11 @@
 </script>
 
 <div use:scrollToBottom class="h-screen max-h-[92vh] relative isolate flex flex-col flex-grow overflow-y-scroll scrollbar-thin">
-    <div class="p-2 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
-        <p class="px-1">{thread?.title}</p>
+    <div class="p-1 border-b border-neutral-200 dark:border-neutral-700 sticky top-0 z-10 bg-white dark:bg-neutral-800 flex items-center justify-between">
+        <p class="px-1 text-sm font-medium">{thread?.title}</p>
         <button onclick={clearMessages} class="flex gap-2 items-center p-1 opacity-50 hover:opacity-100">
             <Trash2Icon class="size-3"/>
-            <span class="text-sm">Clear</span>
+            <span class="text-sm">{dataset.labels.delete}</span>
         </button>
     </div>
 

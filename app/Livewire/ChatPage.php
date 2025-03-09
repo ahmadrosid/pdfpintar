@@ -42,7 +42,10 @@ class ChatPage extends Component
         return Svelte::render('ChatPage.svelte', [
             'document' => $this->document,
             'messages' => $this->messages,
-            'thread' => $this->thread
+            'thread' => $this->thread,
+            'labels' => [
+                'delete' => __('Delete')
+            ]
         ], [
             'class' => 'relative flex flex-col border border-neutral-200 bg-white dark:bg-neutral-800 dark:border-neutral-700 h-full max-h-[93vh]'
         ]);
