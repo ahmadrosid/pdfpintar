@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
+use App\Support\Svelte;
 
 class DocumentList extends Component
 {
@@ -55,36 +56,28 @@ class DocumentList extends Component
             $this->loadDocuments();
         }
     }
-
     public function render(): string
     {
-        $documents = e(json_encode($this->documents));
-        $labels = e(json_encode([
-            'search_document' => __('Search documents'),
-            'click_to_chat' => __('Click to chat with the document'),
-            'no_documents' => __('No documents found.'),
-            'upload_pdf' => __('Upload PDF'),
-            'delete_document' => __('Delete Document'),
-            'delete_document_description' => __('Are you sure you want to delete this document?'),
-            'upload_document' => __('Upload Document'),
-            'upload_document_description' => __('Upload your PDF document here'),
-            'click_to_upload' => __('Click to upload'),
-            'or_drag_and_drop' => __('or drag and drop'),
-            'cancel' => __('Cancel'),
-            'delete' => __('Delete'),
-            'uploading' => __('Uploading'),
-            'upload' => __('Upload'),
-        ]));
-        $csrf = csrf_token();
-        return <<<HTML
-        <div class="py-12">
-            <div
-                data-svelte="DocumentList.svelte"
-                data-documents="$documents"
-                data-labels="$labels"
-                data-csrf="$csrf"
-            ></div>
-        </div>
-        HTML;
+        return Svelte::render('DocumentList.svelte', [
+            'documents' => $this->documents,
+            'labels' => [
+                'search_document' => __('Search documents'),
+                'click_to_chat' => __('Click to chat with the document'),
+                'no_documents' => __('No documents found.'),
+                'upload_pdf' => __('Upload PDF'),
+                'delete_document' => __('Delete Document'),
+                'delete_document_description' => __('Are you sure you want to delete this document?'),
+                'upload_document' => __('Upload Document'),
+                'upload_document_description' => __('Upload your PDF document here'),
+                'click_to_upload' => __('Click to upload'),
+                'or_drag_and_drop' => __('or drag and drop'),
+                'cancel' => __('Cancel'),
+                'delete' => __('Delete'),
+                'uploading' => __('Uploading'),
+                'upload' => __('Upload'),
+            ]
+        ], [
+            'class' => 'py-12'
+        ]);
     }
 }
