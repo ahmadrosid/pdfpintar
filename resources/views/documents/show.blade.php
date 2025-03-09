@@ -33,7 +33,7 @@
                 <livewire:chat-page :document="$document" />
             </div>
             <div class="order-1 lg:order-2 flex-grow lg:flex-grow-0 sm:h-auto">
-                <div id="pdf-viewer" data-url="{{ $pdfUrl }}" class="w-full h-full"></div>
+{{--                <div id="pdf-viewer" data-url="{{ $pdfUrl }}" class="w-full h-full"></div>--}}
             </div>
         </div>
     </div>
