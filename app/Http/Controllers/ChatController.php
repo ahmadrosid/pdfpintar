@@ -130,7 +130,7 @@ class ChatController extends Controller
                 if ($thread->title == 'Untitled') {
                     $thread->title = TitleGenerator::generate($messages);
                     $thread->save();
-                    ChatEvent::update_thread(json_encode($thread))->emit();
+                    ChatEvent::update_thread($thread->toArray())->emit();
                 }
             } catch (\Throwable $e) {
                 report($e);
