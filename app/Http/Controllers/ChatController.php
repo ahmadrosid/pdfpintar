@@ -79,7 +79,7 @@ class ChatController extends Controller
                         'document_id' => $document->id,
                         'title' => 'Untitled',
                     ]);
-                    ChatEvent::update_thread(json_encode($thread))->emit();
+                    ChatEvent::update_thread($thread->toArray())->emit();
                 } else {
                     $thread = Thread::find($validated['threadId']);
                     OpenAI::threads()->messages()->create($thread->openai_thread_id, [

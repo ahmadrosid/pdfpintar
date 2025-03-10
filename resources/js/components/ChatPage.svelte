@@ -53,7 +53,7 @@
                 const event = JSON.parse(raw.data);
                 switch (event.type) {
                     case "thread":
-                        thread = JSON.parse(event.data);
+                        thread = event.data;
                         break;
                     case "token":
                         waitingAssistantResponse = false;
