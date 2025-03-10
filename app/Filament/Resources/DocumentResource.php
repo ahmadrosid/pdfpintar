@@ -36,7 +36,7 @@ class DocumentResource extends Resource
             ->columns([
                 TextColumn::make('id'),
                 TextColumn::make('user.name'),
-                TextColumn::make('file_name'),
+                TextColumn::make('file_name')->wrap(),
                 TextColumn::make('file_size'),
                 TextColumn::make('created_at'),
             ])

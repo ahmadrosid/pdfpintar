@@ -126,7 +126,6 @@ class ChatController extends Controller
                 ];
                 Message::insert($messages);
 
-                logger()->info('thread title = '. $thread->title);
                 if ($thread->title == 'Untitled') {
                     $thread->title = TitleGenerator::generate($messages);
                     $thread->save();
