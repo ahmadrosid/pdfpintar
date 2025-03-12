@@ -21,6 +21,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 
     @if(config('app.env') == 'production')
     <script defer data-domain="pdfpintar.com" src="https://vince.ngooding.com/js/script.js"></script>
