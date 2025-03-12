@@ -22,7 +22,7 @@
         {message.role === 'assistant' ? 'pdfpintar' : 'You'}
     </p>
 
-    <div class="prose prose-sm dark:prose-invert max-w-none">
+    <div class="prose dark:prose-invert max-w-none">
         <Markdown md={message.content}/>
     </div>
 

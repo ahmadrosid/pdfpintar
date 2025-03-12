@@ -16,7 +16,7 @@
 </script>
 
 <div
-    class="py-6 my-3 px-3 font-mono border border-neutral-200 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700/70 text-black rounded-xl overflow-hidden relative group/code"
+    class="py-6 my-3 px-3 font-mono border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700/70 text-black rounded-xl overflow-hidden relative group/code"
 >
     <button
         onclick={copyToClipboard}
