@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.env
+.env.*
+!.env.docker.example
+coverage
+test-results
+playwright-report
+legacy
+docs
+*.md
+!README.md
