@@ -177,8 +177,12 @@ function DocumentUploadButton({
       }
 
       setError(t('Upload failed'))
-    } catch {
-      setError(t('Upload failed'))
+    } catch (error) {
+      const message =
+        error instanceof Error && error.message.trim()
+          ? error.message
+          : t('Upload failed')
+      setError(message)
     } finally {
       setUploading(false)
     }

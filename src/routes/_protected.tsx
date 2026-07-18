@@ -20,7 +20,7 @@ export const Route = createFileRoute('/_protected')({
 
 function ProtectedLayout() {
   return (
-    <main className="page-wrap px-4 py-8">
+    <main className="page-wrap min-h-screen px-4 py-8">
       <Outlet />
     </main>
   )

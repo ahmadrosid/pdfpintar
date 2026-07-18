@@ -7,7 +7,11 @@ import { documents, messages, threads } from '#/db/schema'
 import { auth } from '#/lib/auth/auth'
 import { deleteDocumentForUser, getOwnedDocument } from '#/lib/db/documents'
 import { loadDocumentPageData } from '#/lib/documents/page-data'
-import { uploadPdfToOpenAI } from '#/lib/openai/client'
+import {
+  PENDING_OPENAI_FILE_ID,
+  hasOpenAIApiKey,
+  uploadPdfToOpenAI,
+} from '#/lib/openai/client'
 import {
   buildDocumentObjectKey,
   getPresignedPdfUrl,
@@ -110,15 +114,33 @@ export const uploadDocument = createServerFn({ method: 'POST' })
       throw new Error('Only PDF files up to 10MB are allowed.')
     }
 
-    const openaiFile = await uploadPdfToOpenAI(file, file.name)
     const objectKey = buildDocumentObjectKey(file.name)
     const body = new Uint8Array(await file.arrayBuffer())
-    await uploadPrivatePdf(objectKey, body)
+
+    try {
+      await uploadPrivatePdf(objectKey, body)
+    } catch (error) {
+      console.error('S3 upload failed', error)
+      throw new Error('Storage upload failed. Check S3/MinIO configuration.')
+    }
+
+    let fileId = PENDING_OPENAI_FILE_ID
+    if (hasOpenAIApiKey()) {
+      try {
+        const openaiFile = await uploadPdfToOpenAI(file, file.name)
+        fileId = openaiFile.id
+      } catch (error) {
+        console.error('OpenAI file upload failed', error)
+        throw new Error(
+          'PDF saved to storage, but OpenAI upload failed. Check OPENAI_API_KEY.',
+        )
+      }
+    }
 
     const [created] = await getDb()
       .insert(documents)
       .values({
-        fileId: openaiFile.id,
+        fileId,
         fileName: file.name,
         fileSize: file.size,
         filePath: objectKey,

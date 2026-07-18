@@ -10,8 +10,13 @@ import {
   formatSseEvent,
   stripCitationMarkers,
 } from '#/lib/openai/chat-events'
-import { getOpenAIClient } from '#/lib/openai/client'
+import {
+  getOpenAIClient,
+  isPendingOpenAIFileId,
+  uploadPdfBytesToOpenAI,
+} from '#/lib/openai/client'
 import { generateThreadTitle } from '#/lib/openai/title-generator'
+import { getPrivatePdfBytes } from '#/lib/storage/s3'
 
 type StreamRequest = {
   text: string
@@ -76,6 +81,26 @@ export const Route = createFileRoute('/api/chat/stream')({
             try {
               const openai = getOpenAIClient()
               const userMessage = payload.text.trim()
+              let openaiFileId = document.fileId
+
+              if (isPendingOpenAIFileId(openaiFileId)) {
+                if (!document.filePath) {
+                  throw new Error('Document file is missing from storage')
+                }
+
+                const pdfBytes = await getPrivatePdfBytes(document.filePath)
+                const openaiFile = await uploadPdfBytesToOpenAI(
+                  pdfBytes,
+                  document.fileName,
+                )
+                openaiFileId = openaiFile.id
+
+                await getDb()
+                  .update(documents)
+                  .set({ fileId: openaiFileId })
+                  .where(eq(documents.id, document.id))
+              }
+
               let thread:
                 | (typeof threads.$inferSelect & { id: number })
                 | undefined
@@ -86,7 +111,7 @@ export const Route = createFileRoute('/api/chat/stream')({
                 })
                 const assistant = await createDocumentAssistant(openai, {
                   fileName: document.fileName,
-                  fileId: document.fileId,
+                  fileId: openaiFileId,
                 })
 
                 const [createdThread] = await getDb()

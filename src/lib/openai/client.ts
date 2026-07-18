@@ -1,6 +1,12 @@
 import OpenAI from 'openai'
 
+export const PENDING_OPENAI_FILE_ID = 'pending'
+
 let client: OpenAI | undefined
+
+export function hasOpenAIApiKey() {
+  return Boolean(process.env.OPENAI_API_KEY?.trim())
+}
 
 export function getOpenAIClient() {
   if (!client) {
@@ -18,7 +24,14 @@ export function getOpenAIClient() {
   return client
 }
 
-export async function uploadPdfToOpenAI(file: File, filename: string) {
+export function isPendingOpenAIFileId(fileId: string | null | undefined) {
+  return !fileId || fileId === PENDING_OPENAI_FILE_ID
+}
+
+export async function uploadPdfBytesToOpenAI(
+  body: Uint8Array,
+  filename: string,
+) {
   const openai = getOpenAIClient()
   let name = filename
   if (!name.toLowerCase().endsWith('.pdf')) {
@@ -26,9 +39,13 @@ export async function uploadPdfToOpenAI(file: File, filename: string) {
   }
 
   return openai.files.create({
-    file: await OpenAI.toFile(await file.arrayBuffer(), name, {
+    file: await OpenAI.toFile(body, name, {
       type: 'application/pdf',
     }),
     purpose: 'assistants',
   })
+}
+
+export async function uploadPdfToOpenAI(file: File, filename: string) {
+  return uploadPdfBytesToOpenAI(new Uint8Array(await file.arrayBuffer()), filename)
 }

@@ -24,9 +24,17 @@ describe('validatePdfUpload', () => {
   it('rejects non-PDF files', () => {
     expect(
       validatePdfUpload(
-        makeFile({ type: 'image/png', size: 1024 }),
+        makeFile({ name: 'photo.png', type: 'image/png', size: 1024 }),
       ),
     ).toBe('invalid_type')
+  })
+
+  it('accepts PDFs with an empty MIME type when the extension is .pdf', () => {
+    expect(
+      validatePdfUpload(
+        makeFile({ name: 'resume.pdf', type: '', size: 1024 }),
+      ),
+    ).toBeNull()
   })
 
   it('rejects PDFs larger than 10MB', () => {
